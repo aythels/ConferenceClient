@@ -1,0 +1,33 @@
+package UseCases;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+class UserManager {
+
+    private List<User> Users;
+
+    public UserManager() {
+        this.Users = new ArrayList<User>();
+    }
+
+    public void createUser(String name, String userType, int ID, String password) {
+        User u = new User(name, userType, ID, password);
+        this.Users.add(u);
+    }
+
+    public String getUserType(User u) {
+        if (this.Users.contains(u)) {
+            return u.type;
+        }
+        return "placeholder";
+    }
+
+    public boolean passwordMatch(User u, String s) {
+        if (u.password == s) {
+            return true;
+        }
+        return false;
+    }
+}
