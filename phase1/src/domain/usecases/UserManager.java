@@ -1,6 +1,6 @@
-package UseCases;
+package domain.usecases;
 
-import Entities.User;
+import domain.entities.User;
 
 import java.util.List;
 import java.util.ArrayList;
