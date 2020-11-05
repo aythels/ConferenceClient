@@ -1,4 +1,4 @@
-package UseCases;
+package domain.usecases;
 
 import domain.entities.Event;
 

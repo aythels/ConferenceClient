@@ -1,6 +1,7 @@
 package domain.usecases;
 
 import domain.entities.User;
+import domain.entities.Message;
 
 import java.util.List;
 import java.util.ArrayList;
