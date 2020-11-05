@@ -1,5 +1,7 @@
 package UseCases;
 
+import Entities.User;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,20 +14,20 @@ class UserManager {
         this.Users = new ArrayList<User>();
     }
 
-    public void createUser(String name, String userType, int ID, String password) {
+    public void createUser(String name, String userType, String ID, String password) {
         User u = new User(name, userType, ID, password);
         this.Users.add(u);
     }
 
     public String getUserType(User u) {
         if (this.Users.contains(u)) {
-            return u.type;
+            return u.getUserType();
         }
-        return "placeholder";
+        return "No such user exists!";
     }
 
     public boolean passwordMatch(User u, String s) {
-        if (u.password == s) {
+        if (u.getPassword() == s) {
             return true;
         }
         return false;
