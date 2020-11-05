@@ -1,6 +1,6 @@
-package UI.views;
+package ui.views;
 
-import UI.UIContext;
+import ui.UIContext;
 
 public class LoginView extends View {
     private String username, password;

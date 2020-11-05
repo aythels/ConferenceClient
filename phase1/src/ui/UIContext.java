@@ -1,6 +1,6 @@
-package UI;
+package ui;
 
-import UI.views.View;
+import ui.views.View;
 
 import java.util.LinkedList;
 import java.util.List;

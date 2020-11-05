@@ -1,8 +1,8 @@
-import UI.UIContext;
-import UI.renderers.ConsoleRenderer;
-import UI.views.HomeView;
-import UI.views.LoginView;
-import UI.views.SplashView;
+import ui.UIContext;
+import ui.renderers.ConsoleRenderer;
+import ui.views.HomeView;
+import ui.views.LoginView;
+import ui.views.SplashView;
 
 public class App {
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
-package UI.views;
+package ui.views;
 
-import UI.UIContext;
+import ui.UIContext;
 
 public abstract class View {
     protected final UIContext context;
