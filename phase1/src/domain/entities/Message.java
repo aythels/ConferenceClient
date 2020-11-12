@@ -11,7 +11,7 @@ public class Message {
      * @param message
      */
 
-    public Event(String userId, String message){
+    public Message(String userId, String message){
         this.userId = userId;
         this.message = message;
     }
@@ -23,7 +23,7 @@ public class Message {
 
     public String getUserId() {
 
-        return this.UserId;
+        return this.userId;
     }
 
 
@@ -43,7 +43,7 @@ public class Message {
      * @return message
      */
 
-    public int getEventTime() {
+    public String getMessage() {
         return this.message;
     }
 

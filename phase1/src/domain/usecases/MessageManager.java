@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class MessageManager {
+public class MessageManager {
 
     private HashMap<String, List<Message>> conversations;
 
@@ -20,8 +20,8 @@ class MessageManager {
      * @param m content of the message
      * @return  a new Message with content m
      */
-    public Message createMessage(String m) {
-        return new Message(m);
+    public Message createMessage(String m, String userId) {
+        return new Message(userId, m);
     }
 
     /**
@@ -34,7 +34,7 @@ class MessageManager {
         String x = "";
         if (conversationExists(sender, receiver)) {
             for (String key : conversations.keySet()) {
-                if (key.contains(sender.getUsername) && key.contains(receiver.getUsername)) {
+                if (key.contains(sender.getID()) && key.contains(receiver.getID())) {
                     x = key;
                 }
             }
@@ -45,7 +45,7 @@ class MessageManager {
 
     private boolean conversationExists(User sender, User receiver) {
         for (String key : conversations.keySet()) {
-            if (key.contains(sender.getUsername) && key.contains(receiver.getUsername)) {
+            if (key.contains(sender.getID()) && key.contains(receiver.getID())) {
                 return true;
             }
         }
@@ -54,7 +54,7 @@ class MessageManager {
 
     private void createConversation(User sender, User receiver) {
         List<Message> x = new ArrayList<Message>();
-        conversations.put((sender.getUsername() + ", " + receiver.getUsername()), x);
+        conversations.put((sender.getID() + ", " + receiver.getID()), x);
     }
 
     /**
@@ -71,6 +71,6 @@ class MessageManager {
             createConversation(sender, receiver);
         }
         x = getConversation(sender, receiver);
-        x.add(createMessage(m));
+        x.add(createMessage(sender.getID(), m));
     }
 }

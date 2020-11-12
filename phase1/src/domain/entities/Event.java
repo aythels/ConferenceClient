@@ -15,6 +15,10 @@ public class Event {
         this.eventId = eventId;
     }
 
+    public String getEventId() {
+        return this.eventId;
+    }
+
     /**
      * Returns the duration of this Event.
      * @return eventDuration

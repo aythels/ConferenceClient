@@ -11,27 +11,25 @@ public class EventController {
     private LoginHelper loginHelper;
     private EventManager eventManager;
     private UserManager userManager;
+    private UserTypeChecker userTypeChecker;
 
-    public EventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper){
+    public EventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper, UserTypeChecker userTypeChecker){
         this.eventManager = eventManager;
         this.loginHelper = loginHelper;
         this.userManager = userManager;
+        this.userTypeChecker = userTypeChecker;
     }
 
     //public permission level methods
-    public List<String> getAllEvents() {
-        List<String> idArray = new ArrayList<String>();
+    public List<String> getAllEventIDs() {
+        List<String> allIDs = new ArrayList<String>();
 
-        List<Event> allEvents = eventManager.getEvents();
-        for (Event e : allEvents) {
-            idArray.add(e.getEventID());
-        }
+        for (Event e : eventManager.getAllEvents()) allIDs.add(e.getEventId());
 
-
-       return idArray;
+       return allIDs;
     }
 
-    public String getEventSpeaker(String eventID) {
+    public String getEventSpeakerID(String eventID) {
         return eventManager.getEventSpeaker(getEventByID(eventID));
     }
 
@@ -40,54 +38,59 @@ public class EventController {
     }
 
     public int getEventDuration(String eventID) {
-        return eventManager.getEventByID(eventID).getEventDuration();
+        //return eventManager.getEventByID(eventID).getEventDuration();
+        return 1;
     }
 
-    public Event getEventByID(String eventID) {
-        List<Event> allEvents = eventManager.getEvents();
-        for (Event e : allEvents) if (e.getEventID() == eventID) return e;
+    protected Event getEventByID(String eventID) {
+        //List<Event> allEvents = eventManager.getEvents();
+        //for (Event e : allEvents) if (e.getEventID() == eventID) return e;
         return null;
     }
 
     //user permission level methods
     public List<String> getRegisteredEvent(String accessCode) {
-        if (!loginHelper.isAuthorizedUser(accessCode)) return;
+        userTypeChecker.isAuthorizedUser(accessCode);
+        return null;
     }
 
     public void registerInEvent(String accessCode, String eventID) {
-        if (!loginHelper.isAuthorizedUser(accessCode)) return;
+        if (!userTypeChecker.isAuthorizedUser(accessCode)) return;
     }
 
     public void unregisterInEvent(String accessCode, String eventID) {
-        if (!loginHelper.isAuthorizedUser(accessCode)) return;
+        if (!userTypeChecker.isAuthorizedUser(accessCode)) return;
     }
 
     //speaker permission level methods
     public List<String> getInvolvedEvent(String accessCode) {
-        if (!loginHelper.isAuthorizedSpeaker(accessCode)) return null;
+        if (!userTypeChecker.isAuthorizedSpeaker(accessCode)) return null;
+        return null;
     }
 
     public List<String> getEventRegisteredUsers(String accessCode, String eventID) {
-        if (!loginHelper.isAuthorizedSpeaker(accessCode)) return null;
+        if (!userTypeChecker.isAuthorizedSpeaker(accessCode)) return null;
+        return null;
     }
 
     //organizer permission level methods
     public String createEvent(String accessCode, String eventID, int eventDuration, int eventTime) {
-        if (!loginHelper.isAuthorizedOrganizer(accessCode)) return null;
+        if (!userTypeChecker.isAuthorizedOrganizer(accessCode)) return null;
 
-        eventManager.createEvent(eventID, eventDuration, eventTime);
+        //eventManager.createEvent(eventID, eventDuration, eventTime);
+        return null;
     }
 
     public void rescheduleEvent(String accessCode, String eventID, int eventDuration, int eventTime) {
-        if (!loginHelper.isAuthorizedOrganizer(accessCode)) return;
+        if (!userTypeChecker.isAuthorizedOrganizer(accessCode)) return;
     }
 
     public void cancelEvent(String accessCode, String eventID) {
-        if (!loginHelper.isAuthorizedOrganizer(accessCode)) return;
+        if (!userTypeChecker.isAuthorizedOrganizer(accessCode)) return;
     }
 
     public void setEventSpeaker(String accessCode, String eventID, String userID) {
-        if (!loginHelper.isAuthorizedOrganizer(accessCode)) return;
+        if (!userTypeChecker.isAuthorizedOrganizer(accessCode)) return;
     }
 
 }

@@ -5,7 +5,7 @@ import domain.entities.User;
 import java.util.List;
 import java.util.ArrayList;
 
-class UserManager {
+public class UserManager {
 
     private List<User> users;
 
@@ -13,14 +13,26 @@ class UserManager {
         this.users = new ArrayList<User>();
     }
 
-    public void createUser(String name, String userType, String ID, String password) {
+    public boolean createUser(String name, String userType, String ID, String password) {
+        if (getUser(ID) != null) return false;
+
         User u = new User(name, userType, ID, password);
         this.users.add(u);
+        return true;
     }
 
-    public User getUser(String username) {
+    public boolean userExists(String userID) {
         for (User u : users) {
-            if ((u.getUsername()).equals(username)) {
+            if ((u.getID()).equals(userID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public User getUser(String userID) {
+        for (User u : users) {
+            if ((u.getID()).equals(userID)) {
                 return u;
             }
         }
