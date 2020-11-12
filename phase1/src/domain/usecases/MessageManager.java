@@ -1,5 +1,6 @@
 package domain.usecases;
 
+import domain.entities.Event;
 import domain.entities.User;
 import domain.entities.Message;
 
@@ -22,6 +23,36 @@ public class MessageManager {
      */
     public Message createMessage(String m, String userId) {
         return new Message(userId, m);
+    }
+
+    ////////////////////////READDDDDDDDDDDDDDDDDDDDDDDD///////////////////////////////////////
+    public ArrayList<String> getAllConversationUsers(User sender){
+        //When given a user, i need an array of all other users this user has talked with - elson
+        //i don't know if theres a better solution to this method but improving it probably means you have to improve
+        //how its stored in the first place
+
+        ArrayList<String> allUsers = new ArrayList<>();
+
+        for (String key : conversations.keySet()) {
+            if (key.contains(sender.getID())) {
+
+                //split the key into two different user IDs
+                String[] separated = key.split(","); //016-78967
+                //separated[0]; //"016"
+                //separated[1]; //"78967"
+
+                //remove leading and trailing spaces
+                String userA = separated[0].trim();
+                String userB = separated[1].trim();
+
+                //add the other user to the array
+                if(userA.contains(sender.getID())) allUsers.add(userB);
+                else if(userB.contains(sender.getID())) allUsers.add(userA);
+
+            }
+        }
+
+        return allUsers;
     }
 
     /**

@@ -4,8 +4,7 @@ import domain.entities.User;
 import domain.entities.Event;
 import java.util.ArrayList;
 
-import java.util.HashMap;
-import javafx.util.Pair;
+import java.util.List;
 
 public class EventManager {
 
@@ -15,6 +14,12 @@ public class EventManager {
 
     public EventManager() {
         this.registered = new HashMapManager();
+    }
+
+    public Event getEventByID(String eventID) {
+        List<Event> allEvents = getAllEvents();
+        for (Event e : allEvents) if (e.getEventId() == eventID) return e;
+        return null;
     }
 
     public boolean checkConflict(int eventDuration, int eventTime){

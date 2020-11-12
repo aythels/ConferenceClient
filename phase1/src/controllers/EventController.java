@@ -30,21 +30,26 @@ public class EventController {
     }
 
     public String getEventSpeakerID(String eventID) {
-        return eventManager.getEventSpeaker(getEventByID(eventID));
+        Event event = eventManager.getEventByID(eventID);
+
+        if (event != null) return String.valueOf(event.getEventTime());
+
+        return null;
     }
 
-    public int getEventTime(String eventID) {
-        return getEventByID(eventID).getEventTime();
+    public String getEventTime(String eventID) {
+        Event event = eventManager.getEventByID(eventID);
+
+        if (event != null) return String.valueOf(event.getEventTime());
+
+        return null;
     }
 
-    public int getEventDuration(String eventID) {
-        //return eventManager.getEventByID(eventID).getEventDuration();
-        return 1;
-    }
+    public String getEventDuration(String eventID) {
+        Event event = eventManager.getEventByID(eventID);
 
-    protected Event getEventByID(String eventID) {
-        //List<Event> allEvents = eventManager.getEvents();
-        //for (Event e : allEvents) if (e.getEventID() == eventID) return e;
+        if (event != null) return String.valueOf(event.getEventDuration());
+
         return null;
     }
 

@@ -1,6 +1,5 @@
 package controllers;
 
-import domain.entities.Event;
 import domain.entities.Message;
 import domain.entities.User;
 import domain.usecases.MessageManager;
@@ -23,12 +22,23 @@ public class MessengerController {
     }
 
     //user level permissions
+
+    /**
+     * Get an array of all other userIDs that the client user has talked to.
+     * @param accessCode    a code that permits the caller to use controller methods restricted to their user type.
+     * @return  an array of userIDs
+     */
+
     public List<String> getMessagebleUserIDs(String accessCode) {
         if (!userTypeChecker.isAuthorizedUser(accessCode)) return null;
 
+        User thisUser = loginHelper.getUserByAccessCode(accessCode);
 
+        List<String> allIDs = new ArrayList<String>();
+        for (String userID : messageManager.getAllConversationUsers(thisUser)) allIDs.add(userID);
 
-        return null;
+        return allIDs;
+
     }
 
     /**
