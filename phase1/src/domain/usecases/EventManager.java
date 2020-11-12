@@ -52,7 +52,7 @@ public class EventManager {
     }
 
     public String rescheduleEvent(int id){
-        Event e = this.getEventbyId(id);
+        Event e = this.registered.getEventbyId(id);
         int eventDuration = e.getEventDuration();
         int eventTime = e.getEventTime();
         this.cancelEvent(id);
@@ -71,14 +71,6 @@ public class EventManager {
         return listEvent;
     }
 
-    public Event getEventbyId(int id){
-        if (!this.registered.ifInKeySet(id)){
-            return null;
-        }
-        else{
-            return this.registered.getEventbyId(id);
-        }
-    }
 
     public String bookForAttendee(User u, int id){
         if (!this.registered.ifInKeySet(id)){
