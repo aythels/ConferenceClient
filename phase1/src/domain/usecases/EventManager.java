@@ -123,4 +123,14 @@ public class EventManager {
         this.registered.cancelEventById(id);
         return "The event is now cancelled";
     }
+
+    public int getIdByEvent(Event e){
+        for (int i: this.registered.getKeySet()){
+            if (this.registered.getEventbyId(i) == e){
+                return i;
+            }
+        }
+        return 0;
+    }
+
 }
