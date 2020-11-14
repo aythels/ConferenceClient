@@ -1,27 +1,80 @@
 package controllers.eventcontrollers;
 
 import controllers.LoginHelper;
+import domain.entities.User;
 import domain.usecases.EventManager;
+import domain.usecases.UserManager;
 
 class OrganizerEventController extends SpeakerEventController {
 
-    protected OrganizerEventController(EventManager eventManager, LoginHelper loginhelper) {
-        super(eventManager, loginhelper);
+    protected OrganizerEventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper) {
+        super(eventManager, userManager, loginHelper);
     }
 
-    public String createEvent(String accessCode, String eventID, int eventDuration, int eventTime) {
-        return null;
+    /**
+     * Creates a new event
+     * @param eventName the display name of the event.
+     * @param eventDuration the duration of the event, in milliseconds.
+     * @param eventTime  the time this event takes place, in milliseconds since Unix Epoch.
+     * @return  true if event creation was successful, false otherwise.
+     */
+
+    public boolean createEvent(String eventName, String eventDuration, String eventTime) {
+        int _eventDuration = Integer.parseInt(eventDuration);
+        int _eventTime = Integer.parseInt(eventTime);
+
+        if (_eventDuration <= 0) return false;
+
+        return eventManager.createEvent(_eventDuration, _eventTime, eventName);
     }
 
-    public boolean rescheduleEvent(String accessCode, String eventID, int eventDuration, int eventTime) {
-        return false;
+    /**
+     * Reschedule an existing event
+     * @param eventID   the event's identifier
+     * @param eventDuration the duration of the event, in milliseconds.
+     * @param eventTime  the time this event takes place, in milliseconds since Unix Epoch.
+     * @return  true if the event was found and rescheduled successfully, false otherwise.
+     */
+
+    public boolean rescheduleEvent(String eventID, String eventDuration, String eventTime) {
+        int _eventDuration = Integer.parseInt(eventDuration);
+        int _eventTime = Integer.parseInt(eventTime);
+        int _eventID = Integer.parseInt(eventID);
+
+        if (eventManager.getEventByID(_eventID) == null) return false;
+        if (_eventDuration <= 0) return false;
+
+        return eventManager.rescheduleEvent(_eventID, _eventDuration, _eventTime);
     }
 
-    public boolean cancelEvent(String accessCode, String eventID) {
-        return false;
+    /**
+     * Cancel an existing event
+     * @param eventID   the event's identifier.
+     * @return  true if the event was found and canceled successfully, false otherwise.
+     */
+
+    public boolean cancelEvent(String eventID) {
+        int _eventID = Integer.parseInt(eventID);
+
+        if (eventManager.getEventByID(_eventID) == null) return false;
+
+        return eventManager.cancelEvent(_eventID);
     }
 
-    public boolean setEventSpeaker(String accessCode, String eventID, String userID) {
-        return false;
+    /**
+     * Set the speaker for an event.
+     * @param eventID   the event's identifier.
+     * @param userID    the specified user's identifier.
+     * @return  true if the event and user were found, and user was set as speaker successfully, false otherwise.
+     */
+
+    public boolean setEventSpeaker(String eventID, String userID) {
+        int _eventID = Integer.parseInt(eventID);
+        User speaker = userManager.getUser(userID);
+
+        if (eventManager.getEventByID(_eventID) == null) return false;
+        if (speaker == null) return false;
+
+        return eventManager.bookSpeaker(speaker, _eventID);
     }
 }

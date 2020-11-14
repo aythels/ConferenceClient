@@ -3,9 +3,9 @@ package controllers.logincontrollers;
 import controllers.LoginHelper;
 import domain.usecases.UserManager;
 
-class UserLoginController extends PublicLoginController {
+class AttendeeLoginController extends PublicLoginController {
 
-    protected UserLoginController(UserManager userManager, LoginHelper loginHelper) {
+    protected AttendeeLoginController(UserManager userManager, LoginHelper loginHelper) {
         super(userManager, loginHelper);
     }
 
@@ -15,6 +15,7 @@ class UserLoginController extends PublicLoginController {
      */
 
     public void logout(String accessCode) {
+        if (!loginHelper.isValidAccessCode(accessCode)) return;
         loginHelper.invalidateAccessCode(accessCode);
     }
 

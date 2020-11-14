@@ -18,7 +18,9 @@ class AttendeeUserController extends PublicUserController {
      * @param newName    the name to change to.
      */
 
-    public void setUserName(String accessCode, String userID, String newName) {
+    public void setUserName(String accessCode, String newName) {
+        if (!loginHelper.isValidAccessCode(accessCode)) return;
+
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
         userManager.setUsername(thisUser, newName);
     }
@@ -29,7 +31,9 @@ class AttendeeUserController extends PublicUserController {
      * @param newPassword    the password to change to.
      */
 
-    public void setUserPassword(String accessCode, String userID, String newPassword) {
+    public void setUserPassword(String accessCode, String newPassword) {
+        if (!loginHelper.isValidAccessCode(accessCode)) return;
+
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
         userManager.setPassword(thisUser, newPassword);
     }

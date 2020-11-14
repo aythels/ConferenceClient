@@ -23,10 +23,12 @@ class AttendeeMessengerController extends MessengerController {
     /**
      * Get an array of all other userIDs that the client user has talked to.
      * @param accessCode    a code unique to the current client
-     * @return  an array of userIDs
+     * @return  an array of userIDs or null if invalid accessCode
      */
 
     public List<String> getMessagebleUserIDs(String accessCode) {
+        if (!loginHelper.isValidAccessCode(accessCode)) return null;
+
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
 
         List<String> allIDs = new ArrayList<String>();
@@ -45,6 +47,7 @@ class AttendeeMessengerController extends MessengerController {
      */
 
     public List<String> getConvoWithOtherUserByID(String accessCode, String otherUserID) {
+        if (!loginHelper.isValidAccessCode(accessCode)) return null;
         if (!userManager.userExists(otherUserID)) return null;
 
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
@@ -68,6 +71,7 @@ class AttendeeMessengerController extends MessengerController {
      */
 
     public boolean messageUserByID(String accessCode, String otherUserID, String message) {
+        if (!loginHelper.isValidAccessCode(accessCode)) return false;
         if (!userManager.userExists(otherUserID)) return false;
 
         User thisUser = loginHelper.getUserByAccessCode(accessCode);

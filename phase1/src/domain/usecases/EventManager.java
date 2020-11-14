@@ -136,7 +136,7 @@ public class EventManager {
         return this.registered.getAttendeeById(id);
     }
 
-    public ArrayList<User> getSpeakersById(int id){
+    public ArrayList<User> getSpeakerById(int id){
         if (!this.registered.getKeySet().contains(id)){
             return null;
         }
