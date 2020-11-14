@@ -130,21 +130,21 @@ public class EventManager {
         return 0;
     }
 
-    public ArrayList<User> getAttendeeById(int id){
+    public ArrayList<User> getAttendeesById(int id){
         if (!this.registered.getKeySet().contains(id)){
             return null;
         }
         return this.registered.getAttendeeById(id);
     }
 
-    public ArrayList<User> getSpeakerById(int id){
+    public ArrayList<User> getSpeakersById(int id){
         if (!this.registered.getKeySet().contains(id)){
             return null;
         }
         return this.registered.getSpeakerById(id);
     }
 
-    public ArrayList<Integer> getEventIdByUser(User u){
+    public ArrayList<Integer> getEventIdsByUser(User u){
         ArrayList<Integer> listOfEventId = new ArrayList<>();
         for (Integer i: this.registered.getKeySet()){
             if (this.registered.getAttendeeById(i).contains(u)){
@@ -153,6 +153,8 @@ public class EventManager {
         }
         return listOfEventId;
     }
+
+
 
     public String getEventNameById(int id){
         if (!this.registered.getKeySet().contains(id)){
