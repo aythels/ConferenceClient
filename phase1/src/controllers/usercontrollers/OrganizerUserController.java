@@ -1,6 +1,6 @@
 package controllers.usercontrollers;
 
-import controllers.LoginHelper;
+import controllers.helpers.LoginHelper;
 import domain.usecases.UserManager;
 
 class OrganizerUserController extends AttendeeUserController {

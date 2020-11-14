@@ -1,6 +1,6 @@
 package controllers.messengercontrollers;
 
-import controllers.LoginHelper;
+import controllers.helpers.LoginHelper;
 import domain.usecases.MessageManager;
 import domain.usecases.UserManager;
 

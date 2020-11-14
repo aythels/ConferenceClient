@@ -1,6 +1,6 @@
 package controllers.logincontrollers;
 
-import controllers.LoginHelper;
+import controllers.helpers.LoginHelper;
 import domain.entities.User;
 import domain.usecases.UserManager;
 
@@ -31,6 +31,16 @@ class PublicLoginController extends LoginController {
         }
 
         else return null;
+    }
+
+    /**
+     * Logs out the specified user by invalidating their access code.
+     * @param accessCode    a code that permits the caller to use controller methods restricted to their user type.
+     */
+
+    public void logout(String accessCode) {
+        if (!loginHelper.isValidAccessCode(accessCode)) return;
+        loginHelper.invalidateAccessCode(accessCode);
     }
 
 }

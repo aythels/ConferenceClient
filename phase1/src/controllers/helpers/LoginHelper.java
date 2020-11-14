@@ -1,4 +1,4 @@
-package controllers;
+package controllers.helpers;
 
 import domain.entities.User;
 import java.util.HashMap;

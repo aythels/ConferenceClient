@@ -1,6 +1,6 @@
 package controllers.eventcontrollers;
 
-import controllers.LoginHelper;
+import controllers.helpers.LoginHelper;
 import domain.entities.User;
 import domain.usecases.EventManager;
 import domain.usecases.UserManager;

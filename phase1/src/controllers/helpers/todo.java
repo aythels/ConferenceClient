@@ -1,7 +1,6 @@
-package controllers;
+package controllers.helpers;
 
 public class todo {
-    //fix event controllers
-    //implement enum
+    //implement enum and helpers
     //implement master controller and builders
 }
