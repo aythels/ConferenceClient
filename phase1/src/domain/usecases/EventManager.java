@@ -161,4 +161,13 @@ public class EventManager {
         return this.registered.getEventbyId(id).getEventName();
     }
 
+    public Integer getEventIdByName(String name){
+        for (Integer id: this.registered.getKeySet()){
+            if (this.registered.getEventbyId(id).getEventName == name){
+                return id;
+            }
+        }
+        return null;
+    }
+
 }
