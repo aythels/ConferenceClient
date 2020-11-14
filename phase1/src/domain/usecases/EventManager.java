@@ -79,7 +79,7 @@ public class EventManager {
             return false;
         }
         ArrayList<User> booked = this.registered.getAttendeeById(id);
-        if (booked.size() <= 3){
+        if (booked.size() <= this.maxPeople - 1){
             if (booked.contains(u)){
                 return false;
             }
