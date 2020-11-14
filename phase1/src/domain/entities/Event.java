@@ -2,14 +2,14 @@ package domain.entities;
 
 public class Event {
 
-    private int eventID;
+    private final int eventID;
     private String eventName;
     private int eventDuration;
     private int eventTime;
 
     /**
      * An ID is required to create an instance of Event.
-     * @param eventId
+     * @param eventID
      */
 
     public Event(int eventID, String eventName, int eventDuration, int eventTime){
@@ -19,13 +19,28 @@ public class Event {
         this.eventTime = eventTime;
     }
 
+    /**
+     * This method gets the Event's identifier.
+     * @return the event's identifier
+     */
+
     public int getEventID() {
         return this.eventID;
     }
 
+    /**
+     * This method gets the display name of this Event.
+     * @return the event's display name
+     */
+
     public String getEventName() {
         return this.eventName;
     }
+
+    /**
+     * This method sets the display name of this Event.
+     * @param eventName
+     */
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
