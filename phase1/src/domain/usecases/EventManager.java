@@ -4,8 +4,6 @@ import domain.entities.User;
 import domain.entities.Event;
 import java.util.ArrayList;
 
-import java.util.List;
-
 public class EventManager {
 
     private HashMapManager registered;
@@ -16,15 +14,16 @@ public class EventManager {
         this.registered = new HashMapManager();
     }
 
-    public Event getEventByID(String eventID) {
-        List<Event> allEvents = getAllEvents();
-        for (Event e : allEvents) if (e.getEventId() == eventID) return e;
-        return null;
+    public Event getEventByID(int id) {
+        if(!this.registered.getKeySet().contains(id)){
+            return null;
+        }
+        return this.registered.getEventById(id);
     }
 
     public boolean checkConflict(int eventDuration, int eventTime){
         for (Integer i: this.registered.getKeySet()){
-            Event e = this.registered.getEventbyId(i);
+            Event e = this.registered.getEventById(i);
             int start = e.getEventTime();
             int end = start + e.getEventDuration();
             if (checkConflictHelper(start, end, eventDuration, eventTime)){
@@ -46,10 +45,7 @@ public class EventManager {
 
     public boolean createEvent(int eventDuration, int eventTime, String eventName){
         if(this.checkConflict(eventDuration, eventTime)) {
-            Event e = new Event(this.eventId.toString());
-            e.setEventDuration(eventDuration);
-            e.setEventTime(eventTime);
-            e.setEventName(eventName);
+            Event e = new Event(this.eventId, eventName, eventDuration, eventTime );
             this.registered.addEvent(this.eventId, eventDuration, eventTime, e);
             this.eventId += 1;
             return true;
@@ -58,7 +54,7 @@ public class EventManager {
     }
 
     public boolean rescheduleEvent(int id){
-        Event e = this.registered.getEventbyId(id);
+        Event e = this.registered.getEventById(id);
         int eventDuration = e.getEventDuration();
         int eventTime = e.getEventTime();
         String eventName = e.getEventName();
@@ -72,7 +68,7 @@ public class EventManager {
     public ArrayList<Event> getAllEvents(){
         ArrayList<Event> listEvent = new ArrayList<>();
         for (Integer i: this.registered.getKeySet()){
-            Event e = this.registered.getEventbyId(i);
+            Event e = this.registered.getEventById(i);
             listEvent.add(e);
         }
         return listEvent;
@@ -128,7 +124,7 @@ public class EventManager {
 
     public Integer getIdByEvent(Event e){
         for (int i: this.registered.getKeySet()){
-            if (this.registered.getEventbyId(i) == e){
+            if (this.registered.getEventById(i) == e){
                 return i;
             }
         }
@@ -165,12 +161,12 @@ public class EventManager {
         if (!this.registered.getKeySet().contains(id)){
             return null;
         }
-        return this.registered.getEventbyId(id).getEventName();
+        return this.registered.getEventById(id).getEventName();
     }
 
     public Integer getEventIdByName(String name){
         for (Integer id: this.registered.getKeySet()){
-            if (this.registered.getEventbyId(id).getEventName == name){
+            if (this.registered.getEventById(id).getEventName() == name){
                 return id;
             }
         }

@@ -14,7 +14,7 @@ public class HashMapManager {
         this.hashMap = new HashMap<>();
     }
 
-    public Event getEventbyId(int id){
+    public Event getEventById(int id){
         return this.hashMap.get(id).getKey().getKey();
     }
 
