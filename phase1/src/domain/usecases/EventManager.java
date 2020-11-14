@@ -44,27 +44,29 @@ public class EventManager {
         return false;
     }
 
-    public String createEvent(int eventDuration, int eventTime){
+    public boolean createEvent(int eventDuration, int eventTime, String eventName){
         if(this.checkConflict(eventDuration, eventTime)) {
             Event e = new Event(this.eventId.toString());
             e.setEventDuration(eventDuration);
             e.setEventTime(eventTime);
+            e.setEventName(eventName);
             this.registered.addEvent(this.eventId, eventDuration, eventTime, e);
             this.eventId += 1;
-            return "The event is now created.";
+            return true;
         }
-        return "Sorry, there is conflict with other events.";
+        return false;
     }
 
-    public String rescheduleEvent(int id){
+    public boolean rescheduleEvent(int id){
         Event e = this.registered.getEventbyId(id);
         int eventDuration = e.getEventDuration();
         int eventTime = e.getEventTime();
+        String eventName = e.getEventName();
         this.cancelEvent(id);
-        if(this.createEvent(eventDuration, eventTime) == "Sorry, there is conflict with other events."){
-            return "Sorry, reschedule failed, there is conflict with other events.";
+        if(this.createEvent(eventDuration, eventTime, eventName) == false){
+            return false;
         }
-        return "The event is now rescheduled, all registered speakers and attendees will need to register again for this event.";
+        return true;
     }
 
     public ArrayList<Event> getAllEvents(){
@@ -77,60 +79,102 @@ public class EventManager {
     }
 
 
-    public String bookForAttendee(User u, int id){
+    public boolean bookForAttendee(User u, int id){
         if (!this.registered.ifInKeySet(id)){
-            return "Event does not exist.";
+            return false;
         }
         ArrayList<User> booked = this.registered.getAttendeeById(id);
-        if (booked.size() <= 3){
+        if (booked.size() < this.maxPeople){
             if (booked.contains(u)){
-                return "You are already registered for this event.";
+                return false;
             }
             booked.add(u);
             this.registered.updateAttendee(id, booked);
-            return "You are now registered as attendee for this event.";
+            return true;
         }
-        return "Sorry, the room is full.";
+        return false;
     }
 
-    public String unBookForAttendee(User u, int id){
+    public boolean unBookForAttendee(User u, int id){
         if (!this.registered.ifInKeySet(id)){
-            return "Sorry, the event does not exist.";
+            return false;
         }
         ArrayList<User> booked = this.registered.getAttendeeById(id);
         if (!booked.contains(u)){
-            return "Sorry, you are not registered.";
+            return false;
         }
         booked.remove(u);
         this.registered.updateAttendee(id, booked);
-        return "You are no longer registered for this event.";
+        return true;
     }
 
-    public String bookSpeaker(User u, int id){
+    public boolean bookSpeaker(User u, int id){
         if (!u.getUserType().equals("Speaker")){
-            return "You cannot register as speaker for this event.";
+            return false;
         }
         if (this.registered.updateSpeaker(id, u)){
-            return "You are now registered as speaker for this event";
+            return true;
         }
-        return "There is already a speaker registered for this event!";
+        return false;
     }
 
-    public String cancelEvent(int id){
+    public boolean cancelEvent(int id){
         if (!this.registered.ifInKeySet(id)){
-            return "Sorry, the event does not exist";
+            return false;
         }
         this.registered.cancelEventById(id);
-        return "The event is now cancelled";
+        return true;
     }
 
-    public int getIdByEvent(Event e){
+    public Integer getIdByEvent(Event e){
         for (int i: this.registered.getKeySet()){
             if (this.registered.getEventbyId(i) == e){
                 return i;
             }
         }
         return 0;
+    }
+
+    public ArrayList<User> getAttendeesById(int id){
+        if (!this.registered.getKeySet().contains(id)){
+            return null;
+        }
+        return this.registered.getAttendeeById(id);
+    }
+
+    public ArrayList<User> getSpeakersById(int id){
+        if (!this.registered.getKeySet().contains(id)){
+            return null;
+        }
+        return this.registered.getSpeakerById(id);
+    }
+
+    public ArrayList<Integer> getEventIdsByUser(User u){
+        ArrayList<Integer> listOfEventId = new ArrayList<>();
+        for (Integer i: this.registered.getKeySet()){
+            if (this.registered.getAttendeeById(i).contains(u)){
+                listOfEventId.add(i);
+            }
+        }
+        return listOfEventId;
+    }
+
+
+
+    public String getEventNameById(int id){
+        if (!this.registered.getKeySet().contains(id)){
+            return null;
+        }
+        return this.registered.getEventbyId(id).getEventName();
+    }
+
+    public Integer getEventIdByName(String name){
+        for (Integer id: this.registered.getKeySet()){
+            if (this.registered.getEventbyId(id).getEventName == name){
+                return id;
+            }
+        }
+        return null;
     }
 
 }
