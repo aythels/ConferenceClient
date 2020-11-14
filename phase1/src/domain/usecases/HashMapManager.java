@@ -49,7 +49,7 @@ public class HashMapManager {
 
     public boolean updateSpeaker(int id, User u){
         ArrayList<User> speakers = this.getSpeakerById(id);
-        Event e = this.getEventbyId(id);
+        Event e = this.getEventById(id);
         ArrayList<User> attendees = this.getAttendeeById(id);
         if (speakers.size() > 0){
             return false;
