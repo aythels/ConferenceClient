@@ -1,18 +1,17 @@
-package controllers;
+package controllers.logincontrollers;
 
+import controllers.LoginHelper;
 import domain.entities.User;
 import domain.usecases.UserManager;
 
-public class LoginController {
-    private LoginHelper loginHelper;
-    private UserManager userManager;
+class PublicLoginController extends LoginController {
+    protected final UserManager userManager;
+    protected final LoginHelper loginHelper;
 
-    protected LoginController(UserManager userManager, LoginHelper loginHelper){
-        this.loginHelper = loginHelper;
+    protected PublicLoginController(UserManager userManager, LoginHelper loginHelper) {
         this.userManager = userManager;
+        this.loginHelper = loginHelper;
     }
-
-    //public permission level methods
 
     /**
      * Logs in the specified user by generating a temporary access code that is required as a parameter to use certain
@@ -32,15 +31,6 @@ public class LoginController {
         }
 
         else return null;
-    }
-
-    /**
-     * Logs out the specified user by invalidating their access code.
-     * @param accessCode    a code that permits the caller to use controller methods restricted to their user type.
-     */
-
-    public void logout(String accessCode) {
-        loginHelper.invalidateAccessCode(accessCode);
     }
 
 }

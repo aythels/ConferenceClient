@@ -11,23 +11,23 @@ public class LoginHelper {
         this.loggedUsers = new HashMap<String, User>();
     }
 
-    protected String genAccessCode() {
+    public String genAccessCode() {
         return UUID.randomUUID().toString();
     }
 
-    protected void validateAccessCode(String accessCode, User u) {
+    public void validateAccessCode(String accessCode, User u) {
         loggedUsers.put(accessCode, u);
     }
 
-    protected void invalidateAccessCode(String accessCode) {
+    public void invalidateAccessCode(String accessCode) {
         loggedUsers.remove(accessCode);
     }
 
-    protected User getUserByAccessCode(String accessCode) {
+    public boolean isValidAccessCode(String accessCode) {
+        return loggedUsers.containsKey(accessCode); }
+
+    public User getUserByAccessCode(String accessCode) {
         return loggedUsers.get(accessCode);
     }
-
-    protected boolean isValidAccessCode(String accessCode) {
-        return loggedUsers.containsKey(accessCode); }
 
 }
