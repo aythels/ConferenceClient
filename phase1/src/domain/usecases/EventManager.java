@@ -53,10 +53,8 @@ public class EventManager {
         return false;
     }
 
-    public boolean rescheduleEvent(int id){
+    public boolean rescheduleEvent(int id, int eventDuration, int eventTime){
         Event e = this.registered.getEventById(id);
-        int eventDuration = e.getEventDuration();
-        int eventTime = e.getEventTime();
         String eventName = e.getEventName();
         this.cancelEvent(id);
         if(this.createEvent(eventDuration, eventTime, eventName) == false){
