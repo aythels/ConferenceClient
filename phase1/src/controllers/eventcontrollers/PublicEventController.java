@@ -16,7 +16,7 @@ class PublicEventController extends EventController {
     public List<String> getAllEventIDs() {
         List<String> allIDs = new ArrayList<String>();
 
-        for (Event e : eventManager.getAllEvents()) allIDs.add(e.getEventId());
+        for (Event e : eventManager.getAllEvents()) allIDs.add(eventManager.getEventID(e));
 
         return allIDs;
     }

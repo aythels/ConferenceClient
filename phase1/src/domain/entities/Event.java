@@ -2,7 +2,8 @@ package domain.entities;
 
 public class Event {
 
-    private String eventId;
+    private int eventID;
+    private String eventName;
     private int eventDuration;
     private int eventTime;
 
@@ -11,12 +12,23 @@ public class Event {
      * @param eventId
      */
 
-    public Event(String eventId){
-        this.eventId = eventId;
+    public Event(int eventID, String eventName, int eventDuration, int eventTime){
+        this.eventID = eventID;
+        this.eventName = eventName;
+        this.eventDuration = eventDuration;
+        this.eventTime = eventTime;
     }
 
-    public String getEventId() {
-        return this.eventId;
+    public int getEventID() {
+        return this.eventID;
+    }
+
+    public String getEventName() {
+        return this.eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     /**
