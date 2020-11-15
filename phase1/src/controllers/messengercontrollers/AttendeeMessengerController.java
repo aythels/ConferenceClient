@@ -50,8 +50,11 @@ class AttendeeMessengerController extends MessengerController {
         if (!loginHelper.isValidAccessCode(accessCode)) return null;
         if (!userManager.userExists(otherUserID)) return null;
 
+        //this method gets the message string and message writer directed from the message object instead of use case
+
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
         User otherUser = userManager.getUser(otherUserID);
+
         List<Message> conversation = messageManager.getConversation(thisUser, otherUser);
         conversation = conversation == null ? new ArrayList<Message>() : conversation;
 

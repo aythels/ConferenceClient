@@ -22,15 +22,17 @@ class PublicLoginController extends LoginController {
      */
 
     public String login(String userID, String userPassword) {
+        if (!userManager.userExists(userID)) return null;
+
         User u = userManager.getUser(userID);
 
-        if(u != null && userManager.passwordMatch(u, userPassword)) {
+        if(userManager.passwordMatch(u, userPassword)) {
             String accessCode = loginHelper.genAccessCode();
             loginHelper.validateAccessCode(accessCode, u);
             return accessCode;
         }
 
-        else return null;
+        return null;
     }
 
     /**

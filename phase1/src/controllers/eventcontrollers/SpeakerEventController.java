@@ -20,11 +20,11 @@ class SpeakerEventController extends UserEventController{
      * @return  a list of user ids of users registered in this event, null if the event is not found
      */
 
-    public List<String> getEventRegisteredUsers(String eventID) {
-        if (eventManager.getEventByID(Integer.parseInt(eventID)) == null) return null;
+    public List<String> getEventRegisteredUserIDs(int eventID) {
+        if (eventManager.getEventByID(eventID) == null) return null;
 
         List<String> allUserIDs = new ArrayList<String>();
-        List<User> allUsers = eventManager.getAttendeesById(Integer.parseInt(eventID));
+        List<User> allUsers = eventManager.getAttendeesById(eventID);
 
         for (User u : allUsers) allUserIDs.add(userManager.getID(u));
 

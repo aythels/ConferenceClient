@@ -17,14 +17,10 @@ class SpeakerMessengerController extends AttendeeMessengerController {
      * @param accessCode    a code unique to the current client
      * @param otherUserIDArray    a list of login IDs of users who will receive this message.
      * @param message    the message string to be sent.
-     * @return  true if the message was sent successfully, false otherwise (such as if otherUserIDArray contains a n
-     *          on-existing user).
      */
 
-    public boolean messageUserByIDArray(String accessCode, List<String> otherUserIDArray, String message) {
-        for (String userID : otherUserIDArray) if (!messageUserByID(accessCode, userID, message)) return false;
-
-        return true;
+    public void messageUserByIDArray(String accessCode, List<String> otherUserIDArray, String message) {
+        for (String userID : otherUserIDArray) messageUserByID(accessCode, userID, message);
     }
 
 }

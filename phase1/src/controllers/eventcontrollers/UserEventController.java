@@ -22,15 +22,14 @@ class UserEventController extends PublicEventController {
      * @return a list of ids of events the user has registered in, null if invalid accessCode
      */
 
-    public List<String> getAllRegisteredEventIDs(String accessCode) {
+    public List<Integer> getAllRegisteredEventIDs(String accessCode) {
         if (!loginHelper.isValidAccessCode(accessCode)) return null;
 
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
+        List<Integer> allEventIDsCopy = new ArrayList<Integer>();
+        List<Integer> allEventIDs = eventManager.getEventIdsByUser(thisUser);
 
-        List<String> allEventIDs = new ArrayList<String>();
-        List<Integer> allEventIDsInt = eventManager.getEventIdsByUser(thisUser);
-
-        for (Integer i : allEventIDsInt) allEventIDs.add(String.valueOf(i));
+        for (Integer i : allEventIDs) allEventIDsCopy.add(i);
         return allEventIDs;
     }
 
@@ -41,14 +40,13 @@ class UserEventController extends PublicEventController {
      * @return true if the registration was successful, false otherwise (etc invalid parameters or other reasons)
      */
 
-    public boolean registerInEvent(String accessCode, String eventID) {
+    public boolean registerInEvent(String accessCode, int eventID) {
         if (!loginHelper.isValidAccessCode(accessCode)) return false;
-        if (eventManager.getEventByID(Integer.parseInt(eventID)) == null) return false;
+        if (eventManager.getEventByID(eventID) == null) return false;
 
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
-        int eID = Integer.parseInt(eventID);
 
-        return eventManager.bookForAttendee(thisUser, eID);
+        return eventManager.bookForAttendee(thisUser, eventID);
     }
 
     /**
@@ -58,14 +56,13 @@ class UserEventController extends PublicEventController {
      * @return true if the un-registration was successful, false otherwise(etc invalid parameters or other reasons)
      */
 
-    public boolean unregisterInEvent(String accessCode, String eventID) {
+    public boolean unregisterInEvent(String accessCode, int eventID) {
         if (!loginHelper.isValidAccessCode(accessCode)) return false;
-        if (eventManager.getEventByID(Integer.parseInt(eventID)) == null) return false;
+        if (eventManager.getEventByID(eventID) == null) return false;
 
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
-        int eID = Integer.parseInt(eventID);
 
-        return eventManager.unBookForAttendee(thisUser, eID);
+        return eventManager.unBookForAttendee(thisUser, eventID);
     }
 
 }

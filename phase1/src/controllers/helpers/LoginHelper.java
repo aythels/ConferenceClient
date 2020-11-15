@@ -30,4 +30,11 @@ public class LoginHelper {
         return loggedUsers.get(accessCode);
     }
 
+    /*
+    public UserType getUserTypeByAccessCode(String accessCode) {
+        User u = loggedUsers.get(accessCode);
+        return UserType.valueOf(u.getUserType());
+    }
+    */
+
 }

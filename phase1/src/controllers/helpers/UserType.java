@@ -1,7 +1,19 @@
 package controllers.helpers;
 
-enum UserType {
+public enum UserType {
     ATTENDEE,
     SPEAKER,
-    ORGANIZER
+    ORGANIZER;
+
+    public static boolean contains(String test) {
+
+        for (UserType type : UserType.values()) {
+            if (type.name().equals(test)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

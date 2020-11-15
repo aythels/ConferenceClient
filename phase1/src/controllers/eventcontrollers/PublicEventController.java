@@ -22,11 +22,11 @@ class PublicEventController extends EventController {
      * @return  a list of event IDs
      */
 
-    public List<String> getAllEventIDs() {
-        List<String> allEventIDs = new ArrayList<String>();
+    public List<Integer> getAllEventIDs() {
+        List<Integer> allEventIDs = new ArrayList<Integer>();
 
         for (Event e : eventManager.getAllEvents()) {
-            String eventID = String.valueOf(eventManager.getIdByEvent(e));
+            int eventID = eventManager.getIdByEvent(e);
             allEventIDs.add(eventID);
         }
 
@@ -39,10 +39,10 @@ class PublicEventController extends EventController {
      * @return  a list of ids of users speaking at this event, null if the event was not found
      */
 
-    public List<String> getEventSpeakerID(String eventID) {
-        if (eventManager.getEventByID(Integer.parseInt(eventID)) == null) return null;
+    public List<String> getEventSpeakerID(int eventID) {
+        if (eventManager.getEventByID(eventID) == null) return null;
 
-        ArrayList<User> allSpeakers = eventManager.getSpeakerById(Integer.parseInt(eventID));
+        ArrayList<User> allSpeakers = eventManager.getSpeakerById(eventID);
         ArrayList<String> allUserIDs = new ArrayList<String>();
 
         for (User u : allSpeakers) allUserIDs.add(userManager.getID(u));
@@ -56,10 +56,10 @@ class PublicEventController extends EventController {
      * @return  the display name of the event, null if the event is not found
      */
 
-    public String getEventName(String eventID) {
-        if (eventManager.getEventByID(Integer.parseInt(eventID)) == null) return null;
+    public String getEventName(int eventID) {
+        if (eventManager.getEventByID(eventID) == null) return null;
 
-        String name = eventManager.getEventNameById(Integer.parseInt(eventID));
+        String name = eventManager.getEventNameById(eventID);
         return name;
     }
 
@@ -69,12 +69,12 @@ class PublicEventController extends EventController {
      * @return  the time this event takes place, in milliseconds since Unix Epoch, null if event is not found
      */
 
-    public String getEventTime(String eventID) {
-        if (eventManager.getEventByID(Integer.parseInt(eventID)) == null) return null;
+    public Integer getEventTime(int eventID) {
+        if (eventManager.getEventByID(eventID) == null) return null;
 
         //this method calls getEventTime() directly from the Event object instead of using the use case
-        Event event = eventManager.getEventByID(Integer.parseInt(eventID));
-        return String.valueOf(event.getEventTime());
+        Event event = eventManager.getEventByID(eventID);
+        return event.getEventTime();
     }
 
     /**
@@ -83,12 +83,12 @@ class PublicEventController extends EventController {
      * @return  the duration of the event, in milliseconds, null if event is not found
      */
 
-    public String getEventDuration(String eventID) {
-        if (eventManager.getEventByID(Integer.parseInt(eventID)) == null) return null;
+    public Integer getEventDuration(int eventID) {
+        if (eventManager.getEventByID(eventID) == null) return null;
 
         //this method calls getEventDuration() directly from the Event object instead of using the use case
-        Event event = eventManager.getEventByID(Integer.parseInt(eventID));
-        return String.valueOf(event.getEventDuration());
+        Event event = eventManager.getEventByID(eventID);
+        return event.getEventDuration();
     }
 
 }

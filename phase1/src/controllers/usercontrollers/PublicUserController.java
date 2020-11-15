@@ -1,5 +1,6 @@
 package controllers.usercontrollers;
 
+import controllers.helpers.UserType;
 import domain.entities.User;
 import domain.usecases.UserManager;
 
@@ -14,15 +15,18 @@ class PublicUserController extends UserController {
      * Creates a new user account as the specified account type
      * THIS IS A TEMPORARY METHOD THAT CAN BE USED TO QUICKLY CREATE DIFFERENT ACCOUNTS. IT WILL BE REMOVED AFTER THE
      * PROGRAM IS FINISHED!!!!!!!!!
-     * @param userType    the type of user ("ATTENDEE"/"SPEAKER"/"ORGANIZER").
+     * @param userType    the type of user, as specified in UserType
      * @param name    the name of the user.
      * @param userID    the login ID that will be used to log in the user.
      * @param userPassword  the login password that will be used to log in the user.
      * @return  true if account creation was successful, false otherwise (for reasons such as if userID is already
-     *          taken).
+     *          taken or invalid userType).
      */
 
     public boolean createAnyUserTEMPORARY(String userType, String name, String userID, String userPassword) {
+        if (userManager.userExists(userID)) return false;
+        if (!UserType.contains(userType)) return false;
+
         return userManager.createUser(name, userType, userID, userPassword);
     }
 
@@ -36,7 +40,8 @@ class PublicUserController extends UserController {
      */
 
     public boolean createUser(String name, String userID, String userPassword) {
-        return userManager.createUser(name, "ATTENDEE", userID, userPassword);
+        if (userManager.userExists(userID)) return false;
+        return userManager.createUser(name, UserType.ATTENDEE.name(), userID, userPassword);
     }
 
     /**

@@ -19,13 +19,8 @@ class OrganizerEventController extends SpeakerEventController {
      * @return  true if event creation was successful, false otherwise.
      */
 
-    public boolean createEvent(String eventName, String eventDuration, String eventTime) {
-        int _eventDuration = Integer.parseInt(eventDuration);
-        int _eventTime = Integer.parseInt(eventTime);
-
-        if (_eventDuration <= 0) return false;
-
-        return eventManager.createEvent(_eventDuration, _eventTime, eventName);
+    public boolean createEvent(String eventName, int eventDuration, int eventTime) {
+        return eventManager.createEvent(eventDuration, eventTime, eventName);
     }
 
     /**
@@ -36,15 +31,10 @@ class OrganizerEventController extends SpeakerEventController {
      * @return  true if the event was found and rescheduled successfully, false otherwise.
      */
 
-    public boolean rescheduleEvent(String eventID, String eventDuration, String eventTime) {
-        int _eventDuration = Integer.parseInt(eventDuration);
-        int _eventTime = Integer.parseInt(eventTime);
-        int _eventID = Integer.parseInt(eventID);
+    public boolean rescheduleEvent(int eventID, int eventDuration, int eventTime) {
+        if (eventManager.getEventByID(eventID) == null) return false;
 
-        if (eventManager.getEventByID(_eventID) == null) return false;
-        if (_eventDuration <= 0) return false;
-
-        return eventManager.rescheduleEvent(_eventID, _eventDuration, _eventTime);
+        return eventManager.rescheduleEvent(eventID, eventDuration, eventTime);
     }
 
     /**
@@ -53,12 +43,10 @@ class OrganizerEventController extends SpeakerEventController {
      * @return  true if the event was found and canceled successfully, false otherwise.
      */
 
-    public boolean cancelEvent(String eventID) {
-        int _eventID = Integer.parseInt(eventID);
+    public boolean cancelEvent(int eventID) {
+        if (eventManager.getEventByID(eventID) == null) return false;
 
-        if (eventManager.getEventByID(_eventID) == null) return false;
-
-        return eventManager.cancelEvent(_eventID);
+        return eventManager.cancelEvent(eventID);
     }
 
     /**
@@ -68,13 +56,11 @@ class OrganizerEventController extends SpeakerEventController {
      * @return  true if the event and user were found, and user was set as speaker successfully, false otherwise.
      */
 
-    public boolean setEventSpeaker(String eventID, String userID) {
-        int _eventID = Integer.parseInt(eventID);
+    public boolean setEventSpeaker(int eventID, String userID) {
+        if (eventManager.getEventByID(eventID) == null) return false;
+        if (!userManager.userExists(userID)) return false;
+
         User speaker = userManager.getUser(userID);
-
-        if (eventManager.getEventByID(_eventID) == null) return false;
-        if (speaker == null) return false;
-
-        return eventManager.bookSpeaker(speaker, _eventID);
+        return eventManager.bookSpeaker(speaker, eventID);
     }
 }
