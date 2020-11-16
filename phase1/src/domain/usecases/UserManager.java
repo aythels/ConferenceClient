@@ -2,10 +2,11 @@ package domain.usecases;
 
 import domain.entities.User;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class UserManager {
+public class UserManager implements Serializable {
 
     private List<User> users;
 

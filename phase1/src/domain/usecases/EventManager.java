@@ -2,9 +2,11 @@ package domain.usecases;
 
 import domain.entities.User;
 import domain.entities.Event;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class EventManager {
+public class EventManager implements Serializable {
 
     private HashMapManager registered;
     private Integer eventId = 1;

@@ -3,11 +3,13 @@ package domain.usecases;
 import domain.entities.Event;
 import domain.entities.User;
 import javafx.util.Pair;
+
+import java.io.Serializable;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class HashMapManager {
+public class HashMapManager implements Serializable {
     private HashMap<Integer, Pair<Pair<Event, ArrayList<User>>, ArrayList<User>>> hashMap;
 
     public HashMapManager(){

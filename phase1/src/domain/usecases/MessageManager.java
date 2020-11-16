@@ -4,11 +4,12 @@ import domain.entities.Event;
 import domain.entities.User;
 import domain.entities.Message;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MessageManager {
+public class MessageManager implements Serializable {
 
     private HashMap<String, List<Message>> conversations;
 
