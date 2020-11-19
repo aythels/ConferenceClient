@@ -1,3 +1,5 @@
+package adapters;
+
 import controllers.MasterController;
 
 public class Client {

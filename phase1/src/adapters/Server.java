@@ -1,3 +1,5 @@
+package adapters;
+
 import controllers.MasterController;
 import domain.usecases.EventManager;
 import domain.usecases.MessageManager;
