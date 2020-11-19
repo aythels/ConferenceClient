@@ -4,6 +4,7 @@ public class UserTest {
         //Server server = new Server();
         //Client client = new Client(server.getAPI());
 
+        //run tests here
         System.out.println("Hello, World");
     }
 

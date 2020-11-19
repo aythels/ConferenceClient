@@ -44,12 +44,12 @@ public class MasterController {
         allLoginControllers.addController(UserType.ORGANIZER, _public);
 
         //MESSENGER CONTROLLERS
-        _public = new AttendeeMessengerController(messageManager, userManager, loginHelper);
-        _attendee = null;
+        _public = null;
+        _attendee = new AttendeeMessengerController(messageManager, userManager, loginHelper);
         _speaker = new SpeakerMessengerController(messageManager, userManager, loginHelper);
         _organizer = null;
-        allMessengerControllers.addController(UserType._PUBLIC, _public);
-        allMessengerControllers.addController(UserType.ATTENDEE, _public);
+        allMessengerControllers.addController(UserType._PUBLIC, null);
+        allMessengerControllers.addController(UserType.ATTENDEE, _attendee);
         allMessengerControllers.addController(UserType.SPEAKER, _speaker);
         allMessengerControllers.addController(UserType.ORGANIZER, _speaker);
 
@@ -80,15 +80,24 @@ public class MasterController {
     }
 
     public UserController getUserAPI(String accessCode){
-        return (UserController) allUserControllers.getController(getUserType(accessCode));
+        UserType userType = getUserType(accessCode);
+        if (userType == null) return  null;
+
+        return (UserController) allUserControllers.getController(userType);
     }
 
     public MessengerController getMessengerAPI(String accessCode) {
-        return (MessengerController) allMessengerControllers.getController(getUserType(accessCode));
+        UserType userType = getUserType(accessCode);
+        if (userType == null) return  null;
+
+        return (MessengerController) allMessengerControllers.getController(userType);
     }
 
     public EventController getEventAPI(String accessCode) {
-        return (EventController) allEventControllers.getController(getUserType(accessCode));
+        UserType userType = getUserType(accessCode);
+        if (userType == null) return  null;
+
+        return (EventController) allEventControllers.getController(userType);
     }
 
     protected UserType getUserType(String accessCode) {
@@ -97,6 +106,6 @@ public class MasterController {
             if (UserType.contains(userType)) return UserType.valueOf(userType);
         }
 
-        return UserType._PUBLIC;
+        return null;
     }
 }
