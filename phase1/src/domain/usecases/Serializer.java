@@ -20,7 +20,7 @@ public class Serializer {
         }
     }
 
-    public void serializeMessageManager(UserManager object) {
+    public void serializeMessageManager(MessageManager object) {
         String filename = "MessageManager.ser";
         try
         {
@@ -36,7 +36,7 @@ public class Serializer {
         }
     }
 
-    public void serializeEventManager(UserManager object) {
+    public void serializeEventManager(EventManager object) {
         String filename = "EventManager.ser";
         try
         {
@@ -52,7 +52,7 @@ public class Serializer {
         }
     }
 
-    public void serializeHashMapManager(UserManager object) {
+    public void serializeHashMapManager(HashMapManager object) {
         String filename = "HashMapManager.ser";
         try
         {
