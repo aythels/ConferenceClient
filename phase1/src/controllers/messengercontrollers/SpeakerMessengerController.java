@@ -6,9 +6,9 @@ import domain.usecases.UserManager;
 
 import java.util.List;
 
-class SpeakerMessengerController extends AttendeeMessengerController {
+public class SpeakerMessengerController extends AttendeeMessengerController {
 
-    protected SpeakerMessengerController(MessageManager messageManager, UserManager userManager, LoginHelper loginHelper) {
+    public SpeakerMessengerController(MessageManager messageManager, UserManager userManager, LoginHelper loginHelper) {
         super(messageManager, userManager, loginHelper);
     }
 

@@ -1,5 +1,7 @@
 package controllers.logincontrollers;
 
-abstract class LoginController {
+import controllers.eventcontrollers.Controller;
+
+public abstract class LoginController extends Controller {
     protected LoginController(){}
 }

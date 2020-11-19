@@ -4,9 +4,9 @@ import controllers.helpers.LoginHelper;
 import controllers.helpers.UserType;
 import domain.usecases.UserManager;
 
-class OrganizerUserController extends AttendeeUserController {
+public class OrganizerUserController extends AttendeeUserController {
 
-    protected OrganizerUserController(UserManager userManager, LoginHelper loginHelper) {
+    public OrganizerUserController(UserManager userManager, LoginHelper loginHelper) {
         super(userManager, loginHelper);
     }
 

@@ -9,12 +9,12 @@ import domain.usecases.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 
-class AttendeeMessengerController extends MessengerController {
+public class AttendeeMessengerController extends MessengerController {
     protected final MessageManager messageManager;
     protected final UserManager userManager;
     protected final LoginHelper loginHelper;
 
-    protected AttendeeMessengerController(MessageManager messageManager, UserManager userManager, LoginHelper loginHelper) {
+    public AttendeeMessengerController(MessageManager messageManager, UserManager userManager, LoginHelper loginHelper) {
         this.messageManager = messageManager;
         this.userManager = userManager;
         this.loginHelper = loginHelper;

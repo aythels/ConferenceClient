@@ -8,9 +8,9 @@ import domain.usecases.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 
-class SpeakerEventController extends UserEventController{
+public class SpeakerEventController extends AttendeeEventController {
 
-    protected SpeakerEventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper) {
+    public SpeakerEventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper) {
         super(eventManager, userManager, loginHelper);
     }
 

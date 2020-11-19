@@ -8,11 +8,11 @@ import domain.usecases.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 
-class PublicEventController extends EventController {
+public class PublicEventController extends EventController {
     protected final EventManager eventManager;
     protected final UserManager userManager;
 
-    protected PublicEventController(EventManager eventManager, UserManager userManager) {
+    public PublicEventController(EventManager eventManager, UserManager userManager) {
         this.eventManager = eventManager;
         this.userManager = userManager;
     }

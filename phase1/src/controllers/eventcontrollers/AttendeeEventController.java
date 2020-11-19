@@ -8,10 +8,10 @@ import domain.usecases.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 
-class UserEventController extends PublicEventController {
+public class AttendeeEventController extends PublicEventController {
     protected final LoginHelper loginHelper;
 
-    protected UserEventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper) {
+    public AttendeeEventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper) {
         super(eventManager, userManager);
         this.loginHelper = loginHelper;
     }

@@ -4,11 +4,11 @@ import controllers.helpers.LoginHelper;
 import domain.entities.User;
 import domain.usecases.UserManager;
 
-class PublicLoginController extends LoginController {
+public class PublicLoginController extends LoginController {
     protected final UserManager userManager;
     protected final LoginHelper loginHelper;
 
-    protected PublicLoginController(UserManager userManager, LoginHelper loginHelper) {
+    public PublicLoginController(UserManager userManager, LoginHelper loginHelper) {
         this.userManager = userManager;
         this.loginHelper = loginHelper;
     }

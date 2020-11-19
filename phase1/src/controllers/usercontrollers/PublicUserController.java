@@ -4,10 +4,10 @@ import controllers.helpers.UserType;
 import domain.entities.User;
 import domain.usecases.UserManager;
 
-class PublicUserController extends UserController {
+public class PublicUserController extends UserController {
     protected final UserManager userManager;
 
-    protected PublicUserController(UserManager userManager) {
+    public PublicUserController(UserManager userManager) {
         this.userManager = userManager;
     }
 

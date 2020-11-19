@@ -5,9 +5,9 @@ import domain.entities.User;
 import domain.usecases.EventManager;
 import domain.usecases.UserManager;
 
-class OrganizerEventController extends SpeakerEventController {
+public class OrganizerEventController extends SpeakerEventController {
 
-    protected OrganizerEventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper) {
+    public OrganizerEventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper) {
         super(eventManager, userManager, loginHelper);
     }
 

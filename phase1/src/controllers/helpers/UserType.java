@@ -1,6 +1,7 @@
 package controllers.helpers;
 
 public enum UserType {
+    _PUBLIC,
     ATTENDEE,
     SPEAKER,
     ORGANIZER;

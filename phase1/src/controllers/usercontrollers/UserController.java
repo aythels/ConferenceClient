@@ -1,6 +1,8 @@
 package controllers.usercontrollers;
 
-abstract class UserController {
+import controllers.eventcontrollers.Controller;
+
+public abstract class UserController extends Controller {
     protected UserController(){
 
     }

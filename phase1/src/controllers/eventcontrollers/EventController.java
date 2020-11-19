@@ -1,6 +1,6 @@
 package controllers.eventcontrollers;
 
-abstract class EventController {
+public abstract class EventController extends Controller {
     protected EventController(){
     }
 
