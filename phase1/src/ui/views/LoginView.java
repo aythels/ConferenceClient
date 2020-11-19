@@ -1,28 +1,59 @@
 package ui.views;
 
+import controllers.logincontrollers.PublicLoginController;
+import controllers.usercontrollers.PublicUserController;
 import ui.UIContext;
 
 public class LoginView extends View {
-    private String username, password;
+    private String username, password, error;
     public LoginView(UIContext context) {
         super(context);
     }
 
     @Override
     public String render() {
-        if (username == null)
-            return "Please enter your username: ";
-        return "Please enter your password: ";
+        StringBuilder sb = new StringBuilder();
+        if (error != null) {
+            sb.append("Error: ").append(error).append("\n");
+        }
+        if (username == null) {
+            sb.append("Username: ");
+        } else {
+            sb.append("Password: ");
+        }
+        return sb.toString();
     }
 
     @Override
     public void handleInput(String input) {
+        error = null;
         if (username == null) {
             username = input;
         } else {
             password = input;
-            // do something with credentials here
-            this.context.navigate("home");
+            PublicLoginController loginController = (PublicLoginController) this.context.server.getAPI().getLoginAPI();
+            String accessCode = loginController.login(username, password);
+            if (accessCode != null) {
+                this.context.putState("accessCode", accessCode);
+                PublicUserController userController = (PublicUserController) this.context.server.getAPI().getUserAPI(accessCode);
+                String userRole = userController.getUserType(username);
+
+                switch (userRole) {
+                    case "ATTENDEE":
+                        this.context.navigate("home_attendee");
+                        break;
+                    case "ORGANIZER":
+                        this.context.navigate("home_organizer");
+                        break;
+                    case "SPEAKER":
+                        this.context.navigate("home_speaker");
+                        break;
+                    default:
+                        error = "Invalid user!";
+                }
+            } else {
+                error = "Invalid credentials!";
+            }
         }
     }
 
