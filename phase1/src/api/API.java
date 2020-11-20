@@ -40,7 +40,7 @@ public class API {
         return allMessengerControllers.getDefaultController();
     }
 
-    public Controller getEventAPI() {
+    public Controller allEventControllers() {
         return allEventControllers.getDefaultController();
     }
 
