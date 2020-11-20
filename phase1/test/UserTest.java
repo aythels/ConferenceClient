@@ -1,8 +1,8 @@
 public class UserTest {
 
     public static void main(String[] args) {
-        //Server server = new Server();
-        //Client client = new Client(server.getAPI());
+        //adapters.Server server = new adapters.Server();
+        //adapters.Client client = new adapters.Client(server.getAPI());
 
         //run tests here
         System.out.println("Hello, World");
