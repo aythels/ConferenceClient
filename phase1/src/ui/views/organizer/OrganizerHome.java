@@ -17,7 +17,7 @@ public class OrganizerHome extends View {
                 .append("|--------------------------|\n")
                 .append("| Make a selection:        |\n")
                 .append("| 1. Schedule an event     |\n")
-                .append("| 2. Register a speaker    |\n")
+                .append("| 2. Create speaker account|\n")
                 .append("| 3. View events           |\n")
                 .append("| 4. Log out               |\n")
                 .append("============================\n");
