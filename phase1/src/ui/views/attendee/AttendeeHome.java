@@ -18,6 +18,7 @@ public class AttendeeHome extends View {
                 .append("| Make a selection:        |\n")
                 .append("| 1. View events           |\n")
                 .append("| 2. View messages         |\n")
+                .append("| 3. Log out               |\n")
                 .append("============================\n");
         return sb.toString();
     }
@@ -30,6 +31,10 @@ public class AttendeeHome extends View {
                 break;
             case "2":
                 this.context.navigate("messages_attendee");
+                break;
+            case "3":
+                this.context.putState("accessCode", null);
+                this.context.navigate("login");
                 break;
         }
     }

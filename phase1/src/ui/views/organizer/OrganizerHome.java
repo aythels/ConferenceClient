@@ -19,6 +19,7 @@ public class OrganizerHome extends View {
                 .append("| 1. Schedule an event     |\n")
                 .append("| 2. Register a speaker    |\n")
                 .append("| 3. View events           |\n")
+                .append("| 4. Log out               |\n")
                 .append("============================\n");
         return sb.toString();
     }
@@ -34,6 +35,10 @@ public class OrganizerHome extends View {
                 break;
             case "3":
                 this.context.navigate("events_organizer");
+                break;
+            case "4":
+                this.context.putState("accessCode", null);
+                this.context.navigate("login");
                 break;
         }
     }

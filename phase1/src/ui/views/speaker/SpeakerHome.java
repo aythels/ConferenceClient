@@ -18,6 +18,7 @@ public class SpeakerHome extends View {
                 .append("| Make a selection:        |\n")
                 .append("| 1. View my events        |\n")
                 .append("| 2. Send a message        |\n")
+                .append("| 3. Log out               |\n")
                 .append("============================\n");
         return sb.toString();
     }
@@ -30,6 +31,10 @@ public class SpeakerHome extends View {
                 break;
             case "2":
                 this.context.navigate("new_message_speaker");
+                break;
+            case "3":
+                this.context.putState("accessCode", null);
+                this.context.navigate("login");
                 break;
         }
     }

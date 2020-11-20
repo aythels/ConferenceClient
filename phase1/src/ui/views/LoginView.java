@@ -51,6 +51,8 @@ public class LoginView extends View {
                     default:
                         error = "Invalid user!";
                 }
+                username = null;
+                password = null;
             } else {
                 error = "Invalid credentials!";
                 password = null;
