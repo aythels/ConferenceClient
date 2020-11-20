@@ -1,4 +1,4 @@
-package controllers.eventcontrollers;
+package api.controllers.eventcontrollers;
 
 import domain.entities.Event;
 import domain.entities.User;

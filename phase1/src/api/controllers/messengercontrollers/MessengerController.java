@@ -1,6 +1,6 @@
-package controllers.messengercontrollers;
+package api.controllers.messengercontrollers;
 
-import controllers.eventcontrollers.Controller;
+import api.controllers.Controller;
 
 public abstract class MessengerController extends Controller {
     protected MessengerController(){

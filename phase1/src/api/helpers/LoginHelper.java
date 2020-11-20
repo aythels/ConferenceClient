@@ -1,4 +1,4 @@
-package controllers.helpers;
+package api.helpers;
 
 import domain.entities.User;
 import java.util.HashMap;
@@ -30,11 +30,11 @@ public class LoginHelper {
         return loggedUsers.get(accessCode);
     }
 
-    /*
     public UserType getUserTypeByAccessCode(String accessCode) {
-        User u = loggedUsers.get(accessCode);
-        return UserType.valueOf(u.getUserType());
+        String userType = getUserByAccessCode(accessCode).getUserType();
+        if (UserType.contains(userType)) return UserType.valueOf(userType);
+
+        return null;
     }
-    */
 
 }

@@ -33,6 +33,7 @@ public class EventManager implements Serializable {
             }
         }
         return true;
+
     }
 
     private boolean checkConflictHelper(int start, int end, int eventDuration, int eventTime){

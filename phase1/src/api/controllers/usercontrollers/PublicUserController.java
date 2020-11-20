@@ -1,6 +1,6 @@
-package controllers.usercontrollers;
+package api.controllers.usercontrollers;
 
-import controllers.helpers.UserType;
+import api.helpers.UserType;
 import domain.entities.User;
 import domain.usecases.UserManager;
 
