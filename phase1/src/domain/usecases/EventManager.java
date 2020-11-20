@@ -163,14 +163,11 @@ public class EventManager implements Serializable {
      * @param id    the id of the Event
      * @param u    an User object
      * @return      true if booking is successful, false if the eventID does not exist,
-     *              or the User's usertype is not speaker, or there is already a speaker for this Event.
+     *              or there is already a speaker for this Event.
      */
 
     public boolean bookSpeaker(User u, int id){
         if (!this.registered.ifInKeySet(id)){
-            return false;
-        }
-        if (!u.getUserType().equals("SPEAKER")){
             return false;
         }
         if (this.registered.updateSpeaker(id, u)){
