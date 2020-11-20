@@ -1,6 +1,7 @@
 package ui;
 
-import server.Server;
+import adapters.Server;
+import api.controllers.Controller;
 import ui.views.View;
 
 import java.util.HashMap;

@@ -1,7 +1,6 @@
 package ui.views.attendee;
 
-import controllers.eventcontrollers.AttendeeEventController;
-import controllers.eventcontrollers.PublicEventController;
+import api.controllers.eventcontrollers.AttendeeEventController;
 import ui.UIContext;
 import ui.views.View;
 
@@ -15,7 +14,7 @@ public class AttendeeAllEvents extends View {
     @Override
     public String render() {
         AttendeeEventController eventController =
-                (AttendeeEventController) this.context.server.getAPI().getEventAPI(this.context.getState("accessKey"));
+                (AttendeeEventController) this.context.server.getAPI().getEventAPI(this.context.getState("accessCode"));
 
         List<Integer> eventIds = eventController.getAllEventIDs();
         StringBuilder sb = new StringBuilder();
@@ -35,7 +34,7 @@ public class AttendeeAllEvents extends View {
     @Override
     public void handleInput(String input) {
         AttendeeEventController eventController =
-                (AttendeeEventController) this.context.server.getAPI().getEventAPI(this.context.getState("accessKey"));
+                (AttendeeEventController) this.context.server.getAPI().getEventAPI(this.context.getState("accessCode"));
 
         List<Integer> eventIds = eventController.getAllEventIDs();
 

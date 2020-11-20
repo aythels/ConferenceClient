@@ -34,6 +34,6 @@ public class AttendeeNewMessage extends View {
 
     @Override
     public String getRoute() {
-        return null;
+        return "new_message_attendee";
     }
 }

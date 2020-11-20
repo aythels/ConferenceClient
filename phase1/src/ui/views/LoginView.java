@@ -1,7 +1,7 @@
 package ui.views;
 
-import controllers.logincontrollers.PublicLoginController;
-import controllers.usercontrollers.PublicUserController;
+import api.controllers.logincontrollers.PublicLoginController;
+import api.controllers.usercontrollers.PublicUserController;
 import ui.UIContext;
 
 public class LoginView extends View {
@@ -35,7 +35,7 @@ public class LoginView extends View {
             String accessCode = loginController.login(username, password);
             if (accessCode != null) {
                 this.context.putState("accessCode", accessCode);
-                PublicUserController userController = (PublicUserController) this.context.server.getAPI().getUserAPI(accessCode);
+                PublicUserController userController = (PublicUserController) this.context.server.getAPI().getUserAPI();
                 String userRole = userController.getUserType(username);
 
                 switch (userRole) {

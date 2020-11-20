@@ -1,7 +1,6 @@
 package ui.views.attendee;
 
-import controllers.messengercontrollers.AttendeeMessengerController;
-import controllers.messengercontrollers.MessengerController;
+import api.controllers.messengercontrollers.AttendeeMessengerController;
 import ui.UIContext;
 import ui.views.View;
 
