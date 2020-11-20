@@ -170,7 +170,7 @@ public class EventManager implements Serializable {
         if (!this.registered.ifInKeySet(id)){
             return false;
         }
-        if (!u.getUserType().equals("Speaker")){
+        if (!u.getUserType().equals("SPEAKER")){
             return false;
         }
         if (this.registered.updateSpeaker(id, u)){
