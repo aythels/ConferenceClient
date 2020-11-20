@@ -1,6 +1,7 @@
-package controllers.logincontrollers;
+package api.controllers.logincontrollers;
 
-import controllers.helpers.LoginHelper;
+import api.controllers.logincontrollers.LoginController;
+import api.helpers.LoginHelper;
 import domain.entities.User;
 import domain.usecases.UserManager;
 

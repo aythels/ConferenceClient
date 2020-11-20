@@ -1,7 +1,7 @@
-package controllers.usercontrollers;
+package api.controllers.usercontrollers;
 
-import controllers.helpers.LoginHelper;
-import controllers.helpers.UserType;
+import api.helpers.LoginHelper;
+import api.helpers.UserType;
 import domain.usecases.UserManager;
 
 public class OrganizerUserController extends AttendeeUserController {

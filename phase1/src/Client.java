@@ -1,9 +1,9 @@
-import controllers.MasterController;
+import api.InitializeAPI;
 
 public class Client {
-    private MasterController serverAPI;
+    private InitializeAPI serverAPI;
 
-    public Client(MasterController serverAPI){
+    public Client(InitializeAPI serverAPI){
         this.serverAPI = serverAPI;
     }
 

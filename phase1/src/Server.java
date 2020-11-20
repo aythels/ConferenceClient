@@ -1,11 +1,11 @@
-import controllers.MasterController;
+import api.InitializeAPI;
 import domain.usecases.EventManager;
 import domain.usecases.MessageManager;
 import domain.usecases.UserManager;
 import domain.usecases.Serializer;
 
 public class Server {
-    private MasterController clientAPI;
+    private InitializeAPI clientAPI;
     private MessageManager messageManager;
     private UserManager userManager;
     private EventManager eventManager;
@@ -15,10 +15,10 @@ public class Server {
         UserManager userManager = new UserManager();
         EventManager eventManager = new EventManager();
 
-        this.clientAPI = new MasterController(messageManager, userManager, eventManager);
+        this.clientAPI = new InitializeAPI(messageManager, userManager, eventManager);
     }
 
-    public MasterController getAPI(){
+    public InitializeAPI getAPI(){
         return clientAPI;
     }
 
