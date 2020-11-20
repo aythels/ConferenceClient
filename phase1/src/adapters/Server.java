@@ -1,27 +1,28 @@
 package adapters;
 
-import controllers.MasterController;
+import api.API;
+import api.InitializeAPI;
 import domain.usecases.EventManager;
 import domain.usecases.MessageManager;
 import domain.usecases.UserManager;
 import domain.usecases.Serializer;
 
 public class Server {
-    private MasterController clientAPI;
+    private API api;
     private MessageManager messageManager;
     private UserManager userManager;
     private EventManager eventManager;
 
     public Server () {
-        MessageManager messageManager = new MessageManager();
-        UserManager userManager = new UserManager();
-        EventManager eventManager = new EventManager();
+        this.messageManager = new MessageManager();
+        this.userManager = new UserManager();
+        this.eventManager = new EventManager();
 
-        this.clientAPI = new MasterController(messageManager, userManager, eventManager);
+        this.api = new InitializeAPI(this.messageManager, this.userManager, this.eventManager).getAPI();
     }
 
-    public MasterController getAPI(){
-        return clientAPI;
+    public API getAPI(){
+        return api;
     }
 
     public void Load() {

@@ -1,11 +1,11 @@
 package adapters;
 
-import controllers.MasterController;
+import api.API;
 
 public class Client {
-    private MasterController serverAPI;
+    private API serverAPI;
 
-    public Client(MasterController serverAPI){
+    public Client(API serverAPI){
         this.serverAPI = serverAPI;
     }
 
