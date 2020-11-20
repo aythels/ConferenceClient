@@ -4,6 +4,10 @@ import api.controllers.logincontrollers.PublicLoginController;
 import api.controllers.usercontrollers.PublicUserController;
 
 public class UserTest {
+    /*********************************************************************************************************/
+    //THIS CLASS IS ONLY FOR TESTING THE BACKEND!!!
+    //RUN MAIN IN APP TO START THE ACTUAL PROGRAM!
+    /*********************************************************************************************************/
 
     public static void main(String[] args) {
         adapters.Server server = new adapters.Server();
