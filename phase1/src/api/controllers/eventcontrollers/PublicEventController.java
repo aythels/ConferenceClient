@@ -55,6 +55,17 @@ public class PublicEventController extends EventController {
 
     }
 
+    public List<String> getEventSpeakerName(int eventID) {
+        if (eventManager.getEventByID(eventID) == null) return null;
+
+        ArrayList<User> allSpeakers = eventManager.getSpeakerById(eventID);
+        ArrayList<String> allUserNames = new ArrayList<>();
+
+        for (User u : allSpeakers) allUserNames.add(userManager.getName(u));
+        return allUserNames;
+
+    }
+
     /**
      * Get the display name of the event by its identifier
      * @param eventID   the event's identifier

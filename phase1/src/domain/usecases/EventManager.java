@@ -49,10 +49,10 @@ public class EventManager implements Serializable {
     }
 
     private boolean checkConflictHelper(int start, int end, int eventDuration, int eventTime){
-        if (start <= eventTime && eventTime <= end){
+        if ((start <= eventTime) && (eventTime < end)){
             return true;
         }
-        if (start <= eventTime + eventDuration && eventTime + eventDuration <= end){
+        if ((start < (eventTime + eventDuration)) && ((eventTime + eventDuration) <= end)){
             return true;
         }
         return false;

@@ -37,9 +37,9 @@ public class OrganizerNewEvent extends View {
             start = input;
             OrganizerEventController eventController =
                     (OrganizerEventController) this.context.server.getAPI().getEventAPI(this.context.getState("accessCode"));
-            int durationMs = Integer.parseInt(duration) * 60 * 60 * 1000;
+            int durationMs = Integer.parseInt(duration) * 60 * 60;
             LocalDate d = LocalDate.now();
-            LocalDateTime dd = d.atTime(Integer.parseInt(duration), 0);
+            LocalDateTime dd = d.atTime(Integer.parseInt(start), 0);
             int startMs = (int) dd.toEpochSecond(ZoneOffset.UTC);
             eventController.createEvent(name, durationMs, startMs);
             this.context.navigate("events_organizer");
