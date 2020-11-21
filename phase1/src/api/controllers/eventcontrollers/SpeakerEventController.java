@@ -10,6 +10,12 @@ import java.util.List;
 
 public class SpeakerEventController extends AttendeeEventController {
 
+    /**
+     * @param eventManager Use case class responsible for handing everything related to events.
+     * @param userManager Use case class responsible for handing everything related to events.
+     * @param loginHelper Helper class that keeps track of logged in users.
+     */
+
     public SpeakerEventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper) {
         super(eventManager, userManager, loginHelper);
     }
@@ -23,7 +29,7 @@ public class SpeakerEventController extends AttendeeEventController {
     public List<String> getEventRegisteredUserIDs(int eventID) {
         if (eventManager.getEventByID(eventID) == null) return null;
 
-        List<String> allUserIDs = new ArrayList<String>();
+        List<String> allUserIDs = new ArrayList<>();
         List<User> allUsers = eventManager.getAttendeesById(eventID);
 
         for (User u : allUsers) allUserIDs.add(userManager.getID(u));

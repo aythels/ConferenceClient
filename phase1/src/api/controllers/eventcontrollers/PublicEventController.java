@@ -12,6 +12,11 @@ public class PublicEventController extends EventController {
     protected final EventManager eventManager;
     protected final UserManager userManager;
 
+    /**
+     * @param eventManager Use case class responsible for handing everything related to events.
+     * @param userManager Use case class responsible for handing everything related to events.
+     */
+
     public PublicEventController(EventManager eventManager, UserManager userManager) {
         this.eventManager = eventManager;
         this.userManager = userManager;
@@ -23,7 +28,7 @@ public class PublicEventController extends EventController {
      */
 
     public List<Integer> getAllEventIDs() {
-        List<Integer> allEventIDs = new ArrayList<Integer>();
+        List<Integer> allEventIDs = new ArrayList<>();
 
         for (Event e : eventManager.getAllEvents()) {
             int eventID = eventManager.getIdByEvent(e);
@@ -43,7 +48,7 @@ public class PublicEventController extends EventController {
         if (eventManager.getEventByID(eventID) == null) return null;
 
         ArrayList<User> allSpeakers = eventManager.getSpeakerById(eventID);
-        ArrayList<String> allUserIDs = new ArrayList<String>();
+        ArrayList<String> allUserIDs = new ArrayList<>();
 
         for (User u : allSpeakers) allUserIDs.add(userManager.getID(u));
         return allUserIDs;
@@ -59,8 +64,7 @@ public class PublicEventController extends EventController {
     public String getEventName(int eventID) {
         if (eventManager.getEventByID(eventID) == null) return null;
 
-        String name = eventManager.getEventNameById(eventID);
-        return name;
+        return eventManager.getEventNameById(eventID);
     }
 
     /**

@@ -14,6 +14,12 @@ public class AttendeeMessengerController extends MessengerController {
     protected final UserManager userManager;
     protected final LoginHelper loginHelper;
 
+    /**
+     * @param messageManager Use case class responsible for handing everything related to messaging.
+     * @param userManager Use case class responsible for handing everything related to events.
+     * @param loginHelper Helper class that keeps track of logged in users.
+     */
+
     public AttendeeMessengerController(MessageManager messageManager, UserManager userManager, LoginHelper loginHelper) {
         this.messageManager = messageManager;
         this.userManager = userManager;
@@ -31,10 +37,7 @@ public class AttendeeMessengerController extends MessengerController {
 
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
 
-        List<String> allIDs = new ArrayList<String>();
-        for (String userID : messageManager.getAllConversationUsers(thisUser)) allIDs.add(userID);
-
-        return allIDs;
+        return new ArrayList<>(messageManager.getAllConversationUsers(thisUser));
 
     }
 
@@ -56,9 +59,9 @@ public class AttendeeMessengerController extends MessengerController {
         User otherUser = userManager.getUser(otherUserID);
 
         List<Message> conversation = messageManager.getConversation(thisUser, otherUser);
-        conversation = conversation == null ? new ArrayList<Message>() : conversation;
+        conversation = conversation == null ? new ArrayList<>() : conversation;
 
-        List<String> concatenatedConversation = new ArrayList<String>();
+        List<String> concatenatedConversation = new ArrayList<>();
         for (Message m : conversation) concatenatedConversation.add(m.getUserId() + ":" + m.getMessage());
 
         return concatenatedConversation;

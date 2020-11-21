@@ -7,14 +7,17 @@ import domain.usecases.UserManager;
 public class PublicUserController extends UserController {
     protected final UserManager userManager;
 
+    /**
+     * @param userManager Use case class responsible for handing everything related to events.
+     */
+
     public PublicUserController(UserManager userManager) {
         this.userManager = userManager;
     }
 
     /**
      * Creates a new user account as the specified account type
-     * THIS IS A TEMPORARY METHOD THAT CAN BE USED TO QUICKLY CREATE DIFFERENT ACCOUNTS. IT WILL BE REMOVED AFTER THE
-     * PROGRAM IS FINISHED!!!!!!!!!
+     * THIS IS A TEMPORARY METHOD THAT CAN BE USED TO QUICKLY CREATE DIFFERENT ACCOUNTS FOR TESTING!
      * @param userType    the type of user, as specified in UserType
      * @param name    the name of the user.
      * @param userID    the login ID that will be used to log in the user.
