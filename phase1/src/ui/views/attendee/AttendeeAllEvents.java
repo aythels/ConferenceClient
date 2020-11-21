@@ -21,6 +21,7 @@ public class AttendeeAllEvents extends View {
         sb
                 .append("============================\n")
                 .append("|       All events         |\n")
+                .append("| Input index to register  |\n")
                 .append("|--------------------------|\n");
 
         for (int i = 0; i < eventIds.size(); i++) {
