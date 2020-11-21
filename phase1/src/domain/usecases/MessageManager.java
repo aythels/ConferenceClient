@@ -26,6 +26,10 @@ public class MessageManager implements Serializable {
         return new Message(userId, m);
     }
 
+    /**
+     * @param sender
+     * @return
+     */
     ////////////////////////READDDDDDDDDDDDDDDDDDDDDDDD///////////////////////////////////////
     public ArrayList<String> getAllConversationUsers(User sender){
         //When given a user, i need an array of all other users this user has talked with - elson
