@@ -36,12 +36,17 @@ public class AttendeeChat extends View {
 
     @Override
     public void handleInput(String input) {
-        if (input.equals("q")) this.context.navigate("my_messages_attendee");
+        if (input.equals("q")) {
+            this.context.navigate("my_messages_attendee");
+        }
 
-        String peerId = this.context.getState("chat");
-        AttendeeMessengerController messengerController =
-                (AttendeeMessengerController) this.context.server.getAPI().getMessengerAPI(this.context.getState("accessCode"));
-        messengerController.messageUserByID(this.context.getState("accessCode"), peerId, input);
+
+        if (!input.equals("q")) {
+            String peerId = this.context.getState("chat");
+            AttendeeMessengerController messengerController =
+                    (AttendeeMessengerController) this.context.server.getAPI().getMessengerAPI(this.context.getState("accessCode"));
+            messengerController.messageUserByID(this.context.getState("accessCode"), peerId, input);
+        }
     }
 
     @Override
