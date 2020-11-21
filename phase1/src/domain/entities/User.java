@@ -22,31 +22,72 @@ public class User{
         this.password = password;
     }
 
+    /**
+     * Returns the name of user.
+     * @return name
+     */
+
     public String getName() { return this.name; }
+
+    /**
+     * Returns the type of user.
+     * @return userType
+     */
 
     public String getUserType() {
         return this.userType;
     }
 
+    /**
+     * Returns the ID of user.
+     * @return ID
+     */
+
     public String getID() {
         return this.ID;
     }
+
+    /**
+     * Returns the password of user.
+     * @return password
+     */
+
 
     public String getPassword() {
         return this.password;
     }
 
+    /**
+     * This method sets the name of the user.
+     * @param name
+     */
+
     public void setName(String name) {
         this.name=name;
     }
+
+    /**
+     * This method sets the type of the user.
+     * @param userType
+     */
 
     public void setUserType(String type) {
         this.userType=type;
     }
 
+    /**
+     * This method sets the username(ID) of the user.
+     * @param username
+     */
+
     public void setUsername(String username) {
         this.name=username;
     }
+
+    /**
+     * This method sets the password of the user.
+     * @param password
+     */
 
     public void setPassword(String password) {
         this.password=password;
