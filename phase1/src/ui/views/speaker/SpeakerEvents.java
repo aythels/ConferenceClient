@@ -11,7 +11,7 @@ public class SpeakerEvents extends View {
     @Override
     public String render() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Not implemented! Press enter to go back");
+        sb.append("This function is not currently needed, if you want to register as speakers to a Event, please go through the organizer");
         return sb.toString();
     }
 
