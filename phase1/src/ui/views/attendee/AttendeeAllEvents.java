@@ -32,10 +32,8 @@ public class AttendeeAllEvents extends View {
             int startTime = eventController.getEventTime(eventIds.get(i));
             int duration = eventController.getEventDuration(eventIds.get(i));
             List<String> speakers = eventController.getEventSpeakerName(eventIds.get(i));
-            sb.append("| ").append("type in the event ID and press Enter to register").append(" \n");
             sb.append("| ").append(i). append(". ").append(name).append(" \n");
             sb.append("| ").append("    ").append("start time:").append(startTime).append(" \n");
-            sb.append("| ").append("    ").append("duration:").append(duration).append(" \n");
             sb.append("| ").append("    ").append("speaker(s):").append(speakers).append(" \n");
             for (String n: speakers){
                 sb.append("| ").append("        ").append(n).append(" \n");
