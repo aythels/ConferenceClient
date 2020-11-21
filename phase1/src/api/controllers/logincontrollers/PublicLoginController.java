@@ -1,6 +1,5 @@
 package api.controllers.logincontrollers;
 
-import api.controllers.logincontrollers.LoginController;
 import api.helpers.LoginHelper;
 import domain.entities.User;
 import domain.usecases.UserManager;
@@ -9,6 +8,10 @@ public class PublicLoginController extends LoginController {
     protected final UserManager userManager;
     protected final LoginHelper loginHelper;
 
+    /**
+     * @param userManager Use case class responsible for handing everything related to events.
+     * @param loginHelper Helper class that keeps track of logged in users.
+     */
     public PublicLoginController(UserManager userManager, LoginHelper loginHelper) {
         this.userManager = userManager;
         this.loginHelper = loginHelper;

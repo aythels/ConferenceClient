@@ -7,6 +7,11 @@ import domain.usecases.UserManager;
 public class AttendeeUserController extends PublicUserController {
     private final LoginHelper loginHelper;
 
+     /**
+     * @param userManager Use case class responsible for handing everything related to events.
+     * @param loginHelper Helper class that keeps track of logged in users.
+     */
+
     public AttendeeUserController(UserManager userManager, LoginHelper loginHelper) {
         super(userManager);
         this.loginHelper = loginHelper;

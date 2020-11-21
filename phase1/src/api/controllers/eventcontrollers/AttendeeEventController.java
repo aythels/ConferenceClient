@@ -11,6 +11,12 @@ import java.util.List;
 public class AttendeeEventController extends PublicEventController {
     protected final LoginHelper loginHelper;
 
+    /**
+     * @param eventManager Use case class responsible for handing everything related to events.
+     * @param userManager Use case class responsible for handing everything related to events.
+     * @param loginHelper Helper class that keeps track of logged in users.
+     */
+
     public AttendeeEventController(EventManager eventManager, UserManager userManager, LoginHelper loginHelper) {
         super(eventManager, userManager);
         this.loginHelper = loginHelper;
@@ -26,11 +32,9 @@ public class AttendeeEventController extends PublicEventController {
         if (!loginHelper.isValidAccessCode(accessCode)) return null;
 
         User thisUser = loginHelper.getUserByAccessCode(accessCode);
-        List<Integer> allEventIDsCopy = new ArrayList<Integer>();
         List<Integer> allEventIDs = eventManager.getEventIdsByUser(thisUser);
 
-        for (Integer i : allEventIDs) allEventIDsCopy.add(i);
-        return allEventIDs;
+        return new ArrayList<>(allEventIDs);
     }
 
     /**

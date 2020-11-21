@@ -13,6 +13,10 @@ public class Server {
     private UserManager userManager;
     private EventManager eventManager;
 
+    /**
+     * A class enclosing all back-end functionality.
+     */
+
     public Server () {
         this.messageManager = new MessageManager();
         this.userManager = new UserManager();
@@ -21,9 +25,17 @@ public class Server {
         this.api = new InitializeAPI(this.messageManager, this.userManager, this.eventManager).getAPI();
     }
 
+    /**
+     * @return get the api for retrieving controllers
+     */
+
     public API getAPI(){
         return api;
     }
+
+    /**
+     * Load in saved use case classes.
+     */
 
     public void Load() {
         Serializer s = new Serializer();
@@ -31,7 +43,13 @@ public class Server {
         this.userManager = s.deserializeUserManager();
         this.messageManager = s.deserializeMessageManager();
         this.eventManager = s.deserializeEventManager();
+
+        this.api = new InitializeAPI(this.messageManager, this.userManager, this.eventManager).getAPI();
     }
+
+    /**
+     * Save the current state of all use case classes.
+     */
 
     public void Save() {
         Serializer s = new Serializer();

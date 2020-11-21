@@ -8,6 +8,12 @@ import java.util.List;
 
 public class SpeakerMessengerController extends AttendeeMessengerController {
 
+    /**
+     * @param messageManager Use case class responsible for handing everything related to messaging.
+     * @param userManager Use case class responsible for handing everything related to events.
+     * @param loginHelper Helper class that keeps track of logged in users.
+     */
+
     public SpeakerMessengerController(MessageManager messageManager, UserManager userManager, LoginHelper loginHelper) {
         super(messageManager, userManager, loginHelper);
     }

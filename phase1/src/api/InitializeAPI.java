@@ -16,48 +16,58 @@ import domain.usecases.MessageManager;
 import domain.usecases.UserManager;
 
 public class InitializeAPI {
-    private API api;
+    private final API api;
+
+    /**
+     * Initializes an instance of API. Comments in constructor explain step by step process.
+     * @param messageManager Use case class responsible for handing everything related to messaging.
+     * @param userManager Use case class responsible for handing everything related to events.
+     * @param eventManager Use case class responsible for handing everything related to events.
+     */
 
     public InitializeAPI(MessageManager messageManager, UserManager userManager, EventManager eventManager){
 
-        //initialize loginHelper
+        //Initialize the LoginHelper utility class
         LoginHelper loginHelper = new LoginHelper();
 
-        //initialize allLoginControllers
+        //Initialize the ControllerStorage class and all related controllers related to logging in.
         ControllerStorage allLoginControllers = new ControllerStorage();
 
         Controller publicLogin = new PublicLoginController(userManager, loginHelper);
 
+        //Put the controllers inside controllerStorage depending on what user type they are intended for.
         allLoginControllers.setDefaultController(publicLogin);
         allLoginControllers.addController(UserType.ATTENDEE, null);
         allLoginControllers.addController(UserType.SPEAKER, null);
         allLoginControllers.addController(UserType.ORGANIZER, null);
 
 
-        //initialize allMessengerControllers
+        //Initialize the ControllerStorage class and all related controllers related to messaging.
         ControllerStorage allMessengerControllers = new ControllerStorage();
 
         Controller attendeeMessenger = new AttendeeMessengerController(messageManager, userManager, loginHelper);
         Controller speakerMessenger = new SpeakerMessengerController(messageManager, userManager, loginHelper);
 
+        //Put the controllers inside controllerStorage depending on what user type they are intended for.
         allMessengerControllers.setDefaultController(null);
         allMessengerControllers.addController(UserType.ATTENDEE, attendeeMessenger);
         allMessengerControllers.addController(UserType.SPEAKER, speakerMessenger);
         allMessengerControllers.addController(UserType.ORGANIZER, speakerMessenger);
 
-        //initialize allUserControllers
+        //Initialize the ControllerStorage class and all related controllers related to user management.
         ControllerStorage allUserControllers = new ControllerStorage();
 
         Controller publicUser = new PublicUserController(userManager);
         Controller attendeeUser = new AttendeeUserController(userManager, loginHelper);
         Controller organizerUser = new OrganizerUserController(userManager, loginHelper);
 
+        //Put the controllers inside controllerStorage depending on what user type they are intended for.
         allUserControllers.setDefaultController(publicUser);
         allUserControllers.addController(UserType.ATTENDEE, attendeeUser);
         allUserControllers.addController(UserType.SPEAKER, attendeeUser);
         allUserControllers.addController(UserType.ORGANIZER, organizerUser);
 
-        //initialize allEventControllers
+        //Initialize the ControllerStorage class and all related controllers related to events.
         ControllerStorage allEventControllers = new ControllerStorage();
 
         Controller publicEvent = new PublicEventController(eventManager, userManager);
@@ -65,12 +75,13 @@ public class InitializeAPI {
         Controller speakerEvent = new SpeakerEventController(eventManager, userManager, loginHelper);
         Controller organizerEvent = new OrganizerEventController(eventManager, userManager, loginHelper);
 
+        //Put the controllers inside controllerStorage depending on what user type they are intended for.
         allEventControllers.setDefaultController(publicEvent);
         allEventControllers.addController(UserType.ATTENDEE, attendeeEvent);
         allEventControllers.addController(UserType.SPEAKER, speakerEvent);
         allEventControllers.addController(UserType.ORGANIZER, organizerEvent);
 
-        //initialize api
+        //initialize the api
         this.api = new API(
                 loginHelper,
                 allLoginControllers,
@@ -79,6 +90,11 @@ public class InitializeAPI {
                 allEventControllers);
 
     }
+
+    /**
+     * Get the initialized API.
+     * @return an instance of API as initialized in this class's constructor.
+     */
 
     public API getAPI() {
         return this.api;

@@ -1,6 +1,5 @@
 package adapters;
 
-import api.API;
 import ui.UIContext;
 import ui.renderers.ConsoleRenderer;
 import ui.views.LoginView;
@@ -13,9 +12,13 @@ import ui.views.speaker.SpeakerNewMessage;
 
 public class Client {
 
-    public Client(Server server){
-        /*********************************************************************************************************/
+    /**
+     * A class enclosing all front-end functionality. It is currently responsible for initiating the UI and calling
+     * backend API methods.
+     * @param server the Server object to get the controller API from.
+     */
 
+    public Client(Server server){
         UIContext uiContext = new UIContext(server);
 
         uiContext.addView(new SplashView(uiContext));
@@ -42,13 +45,11 @@ public class Client {
         uiContext.navigate("splash");
         ConsoleRenderer consoleRenderer = new ConsoleRenderer(uiContext);
 
-
         while (true) {
             consoleRenderer.blit();
             consoleRenderer.promptInput();
         }
 
-        /*********************************************************************************************************/
     }
 
 }
