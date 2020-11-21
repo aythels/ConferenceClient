@@ -29,7 +29,7 @@ public class AttendeeMessages extends View {
                 this.context.navigate("my_messages_attendee");
                 break;
             case "2":
-                this.context.navigate("send_message_attendee");
+                this.context.navigate("new_message_attendee");
                 break;
             case "3":
                 this.context.navigate("home_attendee");
