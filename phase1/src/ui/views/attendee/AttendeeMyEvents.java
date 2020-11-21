@@ -43,9 +43,6 @@ public class AttendeeMyEvents extends View {
                 int _index = i;
                 if (input.equals(String.valueOf(_index))) {
 
-                    System.out.println(eventIds + "aasf" + eventIds.get(i));
-
-
                     System.out.println(attendeeEventController.unregisterInEvent(this.context.getState("accessCode"), eventIds.get(i)));
                     this.context.navigate("all_events_attendee");
                 }
