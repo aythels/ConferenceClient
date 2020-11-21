@@ -18,6 +18,7 @@ public class OrganizerNewEvent extends View {
     @Override
     public String render() {
         StringBuilder sb = new StringBuilder();
+
         if (name == null) {
             sb.append("Enter event name - ");
         } else if (duration == null) {
@@ -32,7 +33,7 @@ public class OrganizerNewEvent extends View {
     public void handleInput(String input) {
         if (name == null) name = input;
         else if (duration == null) duration = input;
-        else {
+        else if (start == null){
             start = input;
             OrganizerEventController eventController =
                     (OrganizerEventController) this.context.server.getAPI().getEventAPI(this.context.getState("accessCode"));
@@ -42,8 +43,12 @@ public class OrganizerNewEvent extends View {
             int startMs = (int) dd.toEpochSecond(ZoneOffset.UTC);
             eventController.createEvent(name, durationMs, startMs);
             this.context.navigate("events_organizer");
+            this.name = null;
+            this.duration = null;
+            this.start = null;
         }
     }
+
 
     @Override
     public String getRoute() {
