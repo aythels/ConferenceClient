@@ -20,6 +20,9 @@ public class Serializer {
         }
     }
 
+    /**
+     * @param object
+     */
     public void serializeMessageManager(MessageManager object) {
         String filename = "MessageManager.ser";
         try
@@ -36,6 +39,9 @@ public class Serializer {
         }
     }
 
+    /**
+     * @param object
+     */
     public void serializeEventManager(EventManager object) {
         String filename = "EventManager.ser";
         try
@@ -52,6 +58,9 @@ public class Serializer {
         }
     }
 
+    /**
+     * @param object
+     */
     public void serializeHashMapManager(HashMapManager object) {
         String filename = "HashMapManager.ser";
         try
@@ -68,6 +77,9 @@ public class Serializer {
         }
     }
 
+    /**
+     * @return
+     */
     public UserManager deserializeUserManager() {
         UserManager object = null;
         String filename = "UserManager.ser";
@@ -90,6 +102,9 @@ public class Serializer {
         return object;
     }
 
+    /**
+     * @return
+     */
     public MessageManager deserializeMessageManager() {
         MessageManager object = null;
         String filename = "MessageManager.ser";
@@ -112,6 +127,9 @@ public class Serializer {
         return object;
     }
 
+    /**
+     * @return
+     */
     public EventManager deserializeEventManager() {
         EventManager object = null;
         String filename = "EventManager.ser";
@@ -134,6 +152,9 @@ public class Serializer {
         return object;
     }
 
+    /**
+     * @return
+     */
     public HashMapManager deserializeHashMapManager() {
         HashMapManager object = null;
         String filename = "UserManager.ser";
