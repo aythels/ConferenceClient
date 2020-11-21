@@ -27,6 +27,7 @@ public class SpeakerNewMessage extends View {
         } else {
             sb.append("Enter message: ");
         }
+
         return sb.toString();
     }
 
@@ -42,6 +43,7 @@ public class SpeakerNewMessage extends View {
                     (SpeakerMessengerController) this.context.server.getAPI().getMessengerAPI(this.context.getState("accessCode"));
             messengerController.messageUserByIDArray(this.context.getState("accessCode"), userIds, input);
             this.context.navigate("home_speaker");
+            eventId = null;
         }
     }
 
