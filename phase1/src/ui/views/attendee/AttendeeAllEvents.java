@@ -32,7 +32,7 @@ public class AttendeeAllEvents extends View {
             sb.append("| ").append(i). append(". ").append(name).append(" \n");
             sb.append("| ").append("    ").append("start time:").append(startTime).append(" \n");
             sb.append("| ").append("    ").append("duration:").append(duration).append(" \n");
-            sb.append("| ").append("    ").append("speaker(s):").append(" \n");
+            sb.append("| ").append("    ").append("speaker(s):").append(speakers).append(" \n");
             for (String n: speakers){
                 sb.append("| ").append("        ").append(n).append(" \n");
             }
