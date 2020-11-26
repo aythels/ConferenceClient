@@ -1,6 +1,9 @@
 package core.usecases.ports;
 
 import core.entities.User;
+import core.entities.UserType;
+
+import java.util.List;
 
 public interface IUserRepository {
 
@@ -9,4 +12,6 @@ public interface IUserRepository {
     void addUser(User user);
 
     User getUser(String username);
+
+    List<User> getAllUsersOfType(UserType type);
 }
