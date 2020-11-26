@@ -276,4 +276,13 @@ public class EventManager implements Serializable {
         return null;
     }
 
+    public boolean changeEventCapacity(int id, int capacity){
+        if (!this.registered.getKeySet().contains(id)){
+            return false;
+        }
+        else{
+            this.registered.updateEventCapacity(id, capacity);
+        }
+    }
+
 }

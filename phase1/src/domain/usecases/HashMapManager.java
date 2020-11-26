@@ -45,9 +45,9 @@ public class HashMapManager implements Serializable {
 
 
     public void updateAttendee(int id, ArrayList<User> booked){
-        Pair<Event, ArrayList<User>> e = this.hashMap.get(id).getKey();
+        Pair<Event, ArrayList<User>> roomInfo1 = this.hashMap.get(id).getKey();
         Integer capacity = this.getCapacityById(id);
-        this.hashMap.replace(id, new Pair(e, new Pair(capacity, booked)));
+        this.hashMap.replace(id, new Pair(roomInfo1, new Pair(capacity, booked)));
     }
 
     public ArrayList<User> getSpeakerById(int id){
@@ -57,13 +57,20 @@ public class HashMapManager implements Serializable {
     public boolean updateSpeaker(int id, User u){
         ArrayList<User> speakers = this.getSpeakerById(id);
         Event e = this.getEventById(id);
-        Pair<Integer, ArrayList<User>> roomInfo = this.hashMap.get(id).getValue();
+        Pair<Integer, ArrayList<User>> roomInfo2 = this.hashMap.get(id).getValue();
         if (speakers.size() > 0){
             return false;
         }
         speakers.add(u);
-        this.hashMap.replace(id, new Pair(new Pair(e, speakers), roomInfo));
+        this.hashMap.replace(id, new Pair(new Pair(e, speakers), roomInfo2));
         return true;
+    }
+
+    public void updateEventCapacity(int id, int capacity){
+        Pair<Event, ArrayList<User>> roomInfo1 = this.hashMap.get(id).getKey();
+        ArrayList<User> attendee = this.getAttendeeById(id);
+        this.hashMap.replace(id, new Pair(roomInfo1, new Pair(capacity, attendee)));
+
     }
 
 
