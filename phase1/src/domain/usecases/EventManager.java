@@ -66,10 +66,10 @@ public class EventManager implements Serializable {
      * @return      true if creating Event is successful, false if there is time conflict
      */
 
-    public boolean createEvent(int eventDuration, int eventTime, String eventName){
+    public boolean createEvent(int eventDuration, int eventTime, int capacity, String eventName){
         if(this.checkConflict(eventDuration, eventTime)) {
             Event e = new Event(this.eventId, eventName, eventDuration, eventTime );
-            this.registered.addEvent(this.eventId, eventDuration, eventTime, e);
+            this.registered.addEvent(this.eventId, capacity, e);
             this.eventId += 1;
             return true;
         }
@@ -92,8 +92,9 @@ public class EventManager implements Serializable {
         }
         Event e = this.registered.getEventById(id);
         String eventName = e.getEventName();
+        Integer capacity = this.registered.getCapacityById(id);
         this.cancelEvent(id);
-        if(this.createEvent(eventDuration, eventTime, eventName) == false){
+        if(this.createEvent(eventDuration, eventTime, capacity, eventName) == false){
             return false;
         }
         return true;
@@ -126,7 +127,7 @@ public class EventManager implements Serializable {
             return false;
         }
         ArrayList<User> booked = this.registered.getAttendeeById(id);
-        if (booked.size() < this.maxPeople){
+        if (booked.size() < this.registered.getCapacityById(id)){
             if (booked.contains(u)){
                 return false;
             }
