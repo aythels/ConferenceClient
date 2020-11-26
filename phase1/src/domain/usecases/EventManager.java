@@ -76,6 +76,16 @@ public class EventManager implements Serializable {
         return false;
     }
 
+    public boolean createEvent(int eventDuration, int eventTime, String eventName){
+        if(this.checkConflict(eventDuration, eventTime)) {
+            Event e = new Event(this.eventId, eventName, eventDuration, eventTime );
+            this.registered.addEvent(this.eventId, e);
+            this.eventId += 1;
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Reschedules an Event to the given time and given duration, given the eventID.
      * The old Event will get deleted and a new Event will get created, the eventID will change.
@@ -283,6 +293,7 @@ public class EventManager implements Serializable {
         else{
             this.registered.updateEventCapacity(id, capacity);
         }
+        return true;
     }
 
 }

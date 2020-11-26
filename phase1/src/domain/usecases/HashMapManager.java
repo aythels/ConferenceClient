@@ -39,6 +39,10 @@ public class HashMapManager implements Serializable {
         this.hashMap.put(eventId, new Pair(new Pair(e, new ArrayList<User>()), new Pair(maximum, new ArrayList<User>())));
     }
 
+    public void addEvent(int eventId, Event e){
+        this.hashMap.put(eventId, new Pair(new Pair(e, new ArrayList<User>()), new Pair(2, new ArrayList<User>())));
+    }
+
     public ArrayList<User> getAttendeeById(int id){
         return this.hashMap.get(id).getValue().getValue();
     }
