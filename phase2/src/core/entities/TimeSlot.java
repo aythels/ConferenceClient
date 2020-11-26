@@ -1,29 +1,16 @@
 package core.entities;
 
-import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class Event {
+public class TimeSlot implements Comparable<TimeSlot> {
 
-    private String title;
-    private String room;
     private LocalTime startTime;
     private LocalTime endTime;
 
-    public Event(String title, String room, LocalTime startTime, LocalTime endTime) {
-        this.title = title;
-        this.room = room;
+    public TimeSlot(LocalTime startTime, LocalTime endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public LocalTime getStartTime() {
@@ -42,22 +29,28 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public Duration getDuration() {
-        return Duration.between(startTime, endTime);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return title.equals(event.title) &&
-                startTime.equals(event.startTime) &&
-                endTime.equals(event.endTime);
+        TimeSlot timeSlot = (TimeSlot) o;
+        return startTime.equals(timeSlot.startTime) &&
+                endTime.equals(timeSlot.endTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, startTime, endTime);
+        return Objects.hash(startTime, endTime);
+    }
+
+    @Override
+    public int compareTo(TimeSlot o) {
+        if (startTime.equals(o.startTime) && endTime.equals(o.endTime)) {
+            return 0;
+        } else if (startTime.isBefore(o.startTime) && endTime.isBefore(o.endTime)) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }
