@@ -62,9 +62,7 @@ public class HashMapManager implements Serializable {
         ArrayList<User> speakers = this.getSpeakerById(id);
         Event e = this.getEventById(id);
         Pair<Integer, ArrayList<User>> roomInfo2 = this.hashMap.get(id).getValue();
-        if (speakers.size() > 0){
-            return false;
-        }
+
         speakers.add(u);
         this.hashMap.replace(id, new Pair(new Pair(e, speakers), roomInfo2));
         return true;
