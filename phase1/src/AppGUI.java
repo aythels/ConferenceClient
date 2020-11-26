@@ -1,12 +1,12 @@
-import adapters.Client;
 import adapters.Server;
+import api.API;
 import api.controllers.usercontrollers.PublicUserController;
+import gui.ClientGUI;
+import javafx.application.Application;
 
-public class App {
+public class AppGUI {
     public static void main(String[] args) {
         Server server = new Server();
-
-
 
         PublicUserController abc = (PublicUserController) server.getAPI().getUserAPI();
 
@@ -19,7 +19,9 @@ public class App {
 
         abc.createAnyUserTEMPORARY("ORGANIZER", "Joe1", "organizer1", "pass");
 
-        Client client = new Client(server);
+
+        API api = server.getAPI();
+        Application.launch(ClientGUI.class, args);
 
     }
 }
