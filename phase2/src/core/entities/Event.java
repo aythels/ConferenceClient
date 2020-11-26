@@ -8,12 +8,14 @@ public class Event {
 
     private String title;
     private String room;
+    private int capacity;
     private LocalTime startTime;
     private LocalTime endTime;
 
-    public Event(String title, String room, LocalTime startTime, LocalTime endTime) {
+    public Event(String title, String room, int capacity, LocalTime startTime, LocalTime endTime) {
         this.title = title;
         this.room = room;
+        this.capacity = capacity;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -24,6 +26,22 @@ public class Event {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public LocalTime getStartTime() {

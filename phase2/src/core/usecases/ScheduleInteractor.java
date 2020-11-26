@@ -6,7 +6,6 @@ import core.entities.User;
 import core.usecases.exceptions.InvalidTimeSlotError;
 import core.usecases.ports.IEventRepository;
 import core.usecases.ports.IUserRepository;
-import org.omg.CORBA.DynAnyPackage.Invalid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +13,8 @@ import java.util.List;
 
 public class ScheduleInteractor {
 
-    private IEventRepository events;
-    private IUserRepository users;
+    private final IEventRepository events;
+    private final IUserRepository users;
 
     public ScheduleInteractor(IEventRepository events, IUserRepository users) {
         this.events = events;
@@ -34,14 +33,15 @@ public class ScheduleInteractor {
         return result;
     }
 
-    public void scheduleEvent(User speaker, String room, TimeSlot timeSlot) throws InvalidTimeSlotError {
+    public void scheduleEvent(User speaker, String room, int capacity, TimeSlot timeSlot) throws InvalidTimeSlotError {
         //validate speaker
         if (invalidEventExists(timeSlot, events.getSpeakerEvents(speaker))) {
             throw new InvalidTimeSlotError("Speaker has conflicting schedule");
         } else if (invalidEventExists(timeSlot, events.getEventsByRoom(room))) {
             throw new InvalidTimeSlotError("Room is already booked at this time");
         }
-        Event event = new Event(speaker.getFullName(), room, timeSlot.getStartTime(), timeSlot.getEndTime());
+        Event event =
+                new Event(speaker.getFullName(), room, capacity, timeSlot.getStartTime(), timeSlot.getEndTime());
         events.addEvent(speaker, event);
     }
 
