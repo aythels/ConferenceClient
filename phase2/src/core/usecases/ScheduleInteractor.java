@@ -4,6 +4,7 @@ import core.entities.Event;
 import core.entities.TimeSlot;
 import core.entities.User;
 import core.usecases.exceptions.InvalidTimeSlotError;
+import core.usecases.ports.IConferenceRules;
 import core.usecases.ports.IEventRepository;
 import core.usecases.ports.IUserRepository;
 
@@ -15,10 +16,12 @@ public class ScheduleInteractor {
 
     private final IEventRepository events;
     private final IUserRepository users;
+    private final IConferenceRules rules;
 
-    public ScheduleInteractor(IEventRepository events, IUserRepository users) {
+    public ScheduleInteractor(IEventRepository events, IUserRepository users, IConferenceRules rules) {
         this.events = events;
         this.users = users;
+        this.rules = rules;
     }
 
     public HashMap<String, List<TimeSlot>> getUnavailableTimeSlots() {
@@ -35,9 +38,14 @@ public class ScheduleInteractor {
 
     public void scheduleEvent(User speaker, String room, int capacity, TimeSlot timeSlot) throws InvalidTimeSlotError {
         //validate speaker
+        if (timeSlot.getStartTime().isBefore(rules.getConferenceStartTime())
+                || timeSlot.getEndTime().isAfter(rules.getConferenceEndTime())) {
+            throw new InvalidTimeSlotError("Event outside conference hours");
+        }
         if (invalidEventExists(timeSlot, events.getSpeakerEvents(speaker))) {
             throw new InvalidTimeSlotError("Speaker has conflicting schedule");
-        } else if (invalidEventExists(timeSlot, events.getEventsByRoom(room))) {
+        }
+        if (invalidEventExists(timeSlot, events.getEventsByRoom(room))) {
             throw new InvalidTimeSlotError("Room is already booked at this time");
         }
         Event event =
