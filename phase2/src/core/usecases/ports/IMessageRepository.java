@@ -1,4 +1,10 @@
 package core.usecases.ports;
 
-public class IMessageRepository {
+import core.usecases.Message;
+
+import java.util.List;
+
+public interface IMessageRepository {
+
+    void storeMessage(Message message);
 }
