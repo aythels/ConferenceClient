@@ -19,6 +19,7 @@ public class Client {
      */
 
     public Client(Server server){
+    /*
         UIContext uiContext = new UIContext(server);
 
         uiContext.addView(new SplashView(uiContext));
@@ -49,7 +50,7 @@ public class Client {
             consoleRenderer.blit();
             consoleRenderer.promptInput();
         }
-
+    */
     }
 
 }
