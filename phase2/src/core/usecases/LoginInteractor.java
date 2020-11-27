@@ -10,8 +10,8 @@ import core.usecases.ports.IUserRepository;
 
 public class LoginInteractor {
 
-    private ILoginRepository logins;
-    private IUserRepository users;
+    private final ILoginRepository logins;
+    private final IUserRepository users;
 
     public LoginInteractor(ILoginRepository logins, IUserRepository users) {
         this.logins = logins;
