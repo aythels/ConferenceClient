@@ -23,6 +23,7 @@ public class LoginRepositoryTest {
             Assert.assertTrue(repo.contains("test"));
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 
@@ -39,6 +40,7 @@ public class LoginRepositoryTest {
             Assert.assertEquals(repo.getPassword("test"), "123");
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 }
