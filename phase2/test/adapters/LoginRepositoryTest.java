@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class LoginRepositoryTest {
 
-    private String store = "./store";
-    private String storeFile = "./store/logins.ser";
+    private String store = "./teststore";
+    private String storeFile = "./teststore/logins.ser";
 
     @Test
     public void testPut() {
