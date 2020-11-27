@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HashMapManager implements Serializable {
-    private HashMap<Integer, Pair<Pair<Event, ArrayList<User>>, ArrayList<User>>> hashMap;
+    private HashMap<Integer, Pair<Pair<Event, ArrayList<User>>, Pair<Integer, ArrayList<User>>>> hashMap;
 
     public HashMapManager(){
         this.hashMap = new HashMap<>();
@@ -31,18 +31,27 @@ public class HashMapManager implements Serializable {
         return false;
     }
 
-    public void addEvent(int eventId, int eventDuration, int eventTime, Event e){
-        this.hashMap.put(eventId, new Pair(new Pair(e, new ArrayList<User>()), new ArrayList<User>()));
+    public Integer getCapacityById(int id){
+        return this.hashMap.get(id).getValue().getKey();
+    }
+
+    public void addEvent(int eventId, int maximum, Event e){
+        this.hashMap.put(eventId, new Pair(new Pair(e, new ArrayList<User>()), new Pair(maximum, new ArrayList<User>())));
+    }
+
+    public void addEvent(int eventId, Event e){
+        this.hashMap.put(eventId, new Pair(new Pair(e, new ArrayList<User>()), new Pair(2, new ArrayList<User>())));
     }
 
     public ArrayList<User> getAttendeeById(int id){
-        return this.hashMap.get(id).getValue();
+        return this.hashMap.get(id).getValue().getValue();
     }
 
 
     public void updateAttendee(int id, ArrayList<User> booked){
-        Pair<Event, ArrayList<User>> e = this.hashMap.get(id).getKey();
-        this.hashMap.replace(id, new Pair(e, booked));
+        Pair<Event, ArrayList<User>> roomInfo1 = this.hashMap.get(id).getKey();
+        Integer capacity = this.getCapacityById(id);
+        this.hashMap.replace(id, new Pair(roomInfo1, new Pair(capacity, booked)));
     }
 
     public ArrayList<User> getSpeakerById(int id){
@@ -52,13 +61,18 @@ public class HashMapManager implements Serializable {
     public boolean updateSpeaker(int id, User u){
         ArrayList<User> speakers = this.getSpeakerById(id);
         Event e = this.getEventById(id);
-        ArrayList<User> attendees = this.getAttendeeById(id);
-        if (speakers.size() > 0){
-            return false;
-        }
+        Pair<Integer, ArrayList<User>> roomInfo2 = this.hashMap.get(id).getValue();
+
         speakers.add(u);
-        this.hashMap.replace(id, new Pair(new Pair(e, speakers), attendees));
+        this.hashMap.replace(id, new Pair(new Pair(e, speakers), roomInfo2));
         return true;
+    }
+
+    public void updateEventCapacity(int id, int capacity){
+        Pair<Event, ArrayList<User>> roomInfo1 = this.hashMap.get(id).getKey();
+        ArrayList<User> attendee = this.getAttendeeById(id);
+        this.hashMap.replace(id, new Pair(roomInfo1, new Pair(capacity, attendee)));
+
     }
 
 
