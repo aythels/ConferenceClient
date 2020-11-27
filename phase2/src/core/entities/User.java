@@ -1,5 +1,6 @@
 package core.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Objects;
  * A user is distinguished by what kind of user it is.
  */
 
-public class User {
+public class User implements Serializable {
 
     /** The user's full name. */
     private String fullName;

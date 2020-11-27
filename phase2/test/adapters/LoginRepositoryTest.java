@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class LoginRepositoryTest {
 
-    private String store = "./store";
-    private String storeFile = "./store/logins.ser";
+    private String store = "./teststore";
+    private String storeFile = "./teststore/logins.ser";
 
     @Test
     public void testPut() {
@@ -23,6 +23,7 @@ public class LoginRepositoryTest {
             Assert.assertTrue(repo.contains("test"));
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 
@@ -39,6 +40,7 @@ public class LoginRepositoryTest {
             Assert.assertEquals(repo.getPassword("test"), "123");
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 }
