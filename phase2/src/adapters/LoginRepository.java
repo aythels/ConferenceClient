@@ -5,8 +5,9 @@ import core.usecases.ports.ILoginRepository;
 import java.io.*;
 import java.nio.file.InvalidPathException;
 import java.util.HashMap;
+import java.util.Optional;
 
-public class LoginRepository implements ILoginRepository {
+public class LoginRepository extends AbstractRepository implements ILoginRepository {
 
     private final File store;
     private HashMap<String, String> logins;
@@ -20,9 +21,9 @@ public class LoginRepository implements ILoginRepository {
         if (!store.exists()) {
             store.createNewFile();
             logins = new HashMap<>();
-            put();
+            put(store, logins);
         } else {
-            get();
+            logins = (HashMap<String, String>) get(store).orElseThrow(IOException::new);
         }
     }
 
@@ -34,37 +35,15 @@ public class LoginRepository implements ILoginRepository {
     @Override
     public void addLogin(String username, String password) {
         logins.put(username, password);
-        put();
+        try {
+            put(store, logins);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public String getPassword(String username) {
         return logins.get(username);
-    }
-
-    private void get() {
-        try {
-            FileInputStream fileIn = new FileInputStream(store);
-            ObjectInputStream objIn = new ObjectInputStream(fileIn);
-            logins = (HashMap<String, String>) objIn.readObject();
-            objIn.close();
-            fileIn.close();
-
-        } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void put() {
-        try {
-            FileOutputStream fileOut = new FileOutputStream(store);
-            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-            objOut.writeObject(logins);
-            objOut.close();
-            fileOut.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
