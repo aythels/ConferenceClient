@@ -61,7 +61,9 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userName.equals(user.userName);
+        return fullName.equals(user.fullName) &&
+                userName.equals(user.userName) &&
+                userType.equals(user.userType);
     }
 
     /**
