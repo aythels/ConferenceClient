@@ -17,47 +17,27 @@ public class LoginRepositoryTest {
     }
 
     @Test
-    public void testPut() {
-        try {
-            {
-                LoginRepository repo = new LoginRepository(store);
-                repo.addLogin("test", "123");
-            }
-            LoginRepository repo = new LoginRepository(store);
-            Assert.assertTrue(repo.contains("test"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
-    }
-
-    @Test
-    public void testGet() {
-        try {
-            {
-                LoginRepository repo = new LoginRepository(store);
-                repo.addLogin("test", "123");
-            }
-            LoginRepository repo = new LoginRepository(store);
-            Assert.assertEquals(repo.getPassword("test"), "123");
-        } catch (IOException e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
-    }
-
-    @Test
     public void testContains() {
         try {
-            {
-               LoginRepository repo = new LoginRepository(store);
-               repo.addLogin("test", "password");
-                repo.addLogin("test1", "password");
-            }
-            LoginRepository repo = new LoginRepository(store);
-            Assert.assertTrue(repo.contains("test"));
-            Assert.assertTrue(repo.contains("test1"));
-            Assert.assertFalse(repo.contains("test2"));
+            LoginRepository first = new LoginRepository(store);
+            Assert.assertFalse(first.contains("user"));
+            first.addLogin("user", "password");
+            LoginRepository second = new LoginRepository(store);
+            Assert.assertTrue(second.contains("user"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void testRetrieve() {
+        try {
+            LoginRepository first = new LoginRepository(store);
+            first.addLogin("user", "password");
+            LoginRepository second = new LoginRepository(store);
+            Assert.assertEquals(second.getPassword("user"), "password");
+
         } catch (IOException e) {
             e.printStackTrace();
             Assert.fail();
