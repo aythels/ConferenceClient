@@ -4,7 +4,6 @@ import core.entities.User;
 import core.usecases.exceptions.IncorrectPasswordError;
 import core.usecases.exceptions.LoginNotFoundError;
 import core.usecases.exceptions.UserAlreadyExistsError;
-import core.usecases.exceptions.UsernameAlreadyExistsError;
 import core.usecases.ports.ILoginRepository;
 import core.usecases.ports.IUserRepository;
 
@@ -18,15 +17,13 @@ public class LoginInteractor {
         this.users = users;
     }
 
-    public void registerUser(User user, String username, String password)
-            throws UserAlreadyExistsError, UsernameAlreadyExistsError {
-        if (logins.contains(username)) {
-            throw new UsernameAlreadyExistsError("Username already exists in user repository");
-        } else if (users.contains(user)) {
-            throw new UserAlreadyExistsError("User already exists in user repository");
+    public void registerUser(User user, String password)
+            throws UserAlreadyExistsError {
+        if (logins.contains(user.getUserName()) || users.contains(user)) {
+            throw new UserAlreadyExistsError("Username already exists in user repository");
         } else {
             users.addUser(user);
-            logins.addLogin(username, password);
+            logins.addLogin(user.getUserName(), password);
         }
     }
 
