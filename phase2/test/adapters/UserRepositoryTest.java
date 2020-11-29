@@ -14,6 +14,7 @@ public class UserRepositoryTest {
     private String usersFile = "./teststore/users.ser";
     private String usersByTypeFile = "./teststore/usersByType.ser";
 
+    @Before
     private void deletePreviousData() {
         File f1 = new File(usersFile);
         File f2 = new File(usersByTypeFile);
@@ -23,7 +24,6 @@ public class UserRepositoryTest {
 
     @Test
     public void testPut() {
-        deletePreviousData();
         try {
             User user = new User("test", "testuser", UserType.ATTENDEE);
             {
@@ -40,7 +40,6 @@ public class UserRepositoryTest {
 
     @Test
     public void testGet() {
-        deletePreviousData();
         try {
             User user1 = new User("test", "testuser", UserType.ATTENDEE);
             User user2 = new User("test1", "testuser1", UserType.SPEAKER);
@@ -56,5 +55,9 @@ public class UserRepositoryTest {
             e.printStackTrace();
             Assert.fail();
         }
+    }
+
+    @Test
+    public void testGetAllOfType() {
     }
 }
