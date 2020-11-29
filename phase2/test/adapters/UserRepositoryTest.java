@@ -15,7 +15,7 @@ public class UserRepositoryTest {
     private String usersByTypeFile = "./teststore/usersByType.ser";
 
     @Before
-    private void deletePreviousData() {
+    public void deletePreviousData() {
         File f1 = new File(usersFile);
         File f2 = new File(usersByTypeFile);
         f1.delete();
@@ -23,15 +23,14 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void testPut() {
+    public void testContains() {
         try {
-            User user = new User("test", "testuser", UserType.ATTENDEE);
-            {
-                UserRepository ur = new UserRepository(folder);
-                ur.addUser(user);
-            }
-            UserRepository ur = new UserRepository(folder);
-            Assert.assertTrue(ur.contains(user));
+            User user = new User("test user", "username", UserType.ATTENDEE);
+            UserRepository first = new UserRepository(folder);
+            first.addUser(user);
+            UserRepository second = new UserRepository(folder);
+            Assert.assertTrue(second.contains(user));
+            Assert.assertEquals(second.getUser(user.getUserName()), user);
         } catch (IOException e) {
             e.printStackTrace();
             Assert.fail();
@@ -39,18 +38,13 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void testGet() {
+    public void testGetSingleUser() {
         try {
-            User user1 = new User("test", "testuser", UserType.ATTENDEE);
-            User user2 = new User("test1", "testuser1", UserType.SPEAKER);
-            {
-                UserRepository ur = new UserRepository(folder);
-                ur.addUser(user1);
-                ur.addUser(user2);
-            }
-            UserRepository ur = new UserRepository(folder);
-            User result = ur.getUser("testuser");
-            Assert.assertEquals(user1, result);
+            User user = new User("test user", "username", UserType.ATTENDEE);
+            UserRepository first = new UserRepository(folder);
+            first.addUser(user);
+            UserRepository second = new UserRepository(folder);
+            Assert.assertEquals(second.getUser(user.getUserName()), user);
         } catch (IOException e) {
             e.printStackTrace();
             Assert.fail();
@@ -59,5 +53,30 @@ public class UserRepositoryTest {
 
     @Test
     public void testGetAllOfType() {
+        try {
+            User user = new User("test user", "username", UserType.ATTENDEE);
+            User user1 = new User("test user1", "username1", UserType.ATTENDEE);
+            User user2 = new User("test user2", "username2", UserType.SPEAKER);
+            User user3 = new User("test user3", "username3", UserType.SPEAKER);
+            UserRepository first = new UserRepository(folder);
+            first.addUser(user);
+            first.addUser(user1);
+            first.addUser(user2);
+            first.addUser(user3);
+
+            UserRepository second = new UserRepository(folder);
+            Assert.assertEquals(second.getAllUsersOfType(UserType.ATTENDEE).size(), 2);
+            for (User result: second.getAllUsersOfType(UserType.ATTENDEE)) {
+                Assert.assertEquals(result.getUserType(), UserType.ATTENDEE);
+            }
+            Assert.assertEquals(second.getAllUsersOfType(UserType.SPEAKER).size(), 2);
+            for (User result: second.getAllUsersOfType(UserType.SPEAKER)) {
+                Assert.assertEquals(result.getUserType(), UserType.SPEAKER);
+            }
+            Assert.assertTrue(second.getAllUsersOfType(UserType.ADMIN).isEmpty());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
     }
 }
