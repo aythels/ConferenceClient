@@ -74,6 +74,10 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
 
     @Override
     public List<User> getAllUsersOfType(UserType type) {
-        return usersByType.get(type);
+        if (usersByType.containsKey(type)) {
+            return usersByType.get(type);
+        } else {
+            return new ArrayList<>();
+        }
     }
 }
