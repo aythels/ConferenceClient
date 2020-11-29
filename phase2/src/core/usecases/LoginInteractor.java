@@ -17,8 +17,7 @@ public class LoginInteractor {
         this.users = users;
     }
 
-    public void registerUser(User user, String password)
-            throws UserAlreadyExistsError {
+    public void registerUser(User user, String password) throws UserAlreadyExistsError {
         if (logins.contains(user.getUserName()) || users.contains(user)) {
             throw new UserAlreadyExistsError("Username already exists in user repository");
         } else {
