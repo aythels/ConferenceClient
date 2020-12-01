@@ -1,7 +1,7 @@
 package usecases;
 
-import adapters.LoginRepository;
-import adapters.UserRepository;
+import gateways.LoginRepository;
+import gateways.UserRepository;
 import core.entities.User;
 import core.entities.UserType;
 import core.usecases.LoginInteractor;

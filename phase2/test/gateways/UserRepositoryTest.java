@@ -1,9 +1,8 @@
-package adapters;
+package gateways;
 
 import core.entities.User;
 import core.entities.UserType;
 import org.junit.*;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.io.File;
 import java.io.IOException;

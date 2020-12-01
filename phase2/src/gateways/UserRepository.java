@@ -1,4 +1,4 @@
-package adapters;
+package gateways;
 
 import core.entities.User;
 import core.entities.UserType;

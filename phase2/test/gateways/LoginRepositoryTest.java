@@ -1,4 +1,4 @@
-package adapters;
+package gateways;
 
 import org.junit.*;
 
