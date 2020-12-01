@@ -1,8 +1,6 @@
-package adapters;
+package gateways;
 
 import java.io.*;
-import java.nio.file.InvalidPathException;
-import java.util.HashMap;
 import java.util.Optional;
 
 public class AbstractRepository {

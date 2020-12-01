@@ -1,11 +1,10 @@
-package adapters;
+package gateways;
 
 import core.usecases.ports.ILoginRepository;
 
 import java.io.*;
 import java.nio.file.InvalidPathException;
 import java.util.HashMap;
-import java.util.Optional;
 
 public class LoginRepository extends AbstractRepository implements ILoginRepository {
 
