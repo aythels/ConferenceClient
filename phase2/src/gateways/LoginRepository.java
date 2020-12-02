@@ -9,20 +9,17 @@ import java.util.HashMap;
 public class LoginRepository extends AbstractRepository implements ILoginRepository {
 
     private final File store;
-    private HashMap<String, String> logins;
+    private final HashMap<String, String> logins;
 
+    @SuppressWarnings("unchecked")
     public LoginRepository(String path) throws InvalidPathException, IOException {
-        File dir = new File(path);
-        if (!dir.isDirectory()) {
-            throw new InvalidPathException(path, "Invalid path");
-        }
-        store = new File(dir.getAbsolutePath() + "/logins.ser");
-        if (!store.exists()) {
-            store.createNewFile();
+        super(path);
+        store = new File(path, "logins.ser");
+        if (store.createNewFile()) {
             logins = new HashMap<>();
             put(store, logins);
         } else {
-            logins = (HashMap<String, String>) get(store).orElseThrow(IOException::new);
+            logins = (HashMap<String, String>) get(store);
         }
     }
 
@@ -34,11 +31,7 @@ public class LoginRepository extends AbstractRepository implements ILoginReposit
     @Override
     public void addLogin(String username, String password) {
         logins.put(username, password);
-        try {
-            put(store, logins);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        put(store, logins);
     }
 
     @Override

@@ -18,26 +18,22 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
     private final HashMap<String, User> users;
     private final HashMap<UserType, List<User>> usersByType;
 
+    @SuppressWarnings("unchecked")
     public UserRepository(String path) throws IOException {
-        File dir = new File(path);
-        if (!dir.isDirectory()) {
-            throw new InvalidPathException(path, "Invalid path");
-        }
-        usersStore = new File(path + "/users.ser");
-        usersByTypeStore = new File(path + "/usersByType.ser");
-        if (!usersStore.exists()) {
-            usersStore.createNewFile();
+        super(path);
+        usersStore = new File(path, "/users.ser");
+        usersByTypeStore = new File(path, "/usersByType.ser");
+        if (usersStore.createNewFile()) {
             users = new HashMap<>();
             put(usersStore, users);
         } else {
-            users = (HashMap<String, User>) get(usersStore).orElseThrow(IOException::new);
+            users = (HashMap<String, User>) get(usersStore);
         }
-        if (!usersByTypeStore.exists()) {
-            usersByTypeStore.createNewFile();
+        if (usersByTypeStore.createNewFile()) {
             usersByType = new HashMap<>();
             put(usersByTypeStore, usersByType);
         } else {
-            usersByType = (HashMap<UserType, List<User>>) get(usersByTypeStore).orElseThrow(IOException::new);
+            usersByType = (HashMap<UserType, List<User>>) get(usersByTypeStore);
         }
     }
 
@@ -56,12 +52,8 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
         } else {
             usersByType.get(user.getUserType()).add(user);
         }
-        try {
-            put(usersStore, users);
-            put(usersByTypeStore, usersByType);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        put(usersStore, users);
+        put(usersByTypeStore, usersByType);
     }
 
     @Override
