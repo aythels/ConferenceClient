@@ -1,5 +1,6 @@
 package core.usecases;
 
+import core.entities.Content;
 import core.entities.User;
 
 import java.util.List;
@@ -7,19 +8,19 @@ import java.util.Optional;
 
 public class Message {
 
-    private User sender;
-    private List<User> receivers;
-    private String content;
+    private final User sender;
+    private final List<User> receivers;
+    private final Content content;
     private Message previousMessage;
 
-    public Message(User sender, List<User> receivers, String content, Message previousMessage) {
+    public Message(User sender, List<User> receivers, Content content, Message previousMessage) {
         this.sender = sender;
         this.receivers = receivers;
         this.content = content;
         this.previousMessage = previousMessage;
     }
 
-    public Message(User sender, List<User> receivers, String content) {
+    public Message(User sender, List<User> receivers, Content content) {
         this.sender = sender;
         this.receivers = receivers;
         this.content = content;
@@ -34,11 +35,23 @@ public class Message {
         return receivers;
     }
 
-    public String getContent() {
+    public Content getContent() {
         return content;
     }
 
     public Optional<Message> getPreviousMessage() {
-        return Optional.ofNullable(previousMessage);
+        if (previousMessage != null)
+            return Optional.of(previousMessage);
+        else
+            return Optional.empty();
+    }
+
+    public boolean setPreviousMessage(Message message) {
+        if (previousMessage != null) {
+            return false;
+        } else {
+            previousMessage = message;
+            return true;
+        }
     }
 }
