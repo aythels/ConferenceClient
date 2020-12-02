@@ -5,21 +5,22 @@ import core.usecases.ports.ILoginRepository;
 import java.io.*;
 import java.nio.file.InvalidPathException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class LoginRepository extends AbstractRepository implements ILoginRepository {
 
     private final File store;
-    private final HashMap<String, String> logins;
+    private final Map<String, String> logins;
 
     @SuppressWarnings("unchecked")
-    public LoginRepository(String path) throws InvalidPathException, IOException {
+    public LoginRepository(String path) throws IOException {
         super(path);
         store = new File(path, "logins.ser");
         if (store.createNewFile()) {
             logins = new HashMap<>();
             put(store, logins);
         } else {
-            logins = (HashMap<String, String>) get(store);
+            logins = (Map<String, String>) get(store);
         }
     }
 

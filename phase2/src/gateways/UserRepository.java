@@ -9,13 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserRepository extends AbstractRepository implements IUserRepository {
 
     private final File usersStore;
     private final File usersByTypeStore;
-    private final HashMap<String, User> users;
-    private final HashMap<UserType, List<User>> usersByType;
+    private final Map<String, User> users;
+    private final Map<UserType, List<User>> usersByType;
 
     @SuppressWarnings("unchecked")
     public UserRepository(String path) throws IOException {
@@ -26,13 +27,13 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
             users = new HashMap<>();
             put(usersStore, users);
         } else {
-            users = (HashMap<String, User>) get(usersStore);
+            users = (Map<String, User>) get(usersStore);
         }
         if (usersByTypeStore.createNewFile()) {
             usersByType = new HashMap<>();
             put(usersByTypeStore, usersByType);
         } else {
-            usersByType = (HashMap<UserType, List<User>>) get(usersByTypeStore);
+            usersByType = (Map<UserType, List<User>>) get(usersByTypeStore);
         }
     }
 
