@@ -1,5 +1,6 @@
 package core.usecases;
 
+import core.entities.Content;
 import core.entities.Event;
 import core.entities.User;
 import core.entities.UserType;
@@ -22,7 +23,7 @@ public class MessagingInteractor {
         this.events = events;
     }
 
-    public void userSendMessage(User sender, List<User> recipients, String content) {
+    public void userSendMessage(User sender, List<User> recipients, Content content) {
         Message message = new Message(sender, recipients, content);
         messages.storeMessage(message);
     }
