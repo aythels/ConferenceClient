@@ -23,12 +23,7 @@ public class MessagingInteractor {
         this.events = events;
     }
 
-    public void userSendMessage(User sender, List<User> recipients, Content content) {
-        Message message = new Message(sender, recipients, content);
-        messages.storeMessage(message);
-    }
-
-    public List<Message> getInboxForUser(User user) {
+    public List<Message> getInbox(User user) {
         List<Message> result = new ArrayList<>();
         for (Message msg: messages.getAllMessages()) {
             if (msg.getReceivers().contains(user)) {
@@ -38,19 +33,25 @@ public class MessagingInteractor {
         return result;
     }
 
+    public void userSendMessage(User sender, List<User> recipients, Content content) {
+        Message message = new Message(sender, recipients, content);
+        messages.storeMessage(message);
+    }
+
     public List<Event> getEventsForSpeaker(User speaker) {
         return events.getSpeakerEvents(speaker);
     }
 
-    public List<User> getRecipientsForAttendee() {
-        List<User> result = new ArrayList<>();
-        result.addAll(users.getAllUsersOfType(UserType.ATTENDEE));
-        result.addAll(users.getAllUsersOfType(UserType.SPEAKER));
-        return result;
+    public void speakerSendToEvent(User speaker, Event event, Content content) {
+        userSendMessage(speaker, events.getAttendeesForEvent(event), content);
     }
 
-    public List<User> getRecipientsForOrganizer() {
-        //TODO: Rewrite this
-        return getRecipientsForAttendee();
+    public List<User> getUsersByType(UserType type) {
+        return users.getAllUsersOfType(type);
+    }
+
+    public void organizerMessageUsers(User organizer, UserType type, Content content) {
+        if (type == UserType.ATTENDEE || type == UserType.SPEAKER)
+            userSendMessage(organizer, users.getAllUsersOfType(type), content);
     }
 }
