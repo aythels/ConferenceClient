@@ -6,7 +6,6 @@ import core.usecases.ports.IUserRepository;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,18 +57,14 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
 
     @Override
     public User getUser(String username) {
-        if (users.containsKey(username)) {
-            return users.get(username);
-        }
-        return null;
+        return users.getOrDefault(username, null);
     }
 
     @Override
     public List<User> getAllUsersOfType(UserType type) {
-        if (usersByType.containsKey(type)) {
+        if (usersByType.containsKey(type))
             return usersByType.get(type);
-        } else {
+        else
             return new ArrayList<>();
-        }
     }
 }
