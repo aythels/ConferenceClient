@@ -18,23 +18,17 @@ public class LoginInteractor {
     }
 
     public void registerUser(User user, String password) throws UserAlreadyExistsError {
-        if (logins.contains(user.getUserName()) || users.contains(user)) {
+        if (logins.contains(user.getUserName()) || users.contains(user))
             throw new UserAlreadyExistsError("Username already exists in user repository");
-        } else {
-            users.addUser(user);
-            logins.addLogin(user.getUserName(), password);
-        }
+        logins.addLogin(user.getUserName(), password);
+        users.addUser(user);
     }
 
     public User login(String username, String password) throws LoginNotFoundError {
-        if (!logins.contains(username)) {
+        if (!logins.contains(username))
             throw new LoginNotFoundError("Login doesn't exist in login repository");
-        } else {
-            if (!logins.getPassword(username).equals(password)) {
-                throw new IncorrectPasswordError("Incorrect password");
-            } else {
-                return users.getUser(username);
-            }
-        }
+        if (!logins.getPassword((username)).equals(password))
+            throw new IncorrectPasswordError("Incorrect password");
+        return users.getUser(username);
     }
 }
