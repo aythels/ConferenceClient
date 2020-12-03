@@ -17,7 +17,7 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
 
     public UserRepository(String path) throws IOException {
         super(path);
-        file = new File(path, "/users.ser");
+        file = new File(path, "users.ser");
         if (file.createNewFile()) {
             store = new UserStore();
             put(file, store);

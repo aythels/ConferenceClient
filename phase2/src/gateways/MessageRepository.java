@@ -15,7 +15,7 @@ public class MessageRepository extends AbstractRepository implements IMessageRep
 
     public MessageRepository(String path) throws IOException {
         super(path);
-        file = new File(path, "messages");
+        file = new File(path, "messages.ser");
         if (file.createNewFile()) {
             store = new MessageStore();
             put(file, store);
