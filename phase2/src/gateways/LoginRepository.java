@@ -1,42 +1,39 @@
 package gateways;
 
 import core.usecases.ports.ILoginRepository;
+import gateways.stores.LoginStore;
 
 import java.io.*;
-import java.nio.file.InvalidPathException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginRepository extends AbstractRepository implements ILoginRepository {
 
-    private final File store;
-    private final Map<String, String> logins;
+    private final File file;
+    private final LoginStore store;
 
-    @SuppressWarnings("unchecked")
     public LoginRepository(String path) throws IOException {
         super(path);
-        store = new File(path, "logins.ser");
-        if (store.createNewFile()) {
-            logins = new HashMap<>();
-            put(store, logins);
+        file = new File(path, "logins.ser");
+        if (file.createNewFile()) {
+            store = new LoginStore();
+            put(file, store);
         } else {
-            logins = (Map<String, String>) get(store);
+            store = (LoginStore) get(file);
         }
     }
 
     @Override
     public boolean contains(String username) {
-        return logins.containsKey(username);
+        return store.getLogins().containsKey(username);
     }
 
     @Override
     public void addLogin(String username, String password) {
-        logins.put(username, password);
-        put(store, logins);
+        store.getLogins().put(username, password);
+        put(file, store);
     }
 
     @Override
     public String getPassword(String username) {
-        return logins.get(username);
+        return store.getLogins().get(username);
     }
 }

@@ -2,37 +2,36 @@ package gateways;
 
 import core.usecases.Message;
 import core.usecases.ports.IMessageRepository;
+import gateways.stores.MessageStore;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MessageRepository extends AbstractRepository implements IMessageRepository {
 
-    private final File store;
-    private final List<Message> messages;
+    private final File file;
+    private final MessageStore store;
 
-    @SuppressWarnings("unchecked")
     public MessageRepository(String path) throws IOException {
         super(path);
-        store = new File(path, "messages");
-        if (store.createNewFile()) {
-            messages = new ArrayList<>();
-            put(store, messages);
+        file = new File(path, "messages.ser");
+        if (file.createNewFile()) {
+            store = new MessageStore();
+            put(file, store);
         } else {
-            messages = (List<Message>) get(store);
+            store = (MessageStore) get(file);
         }
     }
 
     @Override
     public void storeMessage(Message message) {
-        messages.add(message);
-        put(store, message);
+        store.getMessages().add(message);
+        put(file, message);
     }
 
     @Override
     public List<Message> getAllMessages() {
-        return messages;
+        return store.getMessages();
     }
 }
