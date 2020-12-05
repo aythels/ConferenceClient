@@ -9,7 +9,7 @@ import domain.usecases.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendeeMessengerController extends MessengerController {
+public class AttendeeMessengerController {
     protected final MessageManager messageManager;
     protected final UserManager userManager;
     protected final LoginHelper loginHelper;

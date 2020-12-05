@@ -25,13 +25,10 @@ public class Server {
         this.api = new InitializeAPI(this.messageManager, this.userManager, this.eventManager).getAPI();
     }
 
-    /**
-     * @return get the api for retrieving controllers
-     */
-
-    public API getAPI(){
-        return api;
+    public API getAPI() {
+        return this.api;
     }
+
 
     /**
      * Load in saved use case classes.

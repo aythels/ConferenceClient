@@ -4,7 +4,7 @@ import api.helpers.LoginHelper;
 import domain.entities.User;
 import domain.usecases.UserManager;
 
-public class PublicLoginController extends LoginController {
+public class PublicLoginController {
     protected final UserManager userManager;
     protected final LoginHelper loginHelper;
 
@@ -15,6 +15,15 @@ public class PublicLoginController extends LoginController {
     public PublicLoginController(UserManager userManager, LoginHelper loginHelper) {
         this.userManager = userManager;
         this.loginHelper = loginHelper;
+    }
+
+    /**
+     * Simple method used to test if this controller works.
+     * @return
+     */
+
+    public String ping() {
+        return "Pong";
     }
 
     /**

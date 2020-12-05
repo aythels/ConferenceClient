@@ -1,5 +1,6 @@
 package gui.views.homeview;
 
+import api.API;
 import gui.helpers.ClientData;
 import gui.helpers.PageIndex;
 import gui.helpers.PageInitializeEvent;
@@ -13,10 +14,14 @@ import java.util.ResourceBundle;
 public class HomeViewController implements PageInitializeEvent, PageUpdateEvent {
     private final ClientData clientData;
     private final PageIndex pageIndex;
+    private final API api;
 
-    public HomeViewController(PageIndex pageIndex, ClientData clientData) {
+    public HomeViewController(PageIndex pageIndex, ClientData clientData, API api) {
         this.clientData = clientData;
         this.pageIndex = pageIndex;
+        this.api = api;
+
+        pageIndex.addPageUpdateObserver(this);
     }
 
     public void logoutButtonOnClick(ActionEvent event) throws IOException {

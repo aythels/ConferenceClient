@@ -1,28 +1,31 @@
 import adapters.Server;
 import api.API;
-import api.controllers.usercontrollers.PublicUserController;
 import gui.ClientGUI;
 import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class AppGUI {
+public class AppGUI extends Application {
     public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
         Server server = new Server();
-
-        PublicUserController abc = (PublicUserController) server.getAPI().getUserAPI();
-
-        abc.createAnyUserTEMPORARY("ATTENDEE", "Bob1", "attendee1", "pass");
-        abc.createAnyUserTEMPORARY("ATTENDEE", "Bob2", "attendee2", "pass");
-        abc.createAnyUserTEMPORARY("ATTENDEE", "Bob3", "attendee3", "pass");
-
-        abc.createAnyUserTEMPORARY("SPEAKER", "Lee1", "speaker1", "pass");
-        abc.createAnyUserTEMPORARY("SPEAKER", "Lee2", "speaker2", "pass");
-
-        abc.createAnyUserTEMPORARY("ORGANIZER", "Joe1", "organizer1", "pass");
-
-
         API api = server.getAPI();
-        Application.launch(ClientGUI.class, args);
 
+        api.call("user_controller", null, "createAnyUserTEMPORARY",
+                "ATTENDEE", "Bob1", "attendee1", "pass");
+
+        api.call("user_controller", null, "createAnyUserTEMPORARY",
+                "SPEAKER", "Joe1", "speaker1", "pass");
+
+        api.call("user_controller", null, "createAnyUserTEMPORARY",
+                "ORGANIZER", "Lee1", "organizer1", "pass");
+
+
+        ClientGUI client = new ClientGUI(primaryStage, api);
+        //ClientGUI client2 = new ClientGUI(new Stage(), api);
     }
 }
 
