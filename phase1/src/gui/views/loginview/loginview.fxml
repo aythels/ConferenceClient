@@ -11,9 +11,9 @@
    <children>
       <VBox alignment="CENTER" prefHeight="800.0" prefWidth="280.0" spacing="10.0">
          <children>
-            <Label fx:id="loginText" text="Invalid credentials!" textFill="#da1e1e" visible="false" />
+            <Label text="Invalid credentials!" textFill="#da1e1e" visible="false" />
             <TextField fx:id="usernameInput" promptText="Username" />
-            <PasswordField fx:id="passInput" promptText="Password" />
+            <TextField fx:id="passInput" promptText="Password" />
             <Button mnemonicParsing="false" onAction="#loginButtonOnClick" prefHeight="-Infinity" prefWidth="Infinity" text="Login" />
          </children>
          <padding>

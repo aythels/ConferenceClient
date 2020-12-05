@@ -4,7 +4,7 @@ import api.helpers.UserType;
 import domain.entities.User;
 import domain.usecases.UserManager;
 
-public class PublicUserController {
+public class PublicUserController extends UserController {
     protected final UserManager userManager;
 
     /**

@@ -1,9 +1,0 @@
-https://www.youtube.com/watch?v=chD0fXngchU
-https://www.youtube.com/watch?v=XCgcQTQCfJQ
-https://stackoverflow.com/questions/39806497/java-alternative-to-fxml-injection-of-controllers
-
-        /*
-        Parent root = FXMLLoader.load(getClass().getResource("views/loginview/loginview.fxml"));
-        pageIndex.addPage("loginview", new Scene(root, 1200, 800));
-        pageIndex.setPage("loginview");
-         */

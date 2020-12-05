@@ -8,7 +8,7 @@ import domain.usecases.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PublicEventController {
+public class PublicEventController extends EventController {
     protected final EventManager eventManager;
     protected final UserManager userManager;
 

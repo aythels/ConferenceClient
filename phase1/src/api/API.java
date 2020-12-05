@@ -1,72 +1,89 @@
 package api;
 
+import api.controllers.Controller;
+import api.helpers.ControllerStorage;
 import api.helpers.LoginHelper;
-import api.helpers.UserType;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.stream.Stream;
 
 public class API {
-    private final HashMap<String, ArrayList<Object>> controllerGroups;
-    private final HashMap<Object, UserType> controllerUserType;
+    private final ControllerStorage allLoginControllers;
+    private final ControllerStorage allMessengerControllers;
+    private final ControllerStorage allUserControllers;
+    private final ControllerStorage allEventControllers;
+
     private final LoginHelper loginHelper;
-    private final APIHelper apiHelper;
 
-    public API(LoginHelper loginHelper, APIHelper apiHelper) {
-        this.controllerGroups = new HashMap<>();
-        this.controllerUserType = new HashMap<>();
+    /**
+     * A class containing all the methods for fetching different controllers. Intended to be called by client.
+     * @param loginHelper keeps track of logged in users. Used to verify access code parameters.
+     * @param allLoginControllers contains controllers related to logging in, mapped to each user type.
+     * @param allMessengerControllers contains controllers related to messaging, mapped to each user type.
+     * @param allUserControllers contains controllers related to users, mapped to each user type.
+     * @param allEventControllers contains controllers related to events, mapped to each user type.
+     */
+
+    public API(LoginHelper loginHelper,
+               ControllerStorage allLoginControllers,
+               ControllerStorage allMessengerControllers,
+               ControllerStorage allUserControllers,
+               ControllerStorage allEventControllers) {
+
         this.loginHelper = loginHelper;
-        this.apiHelper = apiHelper;
-    }
 
-    public void createGroup(String path) {
-        this.controllerGroups.put(path, new ArrayList());
-    }
-
-    public void add(String path, Object controller) {
-        this.add(path, controller, null);
-    }
-
-    public void add(String path, Object controller, UserType userType) {
-        this.controllerGroups.get(path).add(controller);
-        this.controllerUserType.put(controller, userType);
-    }
-
-    public ArrayList<Object> getControllerGroup(String path) {
-        return this.controllerGroups.get(path);
-    }
-
-    public Object getController(ArrayList<Object> controllerGroup, UserType userType) {
-        Object defaultController = null;
-        for (Object controller : controllerGroup) {
-            if (controllerUserType.get(controller) == userType) return controller;
-            else if (controllerUserType.get(controller) == null) defaultController = controller;
-        }
-
-        return defaultController;
-    }
-
-    public String call(String path, String accessCode, String methodName, Object ... args) {
-        ArrayList<Object> controllerGroup =getControllerGroup(path);
-        if (controllerGroup == null) return "Invalid path";
-
-        UserType userType = loginHelper.isValidAccessCode(accessCode) ?
-                loginHelper.getUserTypeByAccessCode(accessCode) : null;
-        Object controller = getController(controllerGroup, userType);
-        if (controller == null) return "Could not get controller (invalid accessCode or non existent controller?)";
-
-        Method method = this.apiHelper.getMethod(controller.getClass(), methodName, args);
-        if (method == null) return "Could not get declared method " + "'" + methodName + "'" +
-                                    " with parameters of types " + Arrays.toString(Stream.of(args).map(a -> a.getClass().getSimpleName()).toArray(String[]::new)) +
-                                    " in controller class " + "<" + controller.getClass().getSimpleName() + ">";
-
-        return String.valueOf(this.apiHelper.callMethod(controller, method, args));
+        this.allLoginControllers = allLoginControllers;
+        this.allMessengerControllers = allMessengerControllers;
+        this.allUserControllers = allUserControllers;
+        this.allEventControllers = allEventControllers;
 
     }
 
+    /**
+     * The following methods are used to fetch the specified public controller. A public controller is a controller
+     * that does not need an access code parameter, hence does not require the client user to be logged in.
+     * @return the specified public controller, null if unavailable.
+     */
+
+    public Controller getLoginAPI() {
+        return allLoginControllers.getDefaultController();
+    }
+
+    public Controller getUserAPI() {
+        return allUserControllers.getDefaultController();
+    }
+
+    public Controller getMessengerAPI() {
+        return allMessengerControllers.getDefaultController();
+    }
+
+    public Controller allEventControllers() {
+        return allEventControllers.getDefaultController();
+    }
+
+    /**
+     * The following methods are used to fetch the specified private controller in its respective category. A private
+     * controller is a controller that requires an access code to obtain and can vary in the amount of methods they
+     * contain depending on what type of user the access code is associated with. Clients are required to first call
+     * getLoginAPI() to get the controller responsible for logging in to obtain this access code.
+     * @param accessCode the access code.
+     * @return a private controller belonging to the specified category if available, null if unavailable or invalid
+     * access code.
+     */
+
+    public Controller getUserAPI(String accessCode){
+        if (!loginHelper.isValidAccessCode(accessCode)) return null;
+
+        return allUserControllers.getController(loginHelper.getUserTypeByAccessCode(accessCode));
+    }
+
+    public Controller getMessengerAPI(String accessCode) {
+        if (!loginHelper.isValidAccessCode(accessCode)) return null;
+
+        return allMessengerControllers.getController(loginHelper.getUserTypeByAccessCode(accessCode));
+    }
+
+    public Controller getEventAPI(String accessCode) {
+        if (!loginHelper.isValidAccessCode(accessCode)) return null;
+
+        return allEventControllers.getController(loginHelper.getUserTypeByAccessCode(accessCode));
+    }
 
 }
