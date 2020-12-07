@@ -296,4 +296,16 @@ public class EventManager implements Serializable {
         return true;
     }
 
+    public String getEventTypebyId(int id){
+        if (this.getSpeakerById(id).size() == 0){
+            return "Party";
+        }
+        if (this.getSpeakerById(id).size() == 1){
+            return "Talk";
+        }
+        else{
+            return "Panel Disccusion";
+        }
+    }
+
 }
