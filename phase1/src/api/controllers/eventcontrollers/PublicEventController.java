@@ -40,11 +40,12 @@ public class PublicEventController {
 
     /**
      * Get a list of all speakers at an event
-     * @param eventID   the event's identifier
+     * @param eventIDString   the event's identifier
      * @return  a list of ids of users speaking at this event, null if the event was not found
      */
 
-    public List<String> getEventSpeakerID(int eventID) {
+    public List<String> getEventSpeakerID(String eventIDString) {
+        int eventID = parseInt(eventIDString);
         if (eventManager.getEventByID(eventID) == null) return null;
 
         ArrayList<User> allSpeakers = eventManager.getSpeakerById(eventID);
@@ -55,7 +56,8 @@ public class PublicEventController {
 
     }
 
-    public List<String> getEventSpeakerName(int eventID) {
+    public List<String> getEventSpeakerName(String eventIDString) {
+        int eventID = parseInt(eventIDString);
         if (eventManager.getEventByID(eventID) == null) return null;
 
         ArrayList<User> allSpeakers = eventManager.getSpeakerById(eventID);
@@ -68,11 +70,13 @@ public class PublicEventController {
 
     /**
      * Get the display name of the event by its identifier
-     * @param eventID   the event's identifier
+     * @param eventIDString   the event's identifier
      * @return  the display name of the event, null if the event is not found
      */
 
-    public String getEventName(int eventID) {
+    public String getEventName(String eventIDString) {
+        int eventID = parseInt(eventIDString);
+
         if (eventManager.getEventByID(eventID) == null) return null;
 
         return eventManager.getEventNameById(eventID);
@@ -80,11 +84,13 @@ public class PublicEventController {
 
     /**
      * Get the time that this event takes place
-     * @param eventID   the event's identifier
+     * @param eventIDString   the event's identifier
      * @return  the time this event takes place, in milliseconds since Unix Epoch, null if event is not found
      */
 
-    public Integer getEventTime(int eventID) {
+    public Integer getEventTime(String eventIDString) {
+        int eventID = parseInt(eventIDString);
+
         if (eventManager.getEventByID(eventID) == null) return null;
 
         //this method calls getEventTime() directly from the Event object instead of using the use case
@@ -94,16 +100,24 @@ public class PublicEventController {
 
     /**
      * Get the duration of the event
-     * @param eventID   the event's identifier
+     * @param eventIDString   the event's identifier
      * @return  the duration of the event, in milliseconds, null if event is not found
      */
 
-    public Integer getEventDuration(int eventID) {
+    public Integer getEventDuration(String eventIDString) {
+        int eventID = parseInt(eventIDString);
+
         if (eventManager.getEventByID(eventID) == null) return null;
 
         //this method calls getEventDuration() directly from the Event object instead of using the use case
         Event event = eventManager.getEventByID(eventID);
         return event.getEventDuration();
+    }
+
+    public Integer parseInt(String text) {
+        if(text.matches("\\d+")) {
+            return Integer.parseInt(text);
+        } else return 798987987;
     }
 
 }

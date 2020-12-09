@@ -25,7 +25,7 @@ public class OrganizerEventController extends SpeakerEventController {
      * @return  true if event creation was successful, false otherwise.
      */
 
-    public boolean createEvent(String eventName, int eventDuration, int eventTime) {
+    public boolean createEvent(String eventName, Integer eventDuration, Integer eventTime) {
         return eventManager.createEvent(eventDuration, eventTime, eventName);
     }
 
@@ -62,7 +62,7 @@ public class OrganizerEventController extends SpeakerEventController {
      * @return  true if the event and user were found, and user was set as speaker successfully, false otherwise.
      */
 
-    public boolean setEventSpeaker(int eventID, String userID) {
+    public boolean setEventSpeaker(Integer eventID, String userID) {
         if (eventManager.getEventByID(eventID) == null) return false;
         if (!userManager.userExists(userID)) return false;
 

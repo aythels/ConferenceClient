@@ -52,17 +52,28 @@ public class API {
 
     public String call(String path, String accessCode, String methodName, Object ... args) {
         ArrayList<Object> controllerGroup =getControllerGroup(path);
-        if (controllerGroup == null) return "Invalid path";
+        if (controllerGroup == null) {
+            System.out.println("Invalid path");
+            return null;
+        }
 
         UserType userType = loginHelper.isValidAccessCode(accessCode) ?
                 loginHelper.getUserTypeByAccessCode(accessCode) : null;
         Object controller = getController(controllerGroup, userType);
-        if (controller == null) return "Could not get controller (invalid accessCode or non existent controller?)";
+        if (controller == null) {
+            System.out.println("Could not get controller (invalid accessCode or non existent controller?)");
+            return null;
+        }
 
-        Method method = this.apiHelper.getMethod(controller.getClass(), methodName, args);
-        if (method == null) return "Could not get declared method " + "'" + methodName + "'" +
-                                    " with parameters of types " + Arrays.toString(Stream.of(args).map(a -> a.getClass().getSimpleName()).toArray(String[]::new)) +
-                                    " in controller class " + "<" + controller.getClass().getSimpleName() + ">";
+        Class[] parameterTypes = Stream.of(args).map(a -> a.getClass()).toArray(Class[]::new);
+        Method method = this.apiHelper.getMethod(controller.getClass(), methodName, parameterTypes);
+
+        if (method == null) {
+            System.out.println("Could not get declared method " + "'" + methodName + "'" +
+                    " with parameters of types " + Arrays.toString(parameterTypes) +
+                    " in controller class " + "<" + controller.getClass().getSimpleName() + ">");
+            return null;
+        }
 
         return String.valueOf(this.apiHelper.callMethod(controller, method, args));
 

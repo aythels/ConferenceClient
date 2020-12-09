@@ -15,17 +15,32 @@ public class AppGUI extends Application {
         API api = server.getAPI();
 
         api.call("user_controller", null, "createAnyUserTEMPORARY",
-                "ATTENDEE", "Bob1", "attendee1", "pass");
+                "ORGANIZER", "Lee1", "u", "p");
 
         api.call("user_controller", null, "createAnyUserTEMPORARY",
-                "SPEAKER", "Joe1", "speaker1", "pass");
+                "SPEAKER", "Lee2", "a", "p");
 
         api.call("user_controller", null, "createAnyUserTEMPORARY",
-                "ORGANIZER", "Lee1", "organizer1", "pass");
+                "SPEAKER", "Lee3", "b", "p");
 
+        String accessCode = api.call("login_controller", null, "login",
+                "u", "p");
+
+        api.call("event_controller", accessCode, "createEvent",
+                "Test Event", 1, (int) (System.currentTimeMillis() / 1000) + 1000);
+
+        api.call("event_controller", accessCode, "createEvent",
+                "zvent Name", 1, (int) (System.currentTimeMillis() / 1000));
+
+        api.call("event_controller", accessCode, "setEventSpeaker",
+                1, "a");
+
+        api.call("event_controller", accessCode, "setEventSpeaker",
+                1, "b");
 
         ClientGUI client = new ClientGUI(primaryStage, api);
         //ClientGUI client2 = new ClientGUI(new Stage(), api);
+
     }
 }
 

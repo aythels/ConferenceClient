@@ -5,10 +5,13 @@ import java.lang.reflect.Method;
 
 public class APIHelper {
 
-    protected Method getMethod (Class c, String methodName, Object ... args) {
-        for (Method method : c.getDeclaredMethods())
-            if (method.getName().equals(methodName))
-                if (verifyArguments(method.getParameterTypes(), args)) return method;
+    protected Method getMethod (Class c, String methodName, Class[] parameterTypes) {
+
+        try {
+            return c.getMethod(methodName, parameterTypes);
+        } catch (NoSuchMethodException e) {
+            //theres no actual error here, the client just tried to get a invalid method
+        }
 
         return null;
     }
@@ -23,15 +26,6 @@ public class APIHelper {
         }
 
         return null;
-    }
-
-    protected boolean verifyArguments (Class[] parameterTypes, Object[] args) {
-        if (parameterTypes.length != args.length) return false;
-
-        for (int i = 0; i < parameterTypes.length; i++)
-            if (parameterTypes[i] != args[i].getClass()) return false;
-
-        return true;
     }
 
 }

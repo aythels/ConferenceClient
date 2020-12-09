@@ -3,43 +3,75 @@ package gui.views.loginview;
 import api.API;
 import gui.helpers.ClientData;
 import gui.helpers.PageIndex;
+import gui.helpers.PageUpdateEvent;
+import gui.presenters.LoginPresenter;
 import javafx.event.ActionEvent;
 
+import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import java.io.IOException;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
-public class LoginViewController {
-    private final ClientData clientData;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LoginViewController implements Initializable, PageUpdateEvent {
+    private final LoginPresenter presenter;
     private final PageIndex pageIndex;
-    private final API api;
+
+    public LoginViewController(PageIndex pageIndex, LoginPresenter presenter) {
+        this.presenter = presenter;
+        this.pageIndex = pageIndex;
+        pageIndex.addPageUpdateObserver(this);
+    }
 
     public TextField usernameInput;
-    public TextField passInput;
-    public Label loginText;
+    public TextField passwordInput;
+    public Label warningText;
 
-    public LoginViewController(PageIndex pageIndex, ClientData clientData, API api) {
-        this.clientData = clientData;
-        this.pageIndex = pageIndex;
-        this.api = api;
-    }
-
-    public void reset() {
-        usernameInput.clear();
-        passInput.clear();
-        loginText.setVisible(false);
-    }
-
-    public void loginButtonOnClick(ActionEvent event) throws IOException {
-        String accessCode = api.call("login_controller", null, "login",
-                usernameInput.getText(), passInput.getText());
-
-        if (accessCode != "null") {
-            reset();
+    public void loginButtonOnClick() {
+        if (this.presenter.login(usernameInput.getText(), passwordInput.getText())) {
             pageIndex.setPage("homeview");
-        } else
-            loginText.setVisible(true);
-
+        } else {
+            warningText.setVisible(true);
+        }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        usernameInput.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent ke)
+            {
+                if (ke.getCode().equals(KeyCode.ENTER))
+                {
+                    loginButtonOnClick();
+                }
+            }
+        });
+
+        passwordInput.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent ke)
+            {
+                if (ke.getCode().equals(KeyCode.ENTER))
+                {
+                    loginButtonOnClick();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void update() {
+        usernameInput.clear();
+        passwordInput.clear();
+        warningText.setVisible(false);
+    }
 }
+
