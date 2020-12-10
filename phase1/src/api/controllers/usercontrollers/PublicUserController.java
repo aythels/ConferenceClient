@@ -1,5 +1,6 @@
 package api.controllers.usercontrollers;
 
+import api.helpers.LoginHelper;
 import api.helpers.UserType;
 import domain.entities.User;
 import domain.usecases.UserManager;

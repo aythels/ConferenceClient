@@ -44,7 +44,7 @@ public class AttendeeEventController extends PublicEventController {
      * @return true if the registration was successful, false otherwise (etc invalid parameters or other reasons)
      */
 
-    public boolean registerInEvent(String accessCode, int eventID) {
+    public boolean registerInEvent(String accessCode, Integer eventID) {
         if (!loginHelper.isValidAccessCode(accessCode)) return false;
         if (eventManager.getEventByID(eventID) == null) return false;
 

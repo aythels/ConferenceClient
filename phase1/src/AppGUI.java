@@ -38,6 +38,10 @@ public class AppGUI extends Application {
         api.call("event_controller", accessCode, "setEventSpeaker",
                 1, "b");
 
+        api.call("event_controller", accessCode, "registerInEvent",
+                accessCode, 1);
+
+
         ClientGUI client = new ClientGUI(primaryStage, api);
         //ClientGUI client2 = new ClientGUI(new Stage(), api);
 
