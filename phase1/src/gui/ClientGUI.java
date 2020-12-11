@@ -7,8 +7,6 @@ import gui.presenters.EventsPresenter;
 import gui.presenters.LoginPresenter;
 import gui.presenters.SettingsPresenter;
 import gui.views.ControllerFactory;
-import gui.views.loginview.LoginViewController;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

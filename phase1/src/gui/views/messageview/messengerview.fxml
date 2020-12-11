@@ -12,86 +12,82 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox spacing="10.0" style="-fx-background-color: #ffffff;">
-         <children>
-            <Button fx:id="returnButton" defaultButton="true" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#returnButtonOnClick" text=" ↩ ">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <TextField fx:id="searchInput" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#searchInputOnChange" prefHeight="31.0" prefWidth="781.0" promptText="Search Events" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-            <ChoiceBox fx:id="filterChoice" onAction="#filterChoiceOnChange" style="-fx-pref-width: 200; -fx-pref-height: 44; -fx-font-size: 20;" value="Date" HBox.hgrow="NEVER">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Date" />
-                     <String fx:value="Name" />
-                     <String fx:value="Registered" />
-                  </FXCollections>
-               </items>
-            </ChoiceBox>
-            <Button fx:id="downloadButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#downloadButtonOnClick" text="+">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </HBox>
       <HBox maxHeight="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" VBox.vgrow="ALWAYS">
          <children>
-            <ScrollPane hbarPolicy="NEVER" prefWidth="270.0" HBox.hgrow="NEVER">
-               <content>
-                  <VBox prefWidth="270.0" spacing="10.0">
+            <VBox maxHeight="1.7976931348623157E308">
+               <children>
+                  <HBox spacing="10.0" style="-fx-background-color: #ffffff;">
                      <children>
-                        <AnchorPane prefHeight="60.0" style="-fx-background-color: #e3e3e3; -fx-background-radius: 20;">
-                           <effect>
-                              <DropShadow color="#c9c9c9" height="10.0" offsetX="3.0" offsetY="3.0" radius="4.5" width="10.0" />
-                           </effect>
-                           <children>
-                              <VBox>
-                                 <children>
-                                    <Label text="Name">
-                                       <font>
-                                          <Font name="System Bold" size="22.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Latest Message afafafafafafsfafafafafafffhfhfhfghfghfhfhfhfhgfaf" />
-                                 </children>
-                              </VBox>
-                              <Button layoutX="220.0" layoutY="15.0" mnemonicParsing="false" text="X" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="60.0" style="-fx-background-color: #e3e3e3; -fx-background-radius: 20;">
-                           <children>
-                              <VBox>
-                                 <children>
-                                    <Label text="Name">
-                                       <font>
-                                          <Font name="System Bold" size="22.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Latest Message afafafafafafsfafafafafafffhfhfhfghfghfhfhfhfhgfaf" />
-                                 </children>
-                              </VBox>
-                              <Button layoutX="220.0" layoutY="15.0" mnemonicParsing="false" text="X" />
-                           </children>
-                           <effect>
-                              <DropShadow color="#c9c9c9" height="10.0" offsetX="3.0" offsetY="3.0" radius="4.5" width="10.0" />
-                           </effect>
-                        </AnchorPane>
+                        <Button fx:id="returnButton" defaultButton="true" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#returnButtonOnClick" text=" ↩ " HBox.hgrow="NEVER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <ChoiceBox fx:id="filterChoice" onAction="#filterChoiceOnChange" style="-fx-pref-width: 160; -fx-pref-height: 44; -fx-font-size: 20;" value="All" HBox.hgrow="NEVER">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="All" />
+                                 <String fx:value="Speakers" />
+                              </FXCollections>
+                           </items>
+                        </ChoiceBox>
+                        <Button fx:id="newMessageButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#downloadButtonOnClick" text=" + " HBox.hgrow="NEVER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
-                  </VBox>
-               </content>
-            </ScrollPane>
+                  </HBox>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" prefWidth="270.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox spacing="6.0">
+                           <children>
+                              <HBox alignment="CENTER" style="-fx-background-color: #19b2ff; -fx-background-radius: 10;">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Active Convo" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Latest Message afafafafafafsfafafafafafffhfhfhfghfghfhfhfhfhgfaf" textFill="WHITE" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" style="-fx-background-color: #dbdbdb; -fx-background-radius: 10;">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Name">
+                                             <font>
+                                                <Font name="System Bold" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Latest Message afafafafafafsfafafafafafffhfhfhfghfghfhfhfhfhgfaf" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                <children>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
@@ -105,15 +101,11 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <HBox>
-                                       <children>
-                                          <Label maxWidth="1.7976931348623157E308" style="-fx-background-color: #a8dbff;" text="Messagehhhuihuihuihiuhiuhiuhuihiuhuihiuhiuhhiihiuhiuhiuhuihiuhuihiuhiuhihiihiuhuihuihuihiuhiuhiuhihiuhiuhiuhiuhiuhiuhiuhhihhiuuhihiuhiuhiuhiuhiuhihiuhiuhiuhiuhiuh" wrapText="true">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
+                                    <Label maxWidth="1.7976931348623157E308" text="Messagehhhuihuihuihiuhiuhiuhuihiuhuihiuhiuhhiihiuhiuhiuhuihiuhuihiuhiuhihiihiuhuihuihuihiuhiuhiuhihiuhiuhiuhiuhiuhiuhiuhhihhiuuhihiuhiuhiuhiuhiuhihiuhiuhiuhiuhiuh" wrapText="true">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -126,9 +118,9 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <HBox>
+                                    <HBox alignment="TOP_RIGHT">
                                        <children>
-                                          <Label maxWidth="1.7976931348623157E308" style="-fx-background-color: #ffffff;" text="Messaggdfgdfgdgdgfgdgfehhhuihuihuihiuhiuhiuhuihiuhuihiuhiuhhiihiuhiuhiuhuihiuhuihiuhiuhihiihiuhuihuihuihiuhiuhiuhihiuhiuhiuhiuhiuhiuhiuhhihhiuuhihiuhiuhiuhiuhiuhihiuhiuhiuhiuhiuh" textAlignment="RIGHT" wrapText="true">
+                                          <Label maxWidth="1.7976931348623157E308" text="dhhfdhdhfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" textAlignment="RIGHT" wrapText="true">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>

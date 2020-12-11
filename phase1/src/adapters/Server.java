@@ -6,6 +6,7 @@ import domain.usecases.EventManager;
 import domain.usecases.MessageManager;
 import domain.usecases.UserManager;
 import domain.usecases.Serializer;
+import domain.usecases.GeneratePdf;
 
 public class Server {
     private API api;
@@ -54,6 +55,15 @@ public class Server {
         s.serializeUserManager(this.userManager);
         s.serializeEventManager(this.eventManager);
         s.serializeMessageManager(this.messageManager);
+    }
+
+    /**
+     * Generate a PDF with details about all events
+     */
+
+    public void generatePdf(String filePath) {
+        GeneratePdf g = new GeneratePdf(this.eventManager, filePath);
+        g.createPdf();
     }
 
 }
