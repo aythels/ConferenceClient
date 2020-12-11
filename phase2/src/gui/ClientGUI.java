@@ -23,7 +23,6 @@ public class ClientGUI {
         pageIndex.addPage("loginview", createScene("views/loginview/loginview.fxml", new ControllerFactory(pageIndex, new LoginPresenter(api, clientData))));
         pageIndex.addPage("homeview", createScene("views/homeview/homeview.fxml", new ControllerFactory(pageIndex, new SettingsPresenter(api, clientData))));
         pageIndex.addPage("eventsview", createScene("views/eventsview/eventsview.fxml", new ControllerFactory(pageIndex, new EventsPresenter(api, clientData))));
-        pageIndex.addPage("messengerview", createScene("views/messageview/messengersview.fxml", new ControllerFactory(pageIndex, new EventsPresenter(api, clientData))));
 
         pageIndex.setPage("loginview");
     }
