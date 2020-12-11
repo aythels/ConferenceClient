@@ -87,9 +87,22 @@ public class EventManager implements Serializable {
     }
 
 
+    public boolean createVipEvent(int eventDuration, int eventTime, int capacity, String eventName){
+        if(this.checkConflict(eventDuration, eventTime)) {
+            Event e = new Event(this.eventId, eventName, eventDuration, eventTime );
+            this.registered.addEvent(this.eventId, capacity, e);
+            e.setVip(true);
+            this.eventId += 1;
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * Reschedules an Event to the given time and given duration, given the eventID.
-     * The old Event will get deleted and a new Event will get created, the eventID will change.
+     * The old Event will get deleted and a new Event will get created, the eventID will not change.
+     * All registered Attendees and Speakers will get removed.
      * @param id    the id of the Event
      * @param eventDuration    the new length of time of the Event
      * @param eventTime the new starting time of tje Event
@@ -104,11 +117,12 @@ public class EventManager implements Serializable {
         Event e = this.registered.getEventById(id);
         String eventName = e.getEventName();
         Integer capacity = this.registered.getCapacityById(id);
-        this.cancelEvent(id);
-        if(this.createEvent(eventDuration, eventTime, capacity, eventName) == false){
-            return false;
+        if(this.checkConflict(eventDuration, eventTime)){
+            Event n = new Event(id, eventName, eventDuration, eventTime);
+            this.registered.rescheduleEvent(id, capacity, n);
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -295,6 +309,10 @@ public class EventManager implements Serializable {
             this.registered.updateEventCapacity(id, capacity);
         }
         return true;
+    }
+
+    public boolean checkIfVip(int id){
+        return this.getEventByID(id).getVip();
     }
 
     public String getEventTypeById(int id){

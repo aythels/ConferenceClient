@@ -6,6 +6,7 @@ public class Event {
     private String eventName;
     private int eventDuration;
     private int eventTime;
+    private boolean vip = false;
 
     /**
      * An ID is required to create an instance of Event.
@@ -83,4 +84,8 @@ public class Event {
     public void setEventTime(int eventTime) {
         this.eventTime = eventTime;
     }
+
+    public boolean getVip(){return this.vip;}
+
+    public void setVip(boolean vip){this.vip = vip; }
 }
