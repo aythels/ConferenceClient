@@ -31,6 +31,10 @@ public class HashMapManager implements Serializable {
         return false;
     }
 
+    public void rescheduleEvent(int id,int maximum, Event e){
+        this.hashMap.replace(id, new Pair(new Pair(e, new ArrayList<User>()), new Pair(maximum, new ArrayList<User>())));
+    }
+
     public Integer getCapacityById(int id){
         return this.hashMap.get(id).getValue().getKey();
     }
