@@ -48,6 +48,7 @@ public class EventManager implements Serializable {
         return true;
     }
 
+
     private boolean checkConflictHelper(int start, int end, int eventDuration, int eventTime){
         if ((start <= eventTime) && (eventTime < end)){
             return true;
@@ -62,6 +63,7 @@ public class EventManager implements Serializable {
      * Creates an Event holding the given name, starting time, and duration.
      * @param eventDuration    the length of time of the Event
      * @param eventTime    the starting time of the Event
+     * @param capacity     the maximum number of attendees allowed
      * @param eventName    the name of the Event
      * @return      true if creating Event is successful, false if there is time conflict
      */
@@ -76,6 +78,14 @@ public class EventManager implements Serializable {
         return false;
     }
 
+    /**
+     * Creates an Event holding the given name, starting time, and duration.
+     * @param eventDuration    the length of time of the Event
+     * @param eventTime    the starting time of the Event
+     * @param eventName    the name of the Event
+     * @return      true if creating Event is successful, false if there is time conflict
+     */
+
     public boolean createEvent(int eventDuration, int eventTime, String eventName){
         if(this.checkConflict(eventDuration, eventTime)) {
             Event e = new Event(this.eventId, eventName, eventDuration, eventTime );
@@ -85,6 +95,16 @@ public class EventManager implements Serializable {
         }
         return false;
     }
+
+    /**
+     * Creates an VIP Event holding the given name, starting time, duration, and only VIP Users can attend this type of Event.
+     * @param eventDuration    the length of time of the Event
+     * @param eventTime    the starting time of the Event
+     * @param capacity     the maximum number of attendees allowed
+     * @param eventName    the name of the Event
+     * @return      true if creating Event is successful, false if there is time conflict
+     */
+
 
 
     public boolean createVipEvent(int eventDuration, int eventTime, int capacity, String eventName){
@@ -301,6 +321,13 @@ public class EventManager implements Serializable {
         return null;
     }
 
+    /**
+     * Changes the maximum attendees allowed
+     * @param id    the id of the Event
+     * @param capacity    the new capacity of the Event
+     * @return    true if changing capacity is successful, false if the EventID does not exist
+     */
+
     public boolean changeEventCapacity(int id, int capacity){
         if (!this.registered.getKeySet().contains(id)){
             return false;
@@ -311,9 +338,21 @@ public class EventManager implements Serializable {
         return true;
     }
 
+    /**
+     * Checks if the Event corresponding to the given eventID is a VIP Event.
+     * @param id    the id of the Event
+     * @return    true if the Event is a VIP Event, false if not.
+     */
+
     public boolean checkIfVip(int id){
         return this.getEventByID(id).getVip();
     }
+
+    /**
+     * Checks the type of the Event given the EventID
+     * @param id    the id of the Event
+     * @return    "Party": no speaker, "Talk": one speaker, "Panel Discussion": more than one speakers
+     */
 
     public String getEventTypeById(int id){
         if (this.getSpeakerById(id).size() == 0){
@@ -323,7 +362,7 @@ public class EventManager implements Serializable {
             return "Talk";
         }
         else{
-            return "Panel Disccusion";
+            return "Panel Discussion";
         }
     }
 
