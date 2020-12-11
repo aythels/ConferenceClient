@@ -2,12 +2,10 @@ package gui.views.homeview;
 
 import gui.helpers.PageIndex;
 import gui.presenters.SettingsPresenter;
-import gui.views.eventsview.eventnode.EventNodeController;
 import gui.views.homeview.settingsview.SettingsViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -44,7 +42,7 @@ public class HomeViewController {
     }
 
     public void messengerButtonOnClick(ActionEvent event) throws IOException {
-        pageIndex.setPage("loginview");
+        pageIndex.setPage("messageview");
     }
 
 }
