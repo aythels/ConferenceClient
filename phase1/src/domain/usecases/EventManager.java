@@ -86,6 +86,7 @@ public class EventManager implements Serializable {
         return false;
     }
 
+
     /**
      * Reschedules an Event to the given time and given duration, given the eventID.
      * The old Event will get deleted and a new Event will get created, the eventID will change.
@@ -296,7 +297,7 @@ public class EventManager implements Serializable {
         return true;
     }
 
-    public String getEventTypebyId(int id){
+    public String getEventTypeById(int id){
         if (this.getSpeakerById(id).size() == 0){
             return "Party";
         }
