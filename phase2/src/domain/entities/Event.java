@@ -6,18 +6,23 @@ public class Event {
     private String eventName;
     private int eventDuration;
     private int eventTime;
+    private int capacity;
     private boolean vip = false;
 
     /**
-     * An ID is required to create an instance of Event.
-     * @param eventID
+     *
+     * @param eventID id of the event
+     * @param eventName name of the event
+     * @param eventDuration duration of the event
+     * @param eventTime time the event starts at
+     * @param capacity capacity for the event
      */
-
-    public Event(int eventID, String eventName, int eventDuration, int eventTime){
+    public Event(int eventID, String eventName, int eventDuration, int eventTime, int capacity){
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventDuration = eventDuration;
         this.eventTime = eventTime;
+        this.capacity = capacity;
     }
 
     /**
@@ -40,7 +45,7 @@ public class Event {
 
     /**
      * This method sets the display name of this Event.
-     * @param eventName
+     * @param eventName name of the event to be set
      */
 
     public void setEventName(String eventName) {
@@ -59,7 +64,7 @@ public class Event {
 
     /**
      * This method sets the duration of this Event.
-     * @param eventDuration
+     * @param eventDuration duration of the event to be set
      */
 
     public void setEventDuration(int eventDuration) {
@@ -78,12 +83,24 @@ public class Event {
 
     /**
      * This method sets the time of this Event.
-     * @param eventTime
+     * @param eventTime start time of the event to be set
      */
 
     public void setEventTime(int eventTime) {
         this.eventTime = eventTime;
     }
+
+    /**
+     * Returns the capacity of this Event
+     * @return capacity
+     */
+    public int getCapacity() { return capacity; }
+
+    /**
+     * Sets the capacity for the Event
+     * @param capacity capacity of the event to be set
+     */
+    public void setCapacity(int capacity) { this.capacity = capacity; }
 
     public boolean getVip(){return this.vip;}
 
