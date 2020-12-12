@@ -1,4 +1,4 @@
-package gui.views.homeview.settingsview;
+package gui.views.settingsview;
 
 import gui.presenters.SettingsPresenter;
 import javafx.scene.control.ChoiceBox;

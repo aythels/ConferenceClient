@@ -17,10 +17,11 @@ public class SettingsPresenter {
     }
 
     public String getUserType() {
-        return
-                this.api.call("user_controller", clientData.accessCode,
-                "getUserType",
-                this.clientData.username);
+        return this.clientData.userType;
+    }
+
+    public String getUserDisplayName() {
+        return this.clientData.userDisplayName;
     }
 
     public void changeDisplayName(String newName) {
@@ -40,5 +41,10 @@ public class SettingsPresenter {
                 api.call("user_controller", clientData.accessCode, "createAnyUser",
                 usertype, "user", username, password)
         );
+    }
+
+    public boolean isUserOrganizer() {
+        if (this.clientData.userType == "ORGANIZER") return true;
+        else return false;
     }
 }

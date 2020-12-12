@@ -25,20 +25,13 @@ public class HomeViewController {
     }
 
     public void settingsButtonOnClick(ActionEvent event) throws IOException {
-        //FXMLLoader fxmlLoader = new FXMLLoader();
-        //Pane pane = fxmlLoader.load(getClass().getResource("settingsview/settingsview.fxml").openStream());
-        //SettingsViewController paneController = (SettingsViewController) fxmlLoader.getController();
-        //paneController.setPresenter(presenter);
-
-        //Scene scene = new Scene(pane);
-        //Stage stage = new Stage();
-        //stage.setScene(scene);
-        //stage.setTitle("Settings");
-        //stage.show();
+        URL url = getClass().getResource("./../settingsview/settingsview.fxml");
+        PageManager.setWindowPage(stage, url, new ControllerFactory(stage, presenters));
     }
 
     public void eventsButtonOnClick(ActionEvent event) throws IOException {
-        //pageIndex.setPage("eventsview");
+        URL url = getClass().getResource("./../eventsview/eventsview.fxml");
+        PageManager.setWindowPage(stage, url, new ControllerFactory(stage, presenters));
     }
 
     public void messengerButtonOnClick(ActionEvent event) throws IOException {

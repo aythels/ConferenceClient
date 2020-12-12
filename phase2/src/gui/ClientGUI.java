@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class ClientGUI {
 
@@ -25,11 +26,8 @@ public class ClientGUI {
         presenters.messagePresenter = new MessagePresenter(api, clientData);
         presenters.settingsPresenter = new SettingsPresenter(api, clientData);
 
-        Scene scene = PageManager.createScene(
-                getClass().getResource("views/loginview/loginview.fxml"),
-                new ControllerFactory(stage, presenters)
-            );
-        PageManager.setScene(stage, scene);
+        URL url = getClass().getResource("views/loginview/loginview.fxml");
+        PageManager.setWindowPage(stage, url, new ControllerFactory(stage, presenters));
 
     }
 }

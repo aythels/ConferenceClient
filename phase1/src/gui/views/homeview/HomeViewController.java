@@ -2,7 +2,7 @@ package gui.views.homeview;
 
 import gui.helpers.PageIndex;
 import gui.presenters.SettingsPresenter;
-import gui.views.homeview.settingsview.SettingsViewController;
+import gui.views.settingsview.SettingsViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

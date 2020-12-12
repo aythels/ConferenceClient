@@ -68,7 +68,7 @@ public class User{
 
     /**
      * This method sets the type of the user.
-     * @param userType
+     * @param type
      */
 
     public void setUserType(String type) {

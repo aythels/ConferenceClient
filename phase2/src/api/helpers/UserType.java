@@ -14,7 +14,8 @@ package api.helpers;
 public enum UserType {
     ATTENDEE,
     SPEAKER,
-    ORGANIZER;
+    ORGANIZER,
+    VIP;
 
     /**
      * Check if the specified string is a valid UserType.
