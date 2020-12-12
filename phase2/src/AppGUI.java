@@ -15,28 +15,30 @@ public class AppGUI extends Application {
         API api = server.getAPI();
 
         api.call("user_controller", null, "createAnyUserTEMPORARY",
-                "ATTENDEE", "Bob1", "a", "a");
+                "ATTENDEE", "Attendee Bob", "a", "a");
 
         api.call("user_controller", null, "createAnyUserTEMPORARY",
-                "ORGANIZER", "Lee1", "u", "p");
+                "ORGANIZER", "Organizer Joe", "b", "b");
 
         api.call("user_controller", null, "createAnyUserTEMPORARY",
-                "SPEAKER", "Lee3", "b", "p");
+                "SPEAKER", "Speaker Lee", "c", "c");
 
         String accessCode = api.call("login_controller", null, "login",
-                "u", "p");
+                "b", "b");
 
         api.call("event_controller", accessCode, "createEvent",
-                "Test Event", 1, (int) (System.currentTimeMillis() / 1000) + 1000, 100);
+                "A Test Event",
+                1, (int) (System.currentTimeMillis() / 1000) + 1000, 100);
 
         api.call("event_controller", accessCode, "createEvent",
-                "zvent Name", 1, (int) (System.currentTimeMillis() / 1000), 100);
+                "B Test Event",
+                1, (int) (System.currentTimeMillis() / 1000), 100);
 
         api.call("event_controller", accessCode, "setEventSpeaker",
-                1, "a");
+                1, "c");
 
         api.call("event_controller", accessCode, "setEventSpeaker",
-                1, "b");
+                1, "c");
 
         api.call("event_controller", accessCode, "registerInEvent",
                 accessCode, 1);
@@ -44,17 +46,17 @@ public class AppGUI extends Application {
         api.call("messenger_controller", accessCode,
                 "messageUserByID",
                 accessCode,
-                "b",
-                "This is the latest message");
+                "c",
+                "This is a test message");
 
         api.call("messenger_controller", accessCode,
                 "messageUserByID",
                 accessCode,
                 "a",
-                "Tother message");
+                "This is another test Message");
 
         ClientGUI client = new ClientGUI(primaryStage, api);
-        //ClientGUI client2 = new ClientGUI(new Stage(), api);
+        ClientGUI client2 = new ClientGUI(new Stage(), api);
 
     }
 }
