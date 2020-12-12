@@ -1,31 +1,26 @@
 package gui.views.loginview;
 
-import api.API;
-import gui.helpers.ClientData;
-import gui.helpers.PageIndex;
-import gui.helpers.PageUpdateEvent;
-import gui.presenters.LoginPresenter;
-import javafx.event.ActionEvent;
+import gui.helpers.*;
 
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginViewController implements Initializable, PageUpdateEvent {
-    private final LoginPresenter presenter;
-    private final PageIndex pageIndex;
+public class LoginViewController implements Initializable {
+    private final Stage stage;
+    private final Presenters presenters;
 
-    public LoginViewController(PageIndex pageIndex, LoginPresenter presenter) {
-        this.presenter = presenter;
-        this.pageIndex = pageIndex;
-        pageIndex.addPageUpdateObserver(this);
+    public LoginViewController(Stage stage, Presenters presenters) {
+        this.stage = stage;
+        this.presenters = presenters;
     }
 
     public TextField usernameInput;
@@ -33,8 +28,10 @@ public class LoginViewController implements Initializable, PageUpdateEvent {
     public Label warningText;
 
     public void loginButtonOnClick() {
-        if (this.presenter.login(usernameInput.getText(), passwordInput.getText())) {
-            pageIndex.setPage("homeview");
+        if (presenters.loginPresenter.login(usernameInput.getText(), passwordInput.getText())) {
+            URL url = getClass().getResource("./../homeview/homeview.fxml");
+            PageManager.setWindowPage(stage, url, new ControllerFactory(stage, presenters));
+
         } else {
             warningText.setVisible(true);
         }
@@ -42,8 +39,7 @@ public class LoginViewController implements Initializable, PageUpdateEvent {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        usernameInput.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
+        usernameInput.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke)
             {
@@ -53,9 +49,7 @@ public class LoginViewController implements Initializable, PageUpdateEvent {
                 }
             }
         });
-
-        passwordInput.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
+        passwordInput.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke)
             {
@@ -67,11 +61,5 @@ public class LoginViewController implements Initializable, PageUpdateEvent {
         });
     }
 
-    @Override
-    public void update() {
-        usernameInput.clear();
-        passwordInput.clear();
-        warningText.setVisible(false);
-    }
 }
 
