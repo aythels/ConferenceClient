@@ -15,7 +15,7 @@ public class MessagePresenter {
         }
 
         private ArrayList<HashMap<String, String>> getAttendeeMessageDetails() {
-            String[] messages = api.call("Message_controller", this.clientData.getAccessCode(),
+            String[] messages = api.call("Message_controller", this.clientData.accessCode,
                     "getConvoWithOtherUserByID")
                     .replaceAll("[\\[\\]\\s]", "").split(",");
 

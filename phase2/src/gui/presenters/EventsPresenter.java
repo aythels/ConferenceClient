@@ -16,7 +16,7 @@ public class EventsPresenter {
     }
 
     private ArrayList<HashMap<String, String>> getEventDetails() {
-        String[] eventIDs = api.call("event_controller", this.clientData.getAccessCode(),
+        String[] eventIDs = api.call("event_controller", this.clientData.accessCode,
                 "getAllEventIDs")
                 .replaceAll("[\\[\\]\\s]", "").split(",");
 
@@ -38,8 +38,8 @@ public class EventsPresenter {
     }
 
     public ArrayList<HashMap<String, String>> getEventDetailsByRegistered(String substring) {
-        String[] registeredEventIDs = api.call("event_controller", this.clientData.getAccessCode(),
-                "getAllRegisteredEventIDs", this.clientData.getAccessCode())
+        String[] registeredEventIDs = api.call("event_controller", this.clientData.accessCode,
+                "getAllRegisteredEventIDs", this.clientData.accessCode)
                 .replaceAll("[\\[\\]\\s]", "").split(",");
 
         ArrayList<HashMap<String, String>> data = getEventDetails();

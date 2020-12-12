@@ -1,9 +1,7 @@
+
+/*
 package gui.views.eventsview;
 
-import api.API;
-import gui.helpers.ClientData;
-import gui.helpers.PageIndex;
-import gui.helpers.PageUpdateEvent;
 import gui.presenters.EventsPresenter;
 import gui.views.eventsview.eventnode.EventNodeController;
 import javafx.fxml.FXMLLoader;
@@ -94,3 +92,4 @@ public class EventsViewController implements PageUpdateEvent {
     }
 
 }
+*/
