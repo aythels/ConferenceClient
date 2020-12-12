@@ -89,8 +89,22 @@ public class EventsViewController implements Initializable {
         paneController.setTimer(new SimpleDateFormat("HH:mm z").format(new Date(Long.valueOf(time) * 1000)));
 
         //set the pane button attributes:
-        //presenters.eventsPresenter
-        //paneController.setRegisterButtonState(0);
+        if(presenters.eventsPresenter.checkIfIsVIPEvent(name)){
+            if(presenters.eventsPresenter.getUserType()!="VIP"){
+                paneController.setRegisterButtonState(3);
+            }
+        }
+        if(presenters.eventsPresenter.checkIfIsSpeakerForEvent(name)){
+            paneController.setRegisterButtonState(2);
+        }
+
+        if(presenters.eventsPresenter.ifAttendeeRegisteredInEvent(name)){
+            paneController.setRegisterButtonState(1);
+        }
+
+        paneController.setRegisterButtonState(0);
+
+
 
         //add the new event pane
         eventListPane.getChildren().add(pane);
