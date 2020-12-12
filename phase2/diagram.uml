@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="276.0" y="1268.0">api.controllers.messengercontrollers.AttendeeMessengerController</node>
+    <node x="1277.0" y="0.0">api.controllers.usercontrollers.PublicUserController</node>
+    <node x="5.5" y="543.0">api.controllers.eventcontrollers.SpeakerEventController</node>
+    <node x="1373.0" y="1888.0">gui.presenters.LoginPresenter</node>
+    <node x="0.0" y="2286.0">gui.ClientGUI</node>
+    <node x="1176.0" y="1633.0">domain.usecases.Serializer</node>
+    <node x="372.0" y="1888.0">domain.entities.Event</node>
+    <node x="53.5" y="0.0">api.controllers.eventcontrollers.PublicEventController</node>
+    <node x="0.0" y="1633.0">domain.usecases.GeneratePdf</node>
+    <node x="1944.0" y="1888.0">gui.views.messengerview.messagenode.MessageNodeController</node>
+    <node x="0.0" y="2121.0">gui.helpers.PageManager</node>
+    <node x="534.0" y="0.0">domain.usecases.EventManager</node>
+    <node x="1305.0" y="2121.0">api.InitializeAPI</node>
+    <node x="1303.0" y="1268.0">gui.presenters.SettingsPresenter</node>
+    <node x="1581.0" y="858.0">gui.presenters.EventsPresenter</node>
+    <node x="493.0" y="2121.0">gui.helpers.Presenters</node>
+    <node x="810.0" y="2121.0">gui.helpers.ClientData</node>
+    <node x="1787.0" y="2121.0">api.APIHelper</node>
+    <node x="1672.0" y="1888.0">gui.helpers.ControllerFactory</node>
+    <node x="279.0" y="1506.0">api.controllers.messengercontrollers.SpeakerMessengerController</node>
+    <node x="0.0" y="858.0">domain.usecases.HashMapManager</node>
+    <node x="0.0" y="670.0">api.controllers.eventcontrollers.OrganizerEventController</node>
+    <node x="1683.0" y="1268.0">gui.views.messengerview.MessengerController</node>
+    <node x="861.0" y="1268.0">api.API</node>
+    <node x="1318.0" y="216.0">api.controllers.usercontrollers.AttendeeUserController</node>
+    <node x="716.0" y="858.0">gui.views.eventsview.EventsViewController</node>
+    <node x="0.0" y="1888.0">gui.views.homeview.HomeViewController</node>
+    <node x="2111.0" y="1633.0">adapters.Server</node>
+    <node x="2036.0" y="1268.0">gui.views.messengerview.convonode.ConvoNodeController</node>
+    <node x="2.5" y="349.0">api.controllers.eventcontrollers.AttendeeEventController</node>
+    <node x="912.0" y="0.0">gui.views.settingsview.SettingsViewController</node>
+    <node x="1591.0" y="1633.0">gui.presenters.MessagePresenter</node>
+    <node x="1178.0" y="858.0">domain.usecases.UserManager</node>
+    <node x="1057.0" y="2121.0">domain.entities.Message</node>
+    <node x="421.0" y="1633.0">domain.usecases.MessageManager</node>
+    <node x="2166.0" y="2121.0">AppGUI</node>
+    <node x="1315.5" y="388.0">api.controllers.usercontrollers.OrganizerUserController</node>
+    <node x="829.0" y="1633.0">gui.views.loginview.LoginViewController</node>
+    <node x="0.0" y="1268.0">gui.views.eventsview.eventnode.EventNodeController</node>
+    <node x="648.0" y="1888.0">api.controllers.logincontrollers.PublicLoginController</node>
+    <node x="1061.0" y="1888.0">domain.entities.User</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="api.controllers.eventcontrollers.AttendeeEventController" target="api.controllers.eventcontrollers.PublicEventController">
+      <point x="0.0" y="-72.0" />
+      <point x="0.0" y="149.5" />
+    </edge>
+    <edge source="api.controllers.eventcontrollers.SpeakerEventController" target="api.controllers.eventcontrollers.AttendeeEventController">
+      <point x="0.0" y="-38.5" />
+      <point x="0.0" y="72.0" />
+    </edge>
+    <edge source="api.controllers.messengercontrollers.SpeakerMessengerController" target="api.controllers.messengercontrollers.AttendeeMessengerController">
+      <point x="0.0" y="-38.5" />
+      <point x="0.0" y="94.0" />
+    </edge>
+    <edge source="api.controllers.eventcontrollers.OrganizerEventController" target="api.controllers.eventcontrollers.SpeakerEventController">
+      <point x="0.0" y="-71.5" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="api.controllers.usercontrollers.OrganizerUserController" target="api.controllers.usercontrollers.AttendeeUserController">
+      <point x="0.0" y="-38.5" />
+      <point x="0.0" y="61.0" />
+    </edge>
+    <edge source="api.controllers.usercontrollers.AttendeeUserController" target="api.controllers.usercontrollers.PublicUserController">
+      <point x="0.0" y="-61.0" />
+      <point x="0.0" y="83.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.3643776046771224" x="1667.4823829139632" y="1435.3653842920005" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
