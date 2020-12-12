@@ -145,7 +145,7 @@
                   <HBox prefHeight="130.0">
                      <children>
                         <TextArea fx:id="messageInput" promptText="Type a message..." wrapText="true" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="sendButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Send" HBox.hgrow="NEVER" />
+                        <Button fx:id="sendButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#sendMessageButtonOnClick" text="Send" HBox.hgrow="NEVER" />
                      </children>
                   </HBox>
                </children>

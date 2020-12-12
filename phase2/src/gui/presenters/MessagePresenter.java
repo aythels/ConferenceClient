@@ -50,5 +50,16 @@ public class MessagePresenter {
                     userID);
         }
 
+        public void sendMessage(String username, String message) {
+            if (username == null) return;
+
+            api.call("messenger_controller", clientData.accessCode,
+                    "messageUserByID",
+                    clientData.accessCode,
+                    username,
+                    message);
+        }
+
+
     }
 

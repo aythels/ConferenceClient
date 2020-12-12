@@ -41,11 +41,17 @@ public class AppGUI extends Application {
         api.call("event_controller", accessCode, "registerInEvent",
                 accessCode, 1);
 
-        System.out.println(api.call("messenger_controller", accessCode,
+        api.call("messenger_controller", accessCode,
                 "messageUserByID",
                 accessCode,
                 "b",
-                "This is the latest message"));
+                "This is the latest message");
+
+        api.call("messenger_controller", accessCode,
+                "messageUserByID",
+                accessCode,
+                "a",
+                "Tother message");
 
         ClientGUI client = new ClientGUI(primaryStage, api);
         //ClientGUI client2 = new ClientGUI(new Stage(), api);

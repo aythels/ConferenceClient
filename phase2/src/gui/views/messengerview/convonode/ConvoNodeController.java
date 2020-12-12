@@ -1,5 +1,6 @@
 package gui.views.messengerview.convonode;
 
+import gui.views.messengerview.MessengerController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -10,19 +11,16 @@ import java.util.ResourceBundle;
 
 public class ConvoNodeController implements Initializable {
 
+    public MessengerController master;
+    public String username;
+
+    public void paneOnClick() {
+        master.onConvoFocus(username, this);
+    }
+
     public Label nameText;
     public Label firstMessageText;
     public HBox backgroundPane;
-    public HBox[] allConvoPanes;
-
-    public void paneOnClick() {
-        //for (HBox pane : allConvoPanes) {
-        //    nameText.setTextFill(Color.BLACK);
-        //    backgroundPane.setStyle("-fx-background-color: #dbdbdb");
-        //}
-
-        //setActive(true);
-    }
 
     public void setActive(Boolean b) {
         if (b) {
@@ -46,7 +44,7 @@ public class ConvoNodeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setActive(true);
+        setActive(false);
     }
 
 }

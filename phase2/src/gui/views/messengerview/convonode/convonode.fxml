@@ -10,7 +10,7 @@
 
 <HBox fx:id="backgroundPane" style="-fx-background-color: #19b2ff; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.views.messengerview.convonode.ConvoNodeController">
     <children>
-        <VBox onMouseClicked="#paneOnClick">
+        <VBox onMousePressed="#paneOnClick">
             <children>
                 <Label fx:id="nameText" text="Active Convo" textFill="WHITE">
                <font>
