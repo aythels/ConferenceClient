@@ -17,6 +17,7 @@ public class MessengerController implements PageUpdateEvent {
         this.presenter = presenter;
         pageIndex.addPageUpdateObserver(this);
     }
+
     public Button returnButton;
     public ChoiceBox filterChoice;
     public Button newMessageButton;
