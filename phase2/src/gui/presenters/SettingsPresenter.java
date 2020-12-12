@@ -41,5 +41,4 @@ public class SettingsPresenter {
                 usertype, "user", username, password)
         );
     }
-
 }

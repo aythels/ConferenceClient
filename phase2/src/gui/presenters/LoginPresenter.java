@@ -19,9 +19,9 @@ public class LoginPresenter {
         if (accessCode != "null") {
             clientData.accessCode = accessCode;
             clientData.username = username;
+
             return true;
         }
         else return false;
-
     }
 }
