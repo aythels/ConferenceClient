@@ -1,3 +1,4 @@
+/*
 package gui.views.messageview;
 
 import gui.helpers.PageIndex;
@@ -45,3 +46,4 @@ public class MessengerController implements PageUpdateEvent {
     }
 
 }
+*/
