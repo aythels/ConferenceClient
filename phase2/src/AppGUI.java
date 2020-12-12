@@ -27,10 +27,10 @@ public class AppGUI extends Application {
                 "u", "p");
 
         api.call("event_controller", accessCode, "createEvent",
-                "Test Event", 1, (int) (System.currentTimeMillis() / 1000) + 1000);
+                "Test Event", 1, (int) (System.currentTimeMillis() / 1000) + 1000, 100);
 
         api.call("event_controller", accessCode, "createEvent",
-                "zvent Name", 1, (int) (System.currentTimeMillis() / 1000));
+                "zvent Name", 1, (int) (System.currentTimeMillis() / 1000), 100);
 
         api.call("event_controller", accessCode, "setEventSpeaker",
                 1, "a");
