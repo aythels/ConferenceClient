@@ -52,7 +52,7 @@ public class EventsPresenter {
 
     public ArrayList<HashMap<String, String>> getEventDetailsByName(String substring) {
 
-        ArrayList<HashMap<String, String>> data = getEventDetails()
+        ArrayList<HashMap<String, String>> data = getEventDetails();
         Collections.sort(data, Comparator.comparing(a -> a.get("eventName")));
 
         return getEventDetailsWithName(data, substring);
