@@ -7,21 +7,22 @@ import com.itextpdf.text.pdf.PdfWriter;
 import domain.entities.Event;
 
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 //Download: https://search.maven.org/classic/#search%7Cga%7C1%7Ca%3A%22itextpdf%22
 
 public class GeneratePdf {
-    private static String filePath;
+    private static String filePath = "c:/Users/Jake/Downloads/Events.pdf";
     private static Font defaultFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
             Font.NORMAL);
-    private EventManager eventManager;
-    private static ArrayList<Event> events;
+    private static ArrayList<HashMap<String, String>> events;
 
-    public GeneratePdf(EventManager eventManager, String filePath) {
-        this.eventManager = eventManager;
-        events = eventManager.getAllEvents();
-        GeneratePdf.filePath = filePath;
+
+    public GeneratePdf(ArrayList<HashMap<String, String>> events) {
+        GeneratePdf.events = events;
     }
 
     public void createPdf() {
@@ -58,13 +59,17 @@ public class GeneratePdf {
         c1 = new PdfPCell(new Phrase("Time"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
+        c1 = new PdfPCell(new Phrase("Speaker"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
         table.setHeaderRows(1);
 
-        for (Event e : events) {
-            int x = e.getEventID();
-            table.addCell(e.getEventName());
-            table.addCell(""+e.getEventID());
-            table.addCell(""+e.getEventTime());
+        for (HashMap<String, String> m : events) {
+            table.addCell(m.get("eventName"));
+            table.addCell(m.get("eventID"));
+            String time = new SimpleDateFormat("MMMMM d yyyy").format(new Date(Long.valueOf(m.get("eventTime")) * 1000));
+            table.addCell(time);
+            table.addCell(m.get("speakerName"));
         }
         subCatPart.add(table);
 
