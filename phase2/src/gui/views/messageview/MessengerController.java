@@ -19,7 +19,7 @@ public class MessengerController implements PageUpdateEvent {
     public Button returnButton;
     public ChoiceBox filterChoice;
     public Button newMessageButton;
-    public TextField searchInput;
+    public TextField messageInput;
     public Button sendButton;
 
     public void returnButtonOnClick() {
@@ -39,7 +39,7 @@ public class MessengerController implements PageUpdateEvent {
 
     @Override
     public void update() {
-        searchInput.clear();
+        messageInput.clear();
         filterChoice.getSelectionModel().selectFirst();
 
     }
