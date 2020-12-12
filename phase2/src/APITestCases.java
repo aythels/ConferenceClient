@@ -10,6 +10,10 @@ public class APITestCases {
         API api = server.getAPI();
 
         //calling api to create user
+
+        api.call("user_controller", null, "createAnyUserTEMPORARY",
+                "ATTENDEE", "Bob1", "a", "a");
+
         api.call("user_controller", null, "createAnyUserTEMPORARY",
                 "ATTENDEE", "Bob1", "attendee1", "pass");
 

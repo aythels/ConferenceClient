@@ -30,7 +30,8 @@ public class HomeViewController {
     }
 
     public void eventsButtonOnClick(ActionEvent event) throws IOException {
-        //pageIndex.setPage("eventsview");
+        URL url = getClass().getResource("./../eventsview/eventsview.fxml");
+        PageManager.setWindowPage(stage, url, new ControllerFactory(stage, presenters));
     }
 
     public void messengerButtonOnClick(ActionEvent event) throws IOException {

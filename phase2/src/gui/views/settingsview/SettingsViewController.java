@@ -5,10 +5,9 @@ import gui.helpers.PageManager;
 import gui.helpers.Presenters;
 import gui.presenters.SettingsPresenter;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -26,11 +25,20 @@ public class SettingsViewController implements Initializable {
     //on page load in
     public Label usernameText;
     public Label usertypeText;
+    public Separator createDivider;
+    public VBox createPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        if (!presenters.settingsPresenter.isUserOrganizer()) {
+            createPane.setVisible(false);
+            createDivider.setVisible(false);
+        }
+
         usernameText.setText(presenters.settingsPresenter.getUserName());
         usertypeText.setText(presenters.settingsPresenter.getUserType());
+        displayText.setText(presenters.settingsPresenter.getUserDisplayName());
     }
 
     //change display name
@@ -47,7 +55,7 @@ public class SettingsViewController implements Initializable {
 
     public void save2ButtonOnClick() {
         if (!pass1.getText().equals(pass2.getText())) {
-            passwordError.setVisible(true);
+            setButtonStyle(passwordError, false);
             return;
         }
 
@@ -55,7 +63,7 @@ public class SettingsViewController implements Initializable {
 
         pass1.clear();
         pass2.clear();
-        passwordError.setVisible(false);
+        setButtonStyle(passwordError, true);
     }
 
     //create account
@@ -67,7 +75,7 @@ public class SettingsViewController implements Initializable {
 
     public void createAccountButtonOnClick() {
         if (!createPass2Text.getText().equals(createPass1Text.getText())) {
-            createErrorText.setVisible(true);
+            setButtonStyle(createErrorText, false);
             return;
         }
 
@@ -80,9 +88,9 @@ public class SettingsViewController implements Initializable {
             createNameText.clear();
             createPass1Text.clear();
             createPass2Text.clear();
-            createErrorText.setVisible(false);
+            setButtonStyle(createErrorText, true);
         } else {
-            createErrorText.setVisible(true);
+            setButtonStyle(createErrorText, false);
         }
     }
 
@@ -98,4 +106,16 @@ public class SettingsViewController implements Initializable {
         save2ButtonOnClick();
     }
 
+    //helpers
+
+    public void setButtonStyle(Label label, Boolean style) {
+        label.setVisible(true);
+        if (style) {
+            label.setText("Success");
+            label.setTextFill(Color.web("32a852"));
+        } else {
+            label.setText("Error");
+            label.setTextFill(Color.web("db1818"));
+        }
+    }
 }

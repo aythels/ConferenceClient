@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
@@ -12,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.views.messageview.MessengerController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.views.messageview.MessengerController">
    <children>
       <HBox maxHeight="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -25,18 +30,18 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <ChoiceBox fx:id="filterChoice" onAction="#filterChoiceOnChange" style="-fx-pref-width: 160; -fx-pref-height: 44; -fx-font-size: 20;" value="All" HBox.hgrow="NEVER">
-                           <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="All" />
-                                 <String fx:value="Speakers" />
-                              </FXCollections>
-                           </items>
-                        </ChoiceBox>
-                        <Button fx:id="newMessageButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#newMessageButtonOnClick" text=" + " HBox.hgrow="NEVER">
+                        <Button fx:id="returnButton1" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#returnButtonOnClick" text=" ⟳ ">
                            <font>
                               <Font size="18.0" />
                            </font>
+                        </Button>
+                        <Button fx:id="newMessageButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newMessageButtonOnClick" text="New Message" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </Button>
                      </children>
                      <padding>
@@ -45,7 +50,7 @@
                   </HBox>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" prefWidth="270.0" VBox.vgrow="ALWAYS">
                      <content>
-                        <VBox spacing="6.0">
+                        <VBox fx:id="convoListPane" spacing="6.0">
                            <children>
                               <HBox alignment="CENTER" style="-fx-background-color: #19b2ff; -fx-background-radius: 10;">
                                  <children>
@@ -94,7 +99,7 @@
                <children>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                      <content>
-                        <VBox>
+                        <VBox fx:id="messageListPane">
                            <children>
                               <VBox spacing="5.0">
                                  <children>

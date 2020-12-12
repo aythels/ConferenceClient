@@ -15,6 +15,9 @@ public class AppGUI extends Application {
         API api = server.getAPI();
 
         api.call("user_controller", null, "createAnyUserTEMPORARY",
+                "ATTENDEE", "Bob1", "a", "a");
+
+        api.call("user_controller", null, "createAnyUserTEMPORARY",
                 "ORGANIZER", "Lee1", "u", "p");
 
         api.call("user_controller", null, "createAnyUserTEMPORARY",

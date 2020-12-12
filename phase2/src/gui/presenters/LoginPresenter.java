@@ -19,6 +19,12 @@ public class LoginPresenter {
         if (accessCode != "null") {
             clientData.accessCode = accessCode;
             clientData.username = username;
+            clientData.userDisplayName = api.call("user_controller", null,
+                    "getUserName",
+                    username);
+            clientData.userType = api.call("user_controller", null,
+                    "getUserType",
+                    username);
 
             return true;
         }
