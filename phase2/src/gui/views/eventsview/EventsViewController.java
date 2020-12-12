@@ -1,5 +1,6 @@
 package gui.views.eventsview;
 
+import domain.usecases.GeneratePdf;
 import gui.helpers.ControllerFactory;
 import gui.helpers.PageManager;
 import gui.helpers.Presenters;
@@ -38,6 +39,10 @@ public class EventsViewController implements Initializable {
 
     public Button downloadButton;
     public void downloadButtonOnClick() {
+        ArrayList<HashMap<String, String>> data;
+        data = (presenters.eventsPresenter.getEventDetailsByDate(searchInput.getText()));
+        GeneratePdf gp = new GeneratePdf(data);
+        gp.createPdf();
     }
 
     public TextField searchInput;

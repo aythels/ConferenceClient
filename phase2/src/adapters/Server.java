@@ -56,14 +56,4 @@ public class Server {
         s.serializeEventManager(this.eventManager);
         s.serializeMessageManager(this.messageManager);
     }
-
-    /**
-     * Generate a PDF with details about all events
-     */
-
-    public void generatePdf(String filePath) {
-        GeneratePdf g = new GeneratePdf(this.eventManager, filePath);
-        g.createPdf();
-    }
-
 }
