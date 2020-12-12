@@ -36,21 +36,18 @@ public class MessagePresenter {
             return userIDs;
         }
 
-        public ArrayList<HashMap<String, String>> getAllConvoMessages(){
-            String[] userIDs = this.getAllConvoUsers();
+        public String[] getAllConvoMessages(String userID){
+            String[] messages = api.call("messenger_controller", clientData.accessCode,
+                    "getConvoWithOtherUserByID", clientData.accessCode, userID).
+                    replaceAll("[\\[\\]\\s]", "").split(",");
 
-            ArrayList<HashMap<String, String>> convo = new ArrayList<>();
+            return messages;
+        }
 
-            for (String userID: userIDs){
-                HashMap<String, String> map = new HashMap<>();
-
-                map.put(userID, api.call("messenger_controller", clientData.accessCode,
-                        "getConvoWithOtherUserByID", clientData.accessCode, userID));
-
-                convo.add(map);
-
-            }
-            return convo;
+        public String getUserDisplayName(String userID) {
+            return api.call("user_controller", null,
+                    "getUserName",
+                    userID);
         }
 
     }
