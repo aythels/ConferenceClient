@@ -72,4 +72,59 @@ public class EventsPresenter {
 
         return data;
     }
+
+    public String getUserType(){
+        return this.clientData.userType;
+    }
+
+    public String getUserName(){
+        return this.clientData.username;
+    }
+
+    public String[] getAttendeesByEventName(String name){
+        ArrayList<HashMap<String, String>> data = this.getEventDetails();
+        for (HashMap<String, String> h: data){
+            if(h.keySet().contains(name)){
+                String ID = h.get("eventID");
+                String[] attendees = api.call("event_controller", null,
+                        "getEventRegisteredUserIDs", Integer.parseInt(ID))
+                        .replaceAll("[\\[\\]\\s]", "").split(",");
+                return attendees;
+            }
+        }
+        return null;
+    }
+
+
+
+    public boolean checkIfIsVIPEvent(String name){
+        if (api.call("event_controller", null, "ifVIP", name) == "true"){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkIfIsSpeakerForEvent(String name){
+        ArrayList<HashMap<String, String>> data = this.getEventDetails();
+        for (HashMap<String, String> h: data){
+            if(h.get("eventName") == name){
+                if (h.get("speakerID").contains(clientData.username)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean ifAttendeeRegisteredInEvent(String eventName){
+        for(String attendee: this.getAttendeesByEventName(eventName)){
+            if (clientData.username == attendee){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 }
