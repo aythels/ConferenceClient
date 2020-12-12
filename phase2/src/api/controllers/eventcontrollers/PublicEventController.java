@@ -120,4 +120,10 @@ public class PublicEventController {
         } else return 798987987;
     }
 
+    public boolean ifVIP(String name){
+        int i = eventManager.getEventIdByName(name);
+        Event e = eventManager.getEventByID(i);
+        return e.getVip();
+    }
+
 }
