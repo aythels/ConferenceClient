@@ -1,6 +1,10 @@
 package gui.views.eventsview.eventnode;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class EventNodeController {
 
@@ -10,23 +14,27 @@ public class EventNodeController {
     public void setRegisterButtonState(int state) {
         switch(state) {
             case 0:
+                //the client can register for this event,
                 registerButton.setText("REGISTER");
                 registerButton.setStyle("-fx-background-color: #e3e3e3");
                 registerButton.setDisable(false);
                 break;
             case 1:
+                //the client is already registered for this event,
                 registerButton.setText("REGISTERED");
                 registerButton.setStyle("-fx-background-color: #e3e3e3");
-                registerButton.setDisable(true);
+                registerButton.setDisable(false);
                 break;
             case 2:
-                registerButton.setText("DISABLED");
-                registerButton.setStyle("-fx-background-color: #f5b342");
+                //the client is the speaker for this event, button disabled
+                registerButton.setText("SPEAKER");
+                registerButton.setStyle("-fx-background-color: #34eb74");
                 registerButton.setDisable(true);
                 break;
             case 3:
-                registerButton.setText("SPEAKER");
-                registerButton.setStyle("-fx-background-color: #34eb74");
+                //the client is not permitted to register for this event, button disabled
+                registerButton.setText("VIP");
+                registerButton.setStyle("-fx-background-color: #b03fa7");
                 registerButton.setDisable(true);
                 break;
         }

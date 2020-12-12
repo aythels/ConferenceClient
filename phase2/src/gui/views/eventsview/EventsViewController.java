@@ -38,7 +38,6 @@ public class EventsViewController implements Initializable {
 
     public Button downloadButton;
     public void downloadButtonOnClick() {
-        System.out.println("NOT IMPLEMENTED");
     }
 
     public TextField searchInput;
@@ -85,7 +84,8 @@ public class EventsViewController implements Initializable {
         paneController.setTimer(new SimpleDateFormat("HH:mm z").format(new Date(Long.valueOf(time) * 1000)));
 
         //set the pane button attributes:
-
+        //presenters.eventsPresenter
+        //paneController.setRegisterButtonState(0);
 
         //add the new event pane
         eventListPane.getChildren().add(pane);
