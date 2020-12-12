@@ -138,15 +138,18 @@ public class EventManager implements Serializable {
     }
 
     /**
-     * Adds the given User to the Event's attendee list corresponding to the given eventID
+     * Adds the given User to the Event's attendee list corresponding to the given eventID ********************change for vip access
      * @param id    the id of the Event
      * @param u    an User object
-     * @return      true if booking is successful, false if the eventID does not exist, or the
-     *              User is already on the attendee list, or the room is full.
+     * @return      true if booking is successful, false if the eventID does not exist, or the User is already on the
+     *              attendee list, the room is full, or the room is vip locked and the User is not vip.
      */
 
     public boolean bookForAttendee(User u, int id){
         if (!this.registered.ifInKeySet(id)){
+            return false;
+        }
+        if (this.registered.getEventById(id).getVip() && (!u.getUserType().equals("VIP"))) {
             return false;
         }
         ArrayList<User> booked = this.registered.getAttendeeById(id);
