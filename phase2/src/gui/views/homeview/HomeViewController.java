@@ -35,7 +35,8 @@ public class HomeViewController {
     }
 
     public void messengerButtonOnClick(ActionEvent event) throws IOException {
-        //pageIndex.setPage("messengerview");
+        URL url = getClass().getResource("./../messengerview/messengerview.fxml");
+        PageManager.setWindowPage(stage, url, new ControllerFactory(stage, presenters));
     }
 
 }

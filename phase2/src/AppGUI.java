@@ -21,9 +21,6 @@ public class AppGUI extends Application {
                 "ORGANIZER", "Lee1", "u", "p");
 
         api.call("user_controller", null, "createAnyUserTEMPORARY",
-                "SPEAKER", "Lee2", "a", "p");
-
-        api.call("user_controller", null, "createAnyUserTEMPORARY",
                 "SPEAKER", "Lee3", "b", "p");
 
         String accessCode = api.call("login_controller", null, "login",
@@ -44,6 +41,11 @@ public class AppGUI extends Application {
         api.call("event_controller", accessCode, "registerInEvent",
                 accessCode, 1);
 
+        System.out.println(api.call("messenger_controller", accessCode,
+                "messageUserByID",
+                accessCode,
+                "b",
+                "This is the latest message"));
 
         ClientGUI client = new ClientGUI(primaryStage, api);
         //ClientGUI client2 = new ClientGUI(new Stage(), api);

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox fx:id="backgroundPane" style="-fx-background-color: #19b2ff; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.views.messengerview.convonode.ConvoNodeController">
+    <children>
+        <VBox onMouseClicked="#paneOnClick">
+            <children>
+                <Label fx:id="nameText" text="Active Convo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font></Label>
+                <Label fx:id="firstMessageText" text="Latest Message afafafafafafsfafafafafafffhfhfhfghfghfhfhfhfhgfaf" textFill="WHITE" />
+            </children>
+        </VBox>
+    </children>
+   <padding>
+      <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+   </padding>
+</HBox>

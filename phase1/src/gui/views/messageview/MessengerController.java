@@ -1,4 +1,4 @@
-package gui.views.messageview;
+package gui.views.messengerview;
 
 import gui.helpers.PageIndex;
 import gui.helpers.PageUpdateEvent;
