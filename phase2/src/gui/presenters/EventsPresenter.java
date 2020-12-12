@@ -81,20 +81,6 @@ public class EventsPresenter {
         return this.clientData.username;
     }
 
-    public String[] getAttendeesByEventName(String name){
-        ArrayList<HashMap<String, String>> data = this.getEventDetails();
-        for (HashMap<String, String> h: data){
-            if(h.keySet().contains(name)){
-                String ID = h.get("eventID");
-                String[] attendees = api.call("event_controller", null,
-                        "getEventRegisteredUserIDs", Integer.parseInt(ID))
-                        .replaceAll("[\\[\\]\\s]", "").split(",");
-                return attendees;
-            }
-        }
-        return null;
-    }
-
 
 
     public boolean checkIfIsVIPEvent(String name){
@@ -108,7 +94,7 @@ public class EventsPresenter {
         ArrayList<HashMap<String, String>> data = this.getEventDetails();
         for (HashMap<String, String> h: data){
             if(h.get("eventName") == name){
-                if (h.get("speakerID").contains(clientData.username)){
+                if (h.get("speakerName").contains(clientData.username)){
                     return true;
                 }
             }
@@ -117,8 +103,12 @@ public class EventsPresenter {
     }
 
     public boolean ifAttendeeRegisteredInEvent(String eventName){
-        for(String attendee: this.getAttendeesByEventName(eventName)){
-            if (clientData.username == attendee){
+        String[] registeredEventIDs = api.call("event_controller", this.clientData.accessCode,
+                "getAllRegisteredEventIDs", this.clientData.accessCode)
+                .replaceAll("[\\[\\]\\s]", "").split(",");
+        for (String ID: registeredEventIDs){
+            String name = api.call("event_controller", null, "getEventSpeakerID", ID);
+            if (eventName == name){
                 return true;
             }
         }

@@ -62,7 +62,7 @@ public class AttendeeMessengerController {
         conversation = conversation == null ? new ArrayList<>() : conversation;
 
         List<String> concatenatedConversation = new ArrayList<>();
-        for (Message m : conversation) concatenatedConversation.add(m.getUserId() + ":" + m.getMessage());
+        for (Message m : conversation) concatenatedConversation.add(m.getMessage() + ":" + m.getUserId());
 
         return concatenatedConversation;
     }

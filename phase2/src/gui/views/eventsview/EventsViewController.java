@@ -106,6 +106,7 @@ public class EventsViewController implements Initializable {
 
 
 
+
         //add the new event pane
         eventListPane.getChildren().add(pane);
     }
