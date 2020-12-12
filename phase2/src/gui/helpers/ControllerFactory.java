@@ -1,4 +1,4 @@
-package gui.views;
+package gui.helpers;
 
 import javafx.util.Callback;
 
