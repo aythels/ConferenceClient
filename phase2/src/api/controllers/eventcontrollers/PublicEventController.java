@@ -122,6 +122,9 @@ public class PublicEventController {
 
     public String getEventNameByID(String ID){
         int id = Integer.parseInt(ID);
+        if (eventManager.getEventNameById(id) == null) {
+            return null;
+        }
         return eventManager.getEventNameById(id);
     }
 

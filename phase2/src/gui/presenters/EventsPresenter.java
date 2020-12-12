@@ -107,7 +107,7 @@ public class EventsPresenter {
                 "getAllRegisteredEventIDs", this.clientData.accessCode)
                 .replaceAll("[\\[\\]\\s]", "").split(",");
         for (String ID: registeredEventIDs){
-            String name = api.call("event_controller", this.clientData.accessCode, "getEventNameByID", ID);
+            String name = api.call("event_controller", null, "getEventSpeakerID", ID);
             if (eventName == name){
                 return true;
             }
