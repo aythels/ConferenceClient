@@ -17,11 +17,11 @@ public class LoginPresenter {
                 username, password);
 
         if (accessCode != "null") {
-            clientData.setAccessCode(accessCode);
-            clientData.setUserName(username);
+            clientData.accessCode = accessCode;
+            clientData.username = username;
+
             return true;
         }
         else return false;
-
     }
 }

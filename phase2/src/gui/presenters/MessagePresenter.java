@@ -15,19 +15,18 @@ public class MessagePresenter {
         }
 
         private ArrayList<HashMap<String, String>> getAttendeeMessageDetails() {
-            String[] messages = api.call("Message_controller", this.clientData.getAccessCode(),
+
+            String[] messages = api.call("Message_controller", this.clientData.accessCode,
                     "getConvoWithOtherUserByID")
                     .replaceAll("[\\[\\]\\s]", "").split(",");
 
             ArrayList<HashMap<String, String>> data = new ArrayList<>();
+
             for (String message : messages) {
                 HashMap<String, String> map = new HashMap<>();
-
                 map.put("message", message);
-
                 data.add(map);
             }
-
             return data;
         }
 

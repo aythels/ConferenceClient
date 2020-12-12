@@ -10,7 +10,6 @@ public class EventManager implements Serializable {
 
     private HashMapManager registered;
     private Integer eventId = 1;
-    private int maxPeople = 2;
 
     public EventManager() {
         this.registered = new HashMapManager();
@@ -63,14 +62,14 @@ public class EventManager implements Serializable {
      * Creates an Event holding the given name, starting time, and duration.
      * @param eventDuration    the length of time of the Event
      * @param eventTime    the starting time of the Event
-     * @param capacity     the maximum number of attendees allowed
      * @param eventName    the name of the Event
+     * @param capacity     the maximum number of attendees allowed
      * @return      true if creating Event is successful, false if there is time conflict
      */
 
-    public boolean createEvent(int eventDuration, int eventTime, int capacity, String eventName){
+    public boolean createEvent(int eventDuration, int eventTime, String eventName, int capacity){
         if(this.checkConflict(eventDuration, eventTime)) {
-            Event e = new Event(this.eventId, eventName, eventDuration, eventTime );
+            Event e = new Event(this.eventId, eventName, eventDuration, eventTime, capacity);
             this.registered.addEvent(this.eventId, capacity, e);
             this.eventId += 1;
             return true;
@@ -79,37 +78,16 @@ public class EventManager implements Serializable {
     }
 
     /**
-     * Creates an Event holding the given name, starting time, and duration.
+     * Creates a VIP Event holding the given name, starting time, duration, and only VIP Users can attend this type of Event.
      * @param eventDuration    the length of time of the Event
      * @param eventTime    the starting time of the Event
      * @param eventName    the name of the Event
-     * @return      true if creating Event is successful, false if there is time conflict
-     */
-
-    public boolean createEvent(int eventDuration, int eventTime, String eventName){
-        if(this.checkConflict(eventDuration, eventTime)) {
-            Event e = new Event(this.eventId, eventName, eventDuration, eventTime );
-            this.registered.addEvent(this.eventId, e);
-            this.eventId += 1;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Creates an VIP Event holding the given name, starting time, duration, and only VIP Users can attend this type of Event.
-     * @param eventDuration    the length of time of the Event
-     * @param eventTime    the starting time of the Event
      * @param capacity     the maximum number of attendees allowed
-     * @param eventName    the name of the Event
      * @return      true if creating Event is successful, false if there is time conflict
      */
-
-
-
     public boolean createVipEvent(int eventDuration, int eventTime, int capacity, String eventName){
         if(this.checkConflict(eventDuration, eventTime)) {
-            Event e = new Event(this.eventId, eventName, eventDuration, eventTime );
+            Event e = new Event(this.eventId, eventName, eventDuration, eventTime, capacity);
             this.registered.addEvent(this.eventId, capacity, e);
             e.setVip(true);
             this.eventId += 1;
@@ -121,7 +99,7 @@ public class EventManager implements Serializable {
 
     /**
      * Reschedules an Event to the given time and given duration, given the eventID.
-     * The old Event will get deleted and a new Event will get created, the eventID will not change.
+     * The old Event will get deleted and a new Event will get created, the eventID and capacity will not change.
      * All registered Attendees and Speakers will get removed.
      * @param id    the id of the Event
      * @param eventDuration    the new length of time of the Event
@@ -138,7 +116,7 @@ public class EventManager implements Serializable {
         String eventName = e.getEventName();
         Integer capacity = this.registered.getCapacityById(id);
         if(this.checkConflict(eventDuration, eventTime)){
-            Event n = new Event(id, eventName, eventDuration, eventTime);
+            Event n = new Event(id, eventName, eventDuration, eventTime, capacity);
             this.registered.rescheduleEvent(id, capacity, n);
             return true;
         }

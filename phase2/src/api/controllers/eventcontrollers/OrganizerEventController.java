@@ -22,11 +22,12 @@ public class OrganizerEventController extends SpeakerEventController {
      * @param eventName the display name of the event.
      * @param eventDuration the duration of the event, in milliseconds.
      * @param eventTime  the time this event takes place, in milliseconds since Unix Epoch.
+     * @param capacity capacity for the event, in people.
      * @return  true if event creation was successful, false otherwise.
      */
 
-    public boolean createEvent(String eventName, Integer eventDuration, Integer eventTime) {
-        return eventManager.createEvent(eventDuration, eventTime, eventName);
+    public boolean createEvent(String eventName, Integer eventDuration, Integer eventTime, Integer capacity) {
+        return eventManager.createEvent(eventDuration, eventTime, eventName, capacity);
     }
 
     /**

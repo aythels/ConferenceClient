@@ -2,48 +2,35 @@ package gui;
 
 import api.API;
 import gui.helpers.ClientData;
-import gui.helpers.PageIndex;
+import gui.helpers.ControllerFactory;
+import gui.helpers.PageManager;
+import gui.helpers.Presenters;
 import gui.presenters.EventsPresenter;
 import gui.presenters.LoginPresenter;
+import gui.presenters.MessagePresenter;
 import gui.presenters.SettingsPresenter;
-import gui.views.ControllerFactory;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.IOException;
 
 public class ClientGUI {
 
     public ClientGUI (Stage stage, API api) throws IOException {
-        PageIndex pageIndex = new PageIndex(stage);
         ClientData clientData = new ClientData();
+        Presenters presenters = new Presenters();
 
-        pageIndex.addPage("loginview", createScene("views/loginview/loginview.fxml", new ControllerFactory(pageIndex, new LoginPresenter(api, clientData))));
-        pageIndex.addPage("homeview", createScene("views/homeview/homeview.fxml", new ControllerFactory(pageIndex, new SettingsPresenter(api, clientData))));
-        pageIndex.addPage("eventsview", createScene("views/eventsview/eventsview.fxml", new ControllerFactory(pageIndex, new EventsPresenter(api, clientData))));
-        pageIndex.addPage("messageview", createScene("views/messageview/messengerview.fxml", new ControllerFactory(pageIndex, new EventsPresenter(api, clientData))));
+        presenters.eventsPresenter = new EventsPresenter(api, clientData);
+        presenters.loginPresenter = new LoginPresenter(api, clientData);
+        presenters.messagePresenter = new MessagePresenter(api, clientData);
+        presenters.settingsPresenter = new SettingsPresenter(api, clientData);
 
-        pageIndex.setPage("loginview");
+        Scene scene = PageManager.createScene(
+                getClass().getResource("views/loginview/loginview.fxml"),
+                new ControllerFactory(stage, presenters)
+            );
+        PageManager.setScene(stage, scene);
+
     }
-
-
-    private Scene createScene(String filePath) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-
-        loader.setLocation(getClass().getResource(filePath));
-
-        return new Scene(loader.load());
-    }
-
-    private Scene createScene(String filePath, Callback<Class<?>, Object> controllerFactory) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-
-        loader.setControllerFactory(controllerFactory);
-        loader.setLocation(getClass().getResource(filePath));
-
-        return new Scene(loader.load());
-    }
-
 }
+
