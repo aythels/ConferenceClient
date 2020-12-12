@@ -2,7 +2,6 @@ package gui.presenters;
 
 import api.API;
 import gui.helpers.ClientData;
-
 import java.util.*;
 
 public class MessagePresenter {
@@ -28,6 +27,30 @@ public class MessagePresenter {
                 data.add(map);
             }
             return data;
+        }
+
+        public String[] getAllConvoUsers(){
+            String[] userIDs = api.call("messenger_controller", clientData.accessCode,
+                    "getMessagebleUserIDs", clientData.accessCode).
+                    replaceAll("[\\[\\]\\s]", "").split(",");
+            return userIDs;
+        }
+
+        public ArrayList<HashMap<String, String>> getAllConvoMessages(){
+            String[] userIDs = this.getAllConvoUsers();
+
+            ArrayList<HashMap<String, String>> convo = new ArrayList<>();
+
+            for (String userID: userIDs){
+                HashMap<String, String> map = new HashMap<>();
+
+                map.put(userID, api.call("messenger_controller", clientData.accessCode,
+                        "getConvoWithOtherUserByID", clientData.accessCode, userID));
+
+                convo.add(map);
+
+            }
+            return convo;
         }
 
     }
