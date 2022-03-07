@@ -1,9 +1,5 @@
 # Conference Client
 
-Simple overview of use/purpose.
-
-## Description
-
 GUI server-client program allowing for the creation, enrollment and scheduling of TED-style conferences.
 
 ## Features
@@ -33,16 +29,10 @@ GUI server-client program allowing for the creation, enrollment and scheduling o
 
 * Run main in AppGUI
 
-## Authors
-
-Elson L.
-
-Fang Ming Z.
-
-Felix Z.
-
-Jacob M.
-
-Kevin K.
-
-Sherif N.
+## Collaborators
+* Elson L.
+* Fang Ming Z.
+* Felix Z.
+* Jacob M.
+* Kevin K.
+* Sherif N.
